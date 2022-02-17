@@ -47,6 +47,7 @@ void loop() {
   void checkEncoder(){
     //TODO
       //Here we listen to the rotations of the encoder, modify the tick and check if encoder is not pressed (then reset and return to ntp time)
+      //here we will need a flag variable showing that the time was altered from NTP. This will be used in showMe
     }
   void ticTac() {
     Serial.println((String)mH +":" + mM + ":" + mS);//debug output
