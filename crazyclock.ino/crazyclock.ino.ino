@@ -8,13 +8,12 @@ const char *password = "PASS";
 
 int tH=0,tM=0,tS=0;//ntp data
 int mH,mM,mS; // crazydata
-int hour=3600; //needed for NTP, dunno why ;)
 unsigned long tick=1000; //initial value of tick =1s
 unsigned long myMillis; 
 
 
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", hour, 60000);
+NTPClient timeClient(ntpUDP, "tempus1.gum.gov.pl");
 
 void setup() {
   Serial.begin(115200);
