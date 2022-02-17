@@ -1,4 +1,3 @@
-#include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
@@ -7,21 +6,18 @@ const char *password = "PASS";
 
 int tH = 0, tM = 0, tS = 0; // ntp data
 int mH, mM, mS;             // crazydata
+unsigned long tick = 1000;  // initial value of tick =1s
 int tick = 1000;  // initial value of tick =1s
 
 unsigned long myMillis;
 
 WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "tempus1.gum.gov.pl");
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org",3600,60000);
 
 void setup() {
   Serial.begin(115200);
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
+@ -24,18 +25,22 @@ void setup() {
 
   timeClient.begin();
   whatTime();
@@ -34,6 +30,7 @@ void setup() {
 void loop() {
   checkEncoder();
   ticTac();
+  showMe();
 }
 void whatTime() {
   timeClient.update();
@@ -44,18 +41,20 @@ void whatTime() {
 }
 
 void checkEncoder() {
-  // TODO
-  // Here we listen to the rotations of the encoder, modify the tick and check
-  // if encoder is not pressed (then reset and return to ntp time) here we will
-  // need a flag variable showing that the time was altered from NTP. This will
+@ -46,18 +51,21 @@ void checkEncoder() {
   // be used in showMe
 }
 void ticTac() {
+  // debug output
+  Serial.println((String)mH + ":" + mM + ":" + mS);
   
   // here the clock works
+  myMillis = millis() + tick;
+  if (myMillis = millis() && tick > 0) {
   
   if ((millis() >= myMillis) and tick > 0) {
     mS++;
+  } else if (myMillis = millis() && tick < 0) {
     myMillis = (millis() + tick);
     showMe();
   } else if ((millis() >= myMillis) and tick < 0) {
@@ -64,29 +63,33 @@ void ticTac() {
     showMe();
   } // if our second has passed and tick is minus, decrement;
 
+  if (mS = 60) {
+    mS = mS - 60;
   if (mS == 59) {
     mS = mS - 59;
     if (tick > 0) {
       mM++; // if second has passed and tick is plus, increment minute
     }
-  }
-  if (mS < 0) {
+@ -66,8 +74,8 @@ void ticTac() {
     mS = mS + 60;
     mM--; // if second has passed and tick is minus, decrement minute
   }
+  if (mM = 60) {
+    mM = mM - 60;
   if (mM == 59) {
     mM = mM - 59;
     if (tick > 0) {
       mH++; // if minute has passed and tick is plus, increment hour
     }
-  }
-  if (mM < 0) {
+@ -76,13 +84,14 @@ void ticTac() {
     mM = mM + 59;
     mH--; // if minute has passed and tick is minus, decrement hour
   }
+  if (mH = 24) {
   if (mH == 24) {
     mH - 24;
   }
+  if (mH = -1) {
   if (mH == -1) {
     mH = mH + 24;
   };
