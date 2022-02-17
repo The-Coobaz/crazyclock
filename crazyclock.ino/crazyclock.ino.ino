@@ -2,8 +2,8 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
-const char *ssid = "TurboKombi";
-const char *password = "Jakuboslaw";
+const char *ssid = "SSID";
+const char *password = "PASS";
 
 int tH = 0, tM = 0, tS = 0; // ntp data
 int mH, mM, mS;             // crazydata
