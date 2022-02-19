@@ -7,13 +7,13 @@ const char *password = "PASS";
 
 int tH = 0, tM = 0, tS = 0; // ntp data
 int mH, mM, mS;             // crazydata
-int tick = 1000;  // initial value of tick =1s
+int tick = 1000;            // initial value of tick =1s
 char zerro[] = {"0"};
 
 unsigned long myMillis;
 
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "europe.pool.ntp.org",3600,60000);
+NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 3600, 60000);
 
 void setup() {
   Serial.begin(115200);
@@ -26,9 +26,9 @@ void setup() {
 
   timeClient.begin();
   whatTime();
-  mH=tH;
-  mM=tM;
-  mS=tS;
+  mH = tH;
+  mM = tM;
+  mS = tS;
   myMillis = (millis() + tick);
 }
 
@@ -52,9 +52,9 @@ void checkEncoder() {
   // be used in showMe
 }
 void ticTac() {
-  
+
   // here the clock works
-  
+
   if ((millis() >= myMillis) and tick > 0) {
     mS++;
     myMillis = (millis() + tick);
@@ -65,21 +65,21 @@ void ticTac() {
     showMe();
   } // if our second has passed and tick is minus, decrement;
 
-  if (mS == 59 and tick>0) {
+  if (mS == 59 and tick > 0) {
     mS = -1;
     mM++; // if second has passed and tick is plus, increment minute
-    }
-  
-  if (mS < 0 and tick<0) {
+  }
+
+  if (mS < 0 and tick < 0) {
     mS = mS + 60;
     mM--; // if second has passed and tick is minus, decrement minute
   }
-  if (mM == 59 and tick>0) {
+  if (mM == 59 and tick > 0) {
     mM = -1;
     mH++; // if minute has passed and tick is plus, increment hour
-    }
-  
-  if (mM < 0 and tick<0) {
+  }
+
+  if (mM < 0 and tick < 0) {
     mM = mM + 59;
     mH--; // if minute has passed and tick is minus, decrement hour
   }
@@ -92,10 +92,14 @@ void ticTac() {
 }
 void showMe() {
   Serial.print((String)mH + ":");
-  if (mM <10){Serial.print(zerro[0]);}
-  Serial.print((String)mM+":");
-  if (mS <10){Serial.print(zerro[0]);}
+  if (mM < 10) {
+    Serial.print(zerro[0]);
+  }
+  Serial.print((String)mM + ":");
+  if (mS < 10) {
+    Serial.print(zerro[0]);
+  }
   Serial.print(mS);
-  Serial.println(); //debug output
+  Serial.println(); // debug output
   // here we show the result on the screen TODO
 }
