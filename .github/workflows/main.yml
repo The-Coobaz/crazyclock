@@ -1,0 +1,19 @@
+# https://github.com/marketplace/actions/bazel-action
+name: Unit tests with Bazel
+
+on: push
+
+jobs:
+
+  checks:
+    name: run
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: run
+      uses: ngalaiko/bazel-action/2.0.0@master
+      with:
+        working_dir: src/hello
+        args: test //:hello_test
