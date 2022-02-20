@@ -1,7 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-#include <U8g2lib.h>
 
 const char *ssid = "SSID";
 const char *password = "PASS";
