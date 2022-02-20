@@ -15,5 +15,4 @@ jobs:
     - name: run
       uses: ngalaiko/bazel-action/1.2.1@master
       with:
-        entryPoint: src/hello
         args: test //:hello_test
