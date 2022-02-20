@@ -2,6 +2,13 @@
 The main idea of this project is arduino clock with flexible second time.
 This would allow to speed up or slow down the time.
 
+## Hardware
+
+You are going to need:
+- ESP8266 (wemos or nodemcu version) 
+- 1602 LCD screen
+- rotary encoder
+
 ## Development
 
 ### Unit Tests
