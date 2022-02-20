@@ -16,7 +16,7 @@ You are going to need:
 For unit tests of C code we use [GoogleTest](https://github.com/google/googletest/) with [Bazel](https://google.github.io/googletest/quickstart-bazel.html):
 
 ```
-bazel test //:hello_test
+bazel test all_tests
 ```
 
 ### VS Code

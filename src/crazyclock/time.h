@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 
 class LocalTime {
 public:
@@ -5,6 +7,8 @@ public:
   int minute;
   int second;
   int millisecond;
+
+  LocalTime(int h, int m, int s);
 };
 
 LocalTime fromEpochMillis(long epochMillis);
