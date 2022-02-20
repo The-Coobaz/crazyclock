@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@master
 
     - name: run
-      uses: ngalaiko/bazel-action/2.0.0@master
+      uses: ngalaiko/bazel-action/1.2.1@master
       with:
-        entryPoint: src/hello
+        working_dir: src/hello
         args: test //:hello_test
