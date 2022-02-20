@@ -1,6 +1,13 @@
 cc_test(
-  name = "hello_test",
+  name = "all_tests",
   size = "small",
-  srcs = ["src/hello/hello_test.cc"],
-  deps = ["@com_google_googletest//:gtest_main"],
+  srcs = [
+    "src/crazyclock/hello.h",
+    "src/crazyclock/hello.cpp",
+    "src/crazyclock/hello_test.cpp",
+    "src/crazyclock/time.h",
+    "src/crazyclock/time.cpp",
+    "src/crazyclock/time_test.cpp"
+  ],
+  deps = ["@com_google_googletest//:gtest_main"]
 )
