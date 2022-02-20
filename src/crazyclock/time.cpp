@@ -1,6 +1,4 @@
 #include "time.h"
-#include <iostream>
-#include <string>
 
 LocalTime::LocalTime(int h, int m, int s) {
   hour = h;
