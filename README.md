@@ -4,6 +4,14 @@ This would allow to speed up or slow down the time.
 
 ## Development
 
+### Unit Tests
+
+For unit tests of C code we use [GoogleTest](https://github.com/google/googletest/) with [Bazel](https://google.github.io/googletest/quickstart-bazel.html):
+
+```
+bazel test //:hello_test
+```
+
 ### VS Code
 
 #### Setup
