@@ -1,6 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include <LiquidCrystal_I2C.h>
+#include <RotaryEncoder.h>
 
 const char *ssid = "SSID";
 const char *password = "PASS";
