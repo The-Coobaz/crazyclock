@@ -17,4 +17,4 @@ jobs:
         chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
     - name: Test
       run: |
-        "${GITHUB_WORKSPACE}/bin/bazel" test //:hello_test
+        "${GITHUB_WORKSPACE}/bin/bazel" test all_tests

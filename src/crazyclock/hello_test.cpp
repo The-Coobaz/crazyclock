@@ -7,5 +7,5 @@ TEST(HelloTest, BasicAssertions) {
   // Expect two strings not to be equal.
   EXPECT_STRNE("hello", "world");
   // Expect for external function.
-  EXPECT_EQ(test(), 1);
+  EXPECT_EQ(test(), 0);
 }

@@ -4,7 +4,7 @@
 // #include <LiquidCrystal_I2C.h>
 // #include <RotaryEncoder.h>
 
-#include "hello.h"
+#include "time.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -21,7 +21,9 @@ NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 3600, 60000);
 
 void setup() {
   Serial.begin(115200);
-  while(!Serial);
+  while (!Serial) {
+    // waits for serial port to be ready
+  };
 
   WiFi.begin(ssid, password);
 
@@ -29,12 +31,9 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("Hello World!");
-  int t = test();
-  Serial.println(t);
-  // timeClient.begin();
-  // whatTime();
-  // myMillis = (millis() + tick);
+  timeClient.begin();
+  whatTime();
+  myMillis = (millis() + tick);
 }
 
 void loop() {
