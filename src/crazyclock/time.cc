@@ -1,9 +1,7 @@
 
 #include "time.h"
 
-long epochMillis() {
-  return 0;
-}
+long epochMillis() { return 0; }
 
 LocalTime toWarsawTime(long epochMillis) {
   LocalTime localTime;
