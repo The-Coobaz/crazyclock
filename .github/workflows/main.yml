@@ -1,20 +1,19 @@
-# https://github.com/marketplace/actions/bazel-action
-name: Unit tests with Bazel
-on: push
+name: clang-format Check
+on:
+  - push
+  - pull_request
+
 jobs:
-  checks:
-    name: run-unit-tests 
+  # https://github.com/marketplace/actions/clang-format-check#single-path
+  formatting-check:
+
+    name: Formatting Check
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get source
-      uses: actions/checkout@master
-    - name: Install bazelisk
-      run: |
-        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.1.0/bazelisk-linux-amd64"
-        mkdir -p "${GITHUB_WORKSPACE}/bin/"
-        mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
-        chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
-    - name: Test
-      run: |
-        "${GITHUB_WORKSPACE}/bin/bazel" test all_tests
+    - uses: actions/checkout@v2
+    - name: Run clang-format style check for C/C++/Protobuf programs.
+      uses: jidicula/clang-format-action@v4.5.0
+      with:
+        clang-format-version: '13'
+        check-path: 'src'
