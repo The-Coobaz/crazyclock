@@ -1,7 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-// #include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+#include <hd44780.h>
+#include <hd44780ioClass/hd44780_I2Cexp.h>
 // #include <RotaryEncoder.h>
 
 #include "time.h"
@@ -18,6 +20,9 @@ unsigned long
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 3600, 60000);
+hd44780_I2Cexp lcd;
+const int LCD_COLS = 16;
+const int LCD_ROWS = 2;
 
 void setup() {
   Serial.begin(115200);
@@ -31,6 +36,14 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
+  int status;
+	status = lcd.begin(LCD_COLS, LCD_ROWS);
+	if(status) // non zero status means it was unsuccesful
+	{
+		// begin() failed so blink error code using the onboard LED if possible
+		hd44780::fatalError(status); // does not return
+	}
+
   timeClient.begin();
   whatTime();
   myMillis = (millis() + tick);
@@ -110,5 +123,22 @@ void showMe() {
   Serial.print(mS);
   Serial.println(); // debug output
   // here we show the result on the screen TODO
+  lcd.setCursor(0,0);
+  lcd.print(String(mH)+String(":"));
+  //lcd.print(":");
+ 
+   if (mM < 10) {
+     lcd.setCursor(3,0);
+      lcd.print("0");
+      }
+    lcd.print(String(mM)+String(":"));
+    if (mS < 10) {
+    
+    lcd.print(String("0"));
+    
+  }
+     lcd.print(String(mS));
+     lcd.setCursor(0,1);
+     lcd.print(String("tick:")+String(tick)+String("ms"));
   // this will need concatenation in order to print it on the screen
 }
