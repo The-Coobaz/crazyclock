@@ -1,4 +1,7 @@
 # crazyclock
+
+[![clang-format Check](https://github.com/The-Coobaz/crazyclock/actions/workflows/clang-format-check.yml/badge.svg)](https://github.com/The-Coobaz/crazyclock/actions/workflows/clang-format-check.yml)
+
 The main idea of this project is arduino clock with flexible second time.
 This would allow to speed up or slow down the time.
 
@@ -10,14 +13,6 @@ You are going to need:
 - rotary encoder
 
 ## Development
-
-### Unit Tests
-
-For unit tests of C code we use [GoogleTest](https://github.com/google/googletest/) with [Bazel](https://google.github.io/googletest/quickstart-bazel.html):
-
-```
-bazel test //:hello_test
-```
 
 ### VS Code
 
