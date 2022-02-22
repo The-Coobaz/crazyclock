@@ -94,10 +94,8 @@ void checkEncoder() {
       tick = tick + 50;
     } else {
       tick = tick - 50;
-      if (tick < 50) {
-        tick = 50;
-      }
     }
+
     pos = newPos;
     myMillis = (millis() + tick); // reset counting after tick change
     showMe();                     // show the result immediately
