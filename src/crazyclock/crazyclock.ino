@@ -11,12 +11,12 @@
 const char *ssid = "SSID";
 const char *password = "PASS";
 
-int mH, mM, mS;  // crazydata
-int tick = 1000; // initial value of tick =1s
-char zerro[] = {"0"};
+int mH, mM, mS;   // crazydata
+int tick = 1000;  // initial value of tick =1s
+char zerro[] = { "0" };
 
 unsigned long
-    myMillis; // maybe myMillis should be a function returning the result?
+  myMillis;  // maybe myMillis should be a function returning the result?
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 3600, 60000);
@@ -37,12 +37,12 @@ void setup() {
     Serial.print(".");
   }
   int status;
-	status = lcd.begin(LCD_COLS, LCD_ROWS);
-	if(status) // non zero status means it was unsuccesful
-	{
-		// begin() failed so blink error code using the onboard LED if possible
-		hd44780::fatalError(status); // does not return
-	}
+  status = lcd.begin(LCD_COLS, LCD_ROWS);
+  if (status)  // non zero status means it was unsuccesful
+  {
+    // begin() failed so blink error code using the onboard LED if possible
+    hd44780::fatalError(status);  // does not return
+  }
 
   timeClient.begin();
   whatTime();
@@ -51,11 +51,11 @@ void setup() {
 
 void loop() {
   // checkEncoder();
-   ticTac();
+  ticTac();
   // showMe();
 }
-void whatTime() { // this function synchronises time with NTP and normalizes the
-                  // tick to 1 second
+void whatTime() {  // this function synchronises time with NTP and normalizes the
+                   // tick to 1 second
   timeClient.update();
   mH = timeClient.getHours();
   mM = timeClient.getMinutes();
@@ -86,25 +86,25 @@ void ticTac() {
     myMillis = (millis() + tick);
     showMe();
 
-  } // if our second has passed and tick is minus, decrement;
+  }  // if our second has passed and tick is minus, decrement;
 
   if (mS == 59 and tick > 0) {
     mS = -1;
-    mM++; // if second has passed and tick is plus, increment minute
+    mM++;  // if second has passed and tick is plus, increment minute
   }
 
   if (mS < 0 and tick < 0) {
     mS = mS + 60;
-    mM--; // if second has passed and tick is minus, decrement minute
+    mM--;  // if second has passed and tick is minus, decrement minute
   }
   if (mM == 59 and tick > 0) {
     mM = -1;
-    mH++; // if minute has passed and tick is plus, increment hour
+    mH++;  // if minute has passed and tick is plus, increment hour
   }
 
   if (mM < 0 and tick < 0) {
     mM = mM + 59;
-    mH--; // if minute has passed and tick is minus, decrement hour
+    mH--;  // if minute has passed and tick is minus, decrement hour
   }
   if (mH == 24) {
     mH - 24;
@@ -123,28 +123,27 @@ void showMe() {
     Serial.print(zerro[0]);
   }
   Serial.print(mS);
-  Serial.println(); // debug output
+  Serial.println();  // debug output
   // here we show the result on the screen TODO
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   if (mH < 10) {
-      lcd.print(String("0"));
-      lcd.setCursor(1,0);
-      }
-  lcd.print(String(mH)+String(":"));
-  //lcd.print(":");
- 
-   if (mM < 10) {
-     lcd.setCursor(3,0);
-      lcd.print("0");
-      }
-    lcd.print(String(mM)+String(":"));
-    if (mS < 10) {
-    
     lcd.print(String("0"));
-    
+    lcd.setCursor(1, 0);
   }
-     lcd.print(String(mS));
-     lcd.setCursor(0,1);
-     lcd.print(String("tick:")+String(tick)+String("ms"));
+  lcd.print(String(mH) + String(":"));
+  //lcd.print(":");
+
+  if (mM < 10) {
+    lcd.setCursor(3, 0);
+    lcd.print("0");
+  }
+  lcd.print(String(mM) + String(":"));
+  if (mS < 10) {
+
+    lcd.print(String("0"));
+  }
+  lcd.print(String(mS));
+  lcd.setCursor(0, 1);
+  lcd.print(String("tick:") + String(tick) + String("ms"));
   // this will need concatenation in order to print it on the screen
 }
