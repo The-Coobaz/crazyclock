@@ -124,6 +124,10 @@ void showMe() {
   Serial.println(); // debug output
   // here we show the result on the screen TODO
   lcd.setCursor(0,0);
+  if (mH < 10) {
+      lcd.print(String("0"));
+      lcd.setCursor(1,0);
+      }
   lcd.print(String(mH)+String(":"));
   //lcd.print(":");
  
