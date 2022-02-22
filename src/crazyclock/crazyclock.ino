@@ -51,7 +51,7 @@ void setup() {
 
 void loop() {
   // checkEncoder();
-  // ticTac();
+   ticTac();
   // showMe();
 }
 void whatTime() { // this function synchronises time with NTP and normalizes the
@@ -79,10 +79,12 @@ void ticTac() {
   if ((millis() >= myMillis) and tick > 0) {
     mS++;
     myMillis = (millis() + tick);
+    showMe();
 
   } else if ((millis() >= myMillis) and tick < 0) {
     mS--;
     myMillis = (millis() + tick);
+    showMe();
 
   } // if our second has passed and tick is minus, decrement;
 
