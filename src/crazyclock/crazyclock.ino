@@ -46,14 +46,14 @@ void setup() {
 
   timeClient.begin();
   whatTime();
+  //tick=-1000; //For debug purposes
   myMillis = (millis() + tick);
 }
 
 void loop() {
   // checkEncoder();
   ticTac();
-  // showMe();
-}
+  }
 void whatTime() {  // this function synchronises time with NTP and normalizes the
                    // tick to 1 second
   timeClient.update();
@@ -77,33 +77,33 @@ void ticTac() {
   // here the clock works
 
   if ((millis() >= myMillis) and tick > 0) {
+    showMe(); //first show, then add second
     mS++;
     myMillis = (millis() + tick);
-    showMe();
 
   } else if ((millis() >= myMillis) and tick < 0) {
-    mS--;
-    myMillis = (millis() + tick);
     showMe();
+    mS--;
+    myMillis = (millis() + abs(tick));
 
   }  // if our second has passed and tick is minus, decrement;
 
-  if (mS == 59 and tick > 0) {
-    mS = -1;
+  if (mS == 60 and tick > 0) {
+    mS = 0;
     mM++;  // if second has passed and tick is plus, increment minute
   }
-
+  
+  if (mM == 60 and tick > 0) {
+    mM = 0;// if minute has passed and tick is plus, increment hour
+  }
+  
   if (mS < 0 and tick < 0) {
-    mS = mS + 60;
+    mS = 59;
     mM--;  // if second has passed and tick is minus, decrement minute
   }
-  if (mM == 59 and tick > 0) {
-    mM = -1;
-    mH++;  // if minute has passed and tick is plus, increment hour
-  }
-
+ 
   if (mM < 0 and tick < 0) {
-    mM = mM + 59;
+    mM = 59;
     mH--;  // if minute has passed and tick is minus, decrement hour
   }
   if (mH == 24) {
