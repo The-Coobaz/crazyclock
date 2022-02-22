@@ -2,10 +2,9 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include <Wire.h>
+#include <RotaryEncoder.h>
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
-// #include <RotaryEncoder.h>
-
 #include "time.h"
 
 const char *ssid = "SSID";
@@ -13,29 +12,31 @@ const char *password = "PASS";
 
 int mH, mM, mS;   // crazydata
 int tick = 1000;  // initial value of tick =1s
+bool change;       // change of time
 char zerro[] = { "0" };
 
+#if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
+// Example for Arduino UNO with input signals on pin 2 and 3
+#define PIN_IN1 2
+#define PIN_IN2 3
+
+#elif defined(ESP8266)
+// Example for ESP8266 NodeMCU with input signals on pin D5 and D6
+#define PIN_IN1 12
+#define PIN_IN2 14
+#endif
 unsigned long
-  myMillis;  // maybe myMillis should be a function returning the result?
+myMillis;  // maybe myMillis should be a function returning the result?
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 3600, 60000);
 hd44780_I2Cexp lcd;
 const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
+RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 
 void setup() {
-  Serial.begin(115200);
-  while (!Serial) {
-    // waits for serial port to be ready
-  };
-
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
+  pinMode(13, INPUT);
   int status;
   status = lcd.begin(LCD_COLS, LCD_ROWS);
   if (status)  // non zero status means it was unsuccesful
@@ -43,6 +44,22 @@ void setup() {
     // begin() failed so blink error code using the onboard LED if possible
     hd44780::fatalError(status);  // does not return
   }
+  lcd.print("Waiting for WiFi");
+  lcd.setCursor(0, 1);
+  Serial.begin(115200);
+  while (!Serial) {
+    // waits for serial port to be ready
+  }
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+    lcd.print(".");
+  }
+
+  lcd.clear();
 
   timeClient.begin();
   whatTime();
@@ -51,26 +68,46 @@ void setup() {
 }
 
 void loop() {
-  // checkEncoder();
+  checkEncoder();
   ticTac();
-  }
+}
 void whatTime() {  // this function synchronises time with NTP and normalizes the
-                   // tick to 1 second
+  // tick to 1 second
   timeClient.update();
   mH = timeClient.getHours();
   mM = timeClient.getMinutes();
   mS = timeClient.getSeconds();
   tick = 1000;
+  change = false;
   Serial.println((String)mH + ":" + mM + ":" + mS);
 }
 
 void checkEncoder() {
-  // TODO
-  // Here we listen to the rotations of the encoder, modify the tick and check
-  // if encoder is not pressed (then reset and return to ntp time) here we will
-  // need a flag variable showing that the time was altered from NTP. This will
-  // be used in "showMe" to show if we can trust the clock ;)
-  // if button pressed invoke "whatTime"
+
+  static int pos = 0;
+  encoder.tick();
+  int newPos = encoder.getPosition();
+
+  if (pos != newPos) {
+    change = true;
+    if (newPos > pos) {
+      tick = tick + 50;
+    }
+    else {
+      tick = tick - 50;
+      if (tick < 50) {
+        tick = 50;
+      }
+    }
+    pos = newPos;
+    myMillis = (millis() + tick);//reset counting after tick change
+    showMe();//show the result immediately
+
+  }
+  if (digitalRead(13) == 0) { //if reset pressed, return to NTP time
+    whatTime();
+  }
+
 }
 void ticTac() {
 
@@ -92,16 +129,17 @@ void ticTac() {
     mS = 0;
     mM++;  // if second has passed and tick is plus, increment minute
   }
-  
+
   if (mM == 60 and tick > 0) {
     mM = 0;// if minute has passed and tick is plus, increment hour
+    mH++;
   }
-  
+
   if (mS < 0 and tick < 0) {
     mS = 59;
     mM--;  // if second has passed and tick is minus, decrement minute
   }
- 
+
   if (mM < 0 and tick < 0) {
     mM = 59;
     mH--;  // if minute has passed and tick is minus, decrement hour
@@ -144,6 +182,13 @@ void showMe() {
   }
   lcd.print(String(mS));
   lcd.setCursor(0, 1);
-  lcd.print(String("tick:") + String(tick) + String("ms"));
-  // this will need concatenation in order to print it on the screen
+  lcd.print(String("tick:") + String(tick) + String("ms "));
+  if (change) {
+    lcd.setCursor(15, 0);
+    lcd.print("?");
+  }
+  else {
+    lcd.setCursor(15, 0);
+    lcd.print(" ");
+  };
 }
