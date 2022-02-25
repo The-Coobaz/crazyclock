@@ -4,3 +4,6 @@
 
 # Bazel files
 bazel-*
+
+# build
+/build
