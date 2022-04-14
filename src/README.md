@@ -19,7 +19,7 @@
     ```
     https://arduino.esp8266.com/stable/package_esp8266com_index.json
     ```
-3. Configure the [autocompletion for command-line](https://arduino.github.io/arduino-cli/0.21/command-line-completion/#generate-the-completion-file)
+3. Configure the [autocompletion for command-line](https://arduino.github.io/arduino-cli/0.21/command-line-completion/#generate-the-completion-file) (optional step)
 3. Install Wemos D1 Mini board:
 
     ```bash
@@ -32,15 +32,12 @@
 
 ## 01-lcd
 
-1. Install required library [LCDIC2](https://github.com/offcircuit/LCDIC2):
-
-    ```bash
-    arduino-cli lib install "LCDIC2"
-    ```
-2. Compile: `arduino-cli compile --fqbn esp8266:esp8266:d1 01-lcd/`
-3. Upload: `arduino-cli upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0 01-lcd/`
+1. Compile: `arduino-cli compile --fqbn esp8266:esp8266:d1 01-lcd/`
+2. Upload: `arduino-cli upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0 01-lcd/`
 
 ## 02-lcd
+
+See also [LCDAPI](https://playground.arduino.cc/Code/LCDAPI/).
 
 1. Install required library [hd44780](https://github.com/duinoWitchery/hd44780):
 
