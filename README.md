@@ -12,6 +12,9 @@ You are going to need:
 - 1602 LCD screen
 - rotary encoder
 
+### Schema
+
+[![Fritzing Wemos D1 Mini schema](./misc/img/wemos-d1-mini-s.png)](./misc/img/wemos-d1-mini.png)
 ## Development
 
 ### VS Code
@@ -31,3 +34,8 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 1. Press `[ctlr] + [,]`
 2. Search for `C_Cpp.clang_format_fallback`
 3. Just change the value in the textfield from `Visual Studio` to `LLVM`
+
+## Fritzing Parts
+
+1. [KY-040 Rotary Encoder](https://forum.fritzing.org/t/ky-040-rotary-encoder-breakout-board-part/11073)
+2. [Wemos D1 Mini](https://github.com/mcauser/Fritzing-Part-WeMos-D1-Mini/tree/master/dist)
