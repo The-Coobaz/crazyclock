@@ -1,0 +1,547 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Generator: Adobe Illustrator 13.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 14948)  -->
+<svg xmlns="http://www.w3.org/2000/svg"  xml:space="preserve" width="1.65354in" viewBox="0 0 119.055 53.858" x="0px" version="1.2" gorn="0" xmlns:xml="http://www.w3.org/XML/1998/namespace" baseProfile="tiny" id="0" y="0px" height="0.748028in">
+    <desc  id="0.0">
+        <referenceFile  id="0.0.0">LCM1602_IIC.svg</referenceFile>
+    </desc>
+    <rect  width="119.055" fill="#1B1464" gorn="0.1" id="0.1" y="0" height="53.857"/>
+    <g  gorn="0.2" id="breadboard_1_">
+        <g  gorn="0.2.0" id="icon_1_">
+            <g  gorn="0.2.0.0" id="0.2.0.0">
+                <title  id="0.2.0.0.0">layer 21</title>
+                <g  gorn="0.2.0.0.1" id="0.2.0.0.1">
+                    <title  id="0.2.0.0.1.0">element:JP1</title>
+                    <g  gorn="0.2.0.0.1.1" id="0.2.0.0.1.1">
+                        <title  id="0.2.0.0.1.1.0">package:1X04</title>
+                        <line stroke-linecap="round" y1="40.591"  y2="44.191" stroke-width="0.576" x1="117.128" fill="none" x2="117.128" gorn="0.2.0.0.1.1.1" stroke="#FFFFFF" id="0.2.0.0.1.1.1"/>
+                        <line stroke-linecap="round" y1="44.191"  y2="45.992" stroke-width="0.576" x1="117.128" fill="none" x2="115.327" gorn="0.2.0.0.1.1.2" stroke="#FFFFFF" id="0.2.0.0.1.1.2"/>
+                        <line stroke-linecap="round" y1="45.992"  y2="44.191" stroke-width="0.576" x1="111.728" fill="none" x2="109.929" gorn="0.2.0.0.1.1.3" stroke="#FFFFFF" id="0.2.0.0.1.1.3"/>
+                        <line stroke-linecap="round" y1="31.591"  y2="33.39" stroke-width="0.576" x1="115.327" fill="none" x2="117.128" gorn="0.2.0.0.1.1.4" stroke="#FFFFFF" id="0.2.0.0.1.1.4"/>
+                        <line stroke-linecap="round" y1="33.39"  y2="36.992" stroke-width="0.576" x1="117.128" fill="none" x2="117.128" gorn="0.2.0.0.1.1.5" stroke="#FFFFFF" id="0.2.0.0.1.1.5"/>
+                        <line stroke-linecap="round" y1="36.992"  y2="38.792" stroke-width="0.576" x1="117.128" fill="none" x2="115.327" gorn="0.2.0.0.1.1.6" stroke="#FFFFFF" id="0.2.0.0.1.1.6"/>
+                        <line stroke-linecap="round" y1="38.792"  y2="36.992" stroke-width="0.576" x1="111.728" fill="none" x2="109.929" gorn="0.2.0.0.1.1.7" stroke="#FFFFFF" id="0.2.0.0.1.1.7"/>
+                        <line stroke-linecap="round" y1="36.992"  y2="33.39" stroke-width="0.576" x1="109.929" fill="none" x2="109.929" gorn="0.2.0.0.1.1.8" stroke="#FFFFFF" id="0.2.0.0.1.1.8"/>
+                        <line stroke-linecap="round" y1="33.39"  y2="31.591" stroke-width="0.576" x1="109.929" fill="none" x2="111.728" gorn="0.2.0.0.1.1.9" stroke="#FFFFFF" id="0.2.0.0.1.1.9"/>
+                        <line stroke-linecap="round" y1="40.591"  y2="38.792" stroke-width="0.576" x1="117.128" fill="none" x2="115.327" gorn="0.2.0.0.1.1.10" stroke="#FFFFFF" id="0.2.0.0.1.1.10"/>
+                        <line stroke-linecap="round" y1="38.792"  y2="40.591" stroke-width="0.576" x1="111.728" fill="none" x2="109.929" gorn="0.2.0.0.1.1.11" stroke="#FFFFFF" id="0.2.0.0.1.1.11"/>
+                        <line stroke-linecap="round" y1="44.191"  y2="40.591" stroke-width="0.576" x1="109.929" fill="none" x2="109.929" gorn="0.2.0.0.1.1.12" stroke="#FFFFFF" id="0.2.0.0.1.1.12"/>
+                        <line stroke-linecap="round" y1="18.992"  y2="22.591" stroke-width="0.576" x1="117.128" fill="none" x2="117.128" gorn="0.2.0.0.1.1.13" stroke="#FFFFFF" id="0.2.0.0.1.1.13"/>
+                        <line stroke-linecap="round" y1="22.591"  y2="24.391" stroke-width="0.576" x1="117.128" fill="none" x2="115.327" gorn="0.2.0.0.1.1.14" stroke="#FFFFFF" id="0.2.0.0.1.1.14"/>
+                        <line stroke-linecap="round" y1="24.391"  y2="22.591" stroke-width="0.576" x1="111.728" fill="none" x2="109.929" gorn="0.2.0.0.1.1.15" stroke="#FFFFFF" id="0.2.0.0.1.1.15"/>
+                        <line stroke-linecap="round" y1="24.391"  y2="26.191" stroke-width="0.576" x1="115.327" fill="none" x2="117.128" gorn="0.2.0.0.1.1.16" stroke="#FFFFFF" id="0.2.0.0.1.1.16"/>
+                        <line stroke-linecap="round" y1="26.191"  y2="29.792" stroke-width="0.576" x1="117.128" fill="none" x2="117.128" gorn="0.2.0.0.1.1.17" stroke="#FFFFFF" id="0.2.0.0.1.1.17"/>
+                        <line stroke-linecap="round" y1="29.792"  y2="31.591" stroke-width="0.576" x1="117.128" fill="none" x2="115.327" gorn="0.2.0.0.1.1.18" stroke="#FFFFFF" id="0.2.0.0.1.1.18"/>
+                        <line stroke-linecap="round" y1="31.591"  y2="29.792" stroke-width="0.576" x1="111.728" fill="none" x2="109.929" gorn="0.2.0.0.1.1.19" stroke="#FFFFFF" id="0.2.0.0.1.1.19"/>
+                        <line stroke-linecap="round" y1="29.792"  y2="26.191" stroke-width="0.576" x1="109.929" fill="none" x2="109.929" gorn="0.2.0.0.1.1.20" stroke="#FFFFFF" id="0.2.0.0.1.1.20"/>
+                        <line stroke-linecap="round" y1="26.191"  y2="24.391" stroke-width="0.576" x1="109.929" fill="none" x2="111.728" gorn="0.2.0.0.1.1.21" stroke="#FFFFFF" id="0.2.0.0.1.1.21"/>
+                        <line stroke-linecap="round" y1="17.191"  y2="17.191" stroke-width="0.576" x1="115.327" fill="none" x2="111.728" gorn="0.2.0.0.1.1.22" stroke="#FFFFFF" id="0.2.0.0.1.1.22"/>
+                        <line stroke-linecap="round" y1="18.992"  y2="17.191" stroke-width="0.576" x1="117.128" fill="none" x2="115.327" gorn="0.2.0.0.1.1.23" stroke="#FFFFFF" id="0.2.0.0.1.1.23"/>
+                        <line stroke-linecap="round" y1="17.191"  y2="18.992" stroke-width="0.576" x1="111.728" fill="none" x2="109.929" gorn="0.2.0.0.1.1.24" stroke="#FFFFFF" id="0.2.0.0.1.1.24"/>
+                        <line stroke-linecap="round" y1="22.591"  y2="18.992" stroke-width="0.576" x1="109.929" fill="none" x2="109.929" gorn="0.2.0.0.1.1.25" stroke="#FFFFFF" id="0.2.0.0.1.1.25"/>
+                        <line stroke-linecap="round" y1="45.992"  y2="45.992" stroke-width="0.576" x1="115.327" fill="none" x2="111.728" gorn="0.2.0.0.1.1.26" stroke="#FFFFFF" id="0.2.0.0.1.1.26"/>
+                    </g>
+                </g>
+                <g  gorn="0.2.0.0.2" id="0.2.0.0.2">
+                    <title  id="0.2.0.0.2.0">element:JP2</title>
+                    <g  gorn="0.2.0.0.2.1" id="0.2.0.0.2.1">
+                        <title  id="0.2.0.0.2.1.0">package:STAND-OFF</title>
+                    </g>
+                </g>
+                <g  gorn="0.2.0.0.3" id="0.2.0.0.3">
+                    <title  id="0.2.0.0.3.0">element:JP3</title>
+                    <g  gorn="0.2.0.0.3.1" id="0.2.0.0.3.1">
+                        <title  id="0.2.0.0.3.1.0">package:STAND-OFF</title>
+                    </g>
+                </g>
+                <g  gorn="0.2.0.0.4" id="0.2.0.0.4">
+                    <title  id="0.2.0.0.4.0">element:JP5</title>
+                    <g  gorn="0.2.0.0.4.1" id="0.2.0.0.4.1">
+                        <title  id="0.2.0.0.4.1.0">package:FIDUCIAL-1X2.5</title>
+                    </g>
+                </g>
+                <g  gorn="0.2.0.0.5" id="0.2.0.0.5">
+                    <title  id="0.2.0.0.5.0">element:JP6</title>
+                    <g  gorn="0.2.0.0.5.1" id="0.2.0.0.5.1">
+                        <title  id="0.2.0.0.5.1.0">package:FIDUCIAL-1X2.5</title>
+                    </g>
+                </g>
+                <g  gorn="0.2.0.0.6" id="0.2.0.0.6">
+                    <title  id="0.2.0.0.6.0">element:R1</title>
+                    <g  gorn="0.2.0.0.6.1" id="0.2.0.0.6.1">
+                        <title  id="0.2.0.0.6.1.0">package:0402-RES</title>
+                    </g>
+                </g>
+                <g  gorn="0.2.0.0.7" id="0.2.0.0.7">
+                    <title  id="0.2.0.0.7.0">element:R2</title>
+                    <g  gorn="0.2.0.0.7.1" id="0.2.0.0.7.1">
+                        <title  id="0.2.0.0.7.1.0">package:0402-RES</title>
+                    </g>
+                </g>
+                <g  gorn="0.2.0.0.8" id="0.2.0.0.8">
+                    <title  id="0.2.0.0.8.0">element:U$2</title>
+                    <g  gorn="0.2.0.0.8.1" id="0.2.0.0.8.1">
+                        <title  id="0.2.0.0.8.1.0">package:OSHW-LOGO-M</title>
+                    </g>
+                </g>
+            </g>
+            <circle cy="20.792"  cx="113.527" r="2.052" stroke-width="1.224" fill="none" gorn="0.2.0.1" stroke="#9A916C" id="connector3_1_"/>
+            <rect  width="4.104" stroke-width="1.224" x="111.476" fill="none" gorn="0.2.0.2" stroke="#9A916C" id="0.2.0.2" y="18.739" height="4.104"/>
+            <circle cy="27.993"  cx="113.527" r="2.052" stroke-width="1.224" fill="none" gorn="0.2.0.3" stroke="#9A916C" id="connector2_3_"/>
+            <circle cy="35.191"  cx="113.527" r="2.052" stroke-width="1.224" fill="none" gorn="0.2.0.4" stroke="#9A916C" id="connector1_1_"/>
+            <circle cy="42.39"  cx="113.527" r="2.052" stroke-width="1.224" fill="none" gorn="0.2.0.5" stroke="#9A916C" id="connector0_1_"/>
+        </g>
+    </g>
+    <g  gorn="0.3" id="0.3">
+        <g  gorn="0.3.0" id="0.3.0">
+            <title  id="0.3.0.0">layer 21</title>
+            <g  gorn="0.3.0.1" id="0.3.0.1">
+                <title  id="0.3.0.1.0">element:JP1</title>
+                <g  gorn="0.3.0.1.1" id="0.3.0.1.1">
+                    <title  id="0.3.0.1.1.0">package:1X04</title>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="7.327" fill="none" x2="3.727" gorn="0.3.0.1.1.1" stroke="#FFFFFF" id="0.3.0.1.1.1"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="3.727" fill="none" x2="1.926" gorn="0.3.0.1.1.2" stroke="#FFFFFF" id="0.3.0.1.1.2"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="1.926" fill="none" x2="3.727" gorn="0.3.0.1.1.3" stroke="#FFFFFF" id="0.3.0.1.1.3"/>
+                    <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="16.327" fill="none" x2="14.527" gorn="0.3.0.1.1.4" stroke="#FFFFFF" id="0.3.0.1.1.4"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="14.527" fill="none" x2="10.926" gorn="0.3.0.1.1.5" stroke="#FFFFFF" id="0.3.0.1.1.5"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="10.926" fill="none" x2="9.126" gorn="0.3.0.1.1.6" stroke="#FFFFFF" id="0.3.0.1.1.6"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="9.126" fill="none" x2="10.926" gorn="0.3.0.1.1.7" stroke="#FFFFFF" id="0.3.0.1.1.7"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="10.926" fill="none" x2="14.527" gorn="0.3.0.1.1.8" stroke="#FFFFFF" id="0.3.0.1.1.8"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="14.527" fill="none" x2="16.327" gorn="0.3.0.1.1.9" stroke="#FFFFFF" id="0.3.0.1.1.9"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="7.327" fill="none" x2="9.126" gorn="0.3.0.1.1.10" stroke="#FFFFFF" id="0.3.0.1.1.10"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="9.126" fill="none" x2="7.327" gorn="0.3.0.1.1.11" stroke="#FFFFFF" id="0.3.0.1.1.11"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="3.727" fill="none" x2="7.327" gorn="0.3.0.1.1.12" stroke="#FFFFFF" id="0.3.0.1.1.12"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="28.925" fill="none" x2="25.328" gorn="0.3.0.1.1.13" stroke="#FFFFFF" id="0.3.0.1.1.13"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="25.328" fill="none" x2="23.527" gorn="0.3.0.1.1.14" stroke="#FFFFFF" id="0.3.0.1.1.14"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="23.527" fill="none" x2="25.328" gorn="0.3.0.1.1.15" stroke="#FFFFFF" id="0.3.0.1.1.15"/>
+                    <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="23.527" fill="none" x2="21.727" gorn="0.3.0.1.1.16" stroke="#FFFFFF" id="0.3.0.1.1.16"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="21.727" fill="none" x2="18.126" gorn="0.3.0.1.1.17" stroke="#FFFFFF" id="0.3.0.1.1.17"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="18.126" fill="none" x2="16.327" gorn="0.3.0.1.1.18" stroke="#FFFFFF" id="0.3.0.1.1.18"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="16.327" fill="none" x2="18.126" gorn="0.3.0.1.1.19" stroke="#FFFFFF" id="0.3.0.1.1.19"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="18.126" fill="none" x2="21.727" gorn="0.3.0.1.1.20" stroke="#FFFFFF" id="0.3.0.1.1.20"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="21.727" fill="none" x2="23.527" gorn="0.3.0.1.1.21" stroke="#FFFFFF" id="0.3.0.1.1.21"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.0.1.1.22" stroke="#FFFFFF" id="0.3.0.1.1.22" d="M30.726,4.59"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.0.1.1.23" stroke="#FFFFFF" id="0.3.0.1.1.23" d="M30.726,8.189"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="28.925" fill="none" x2="30.726" gorn="0.3.0.1.1.24" stroke="#FFFFFF" id="0.3.0.1.1.24"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="30.726" fill="none" x2="28.925" gorn="0.3.0.1.1.25" stroke="#FFFFFF" id="0.3.0.1.1.25"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="25.328" fill="none" x2="28.925" gorn="0.3.0.1.1.26" stroke="#FFFFFF" id="0.3.0.1.1.26"/>
+                    <line stroke-linecap="round" y1="8.189"  y2="4.59" stroke-width="0.576" x1="1.926" fill="none" x2="1.926" gorn="0.3.0.1.1.27" stroke="#FFFFFF" id="0.3.0.1.1.27"/>
+                </g>
+            </g>
+            <g  gorn="0.3.0.2" id="0.3.0.2">
+                <title  id="0.3.0.2.0">element:JP2</title>
+                <g  gorn="0.3.0.2.1" id="0.3.0.2.1">
+                    <title  id="0.3.0.2.1.0">package:STAND-OFF</title>
+                </g>
+            </g>
+            <g  gorn="0.3.0.3" id="0.3.0.3">
+                <title  id="0.3.0.3.0">element:JP3</title>
+                <g  gorn="0.3.0.3.1" id="0.3.0.3.1">
+                    <title  id="0.3.0.3.1.0">package:STAND-OFF</title>
+                </g>
+            </g>
+            <g  gorn="0.3.0.4" id="0.3.0.4">
+                <title  id="0.3.0.4.0">element:JP5</title>
+                <g  gorn="0.3.0.4.1" id="0.3.0.4.1">
+                    <title  id="0.3.0.4.1.0">package:FIDUCIAL-1X2.5</title>
+                </g>
+            </g>
+            <g  gorn="0.3.0.5" id="0.3.0.5">
+                <title  id="0.3.0.5.0">element:JP6</title>
+                <g  gorn="0.3.0.5.1" id="0.3.0.5.1">
+                    <title  id="0.3.0.5.1.0">package:FIDUCIAL-1X2.5</title>
+                </g>
+            </g>
+            <g  gorn="0.3.0.6" id="0.3.0.6">
+                <title  id="0.3.0.6.0">element:R1</title>
+                <g  gorn="0.3.0.6.1" id="0.3.0.6.1">
+                    <title  id="0.3.0.6.1.0">package:0402-RES</title>
+                </g>
+            </g>
+            <g  gorn="0.3.0.7" id="0.3.0.7">
+                <title  id="0.3.0.7.0">element:R2</title>
+                <g  gorn="0.3.0.7.1" id="0.3.0.7.1">
+                    <title  id="0.3.0.7.1.0">package:0402-RES</title>
+                </g>
+            </g>
+            <g  gorn="0.3.0.8" id="0.3.0.8">
+                <title  id="0.3.0.8.0">element:U$2</title>
+                <g  gorn="0.3.0.8.1" id="0.3.0.8.1">
+                    <title  id="0.3.0.8.1.0">package:OSHW-LOGO-M</title>
+                </g>
+            </g>
+        </g>
+        <circle cy="6.39"  cx="27.126" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.1" stroke="#9A916C" id="connector3"/>
+        <circle cy="6.39"  cx="19.926" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.2" stroke="#9A916C" id="connector2"/>
+        <circle cy="6.39"  cx="12.727" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.3" stroke="#9A916C" id="connector1"/>
+        <circle cy="6.39"  cx="5.527" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.4" stroke="#9A916C" id="connector0"/>
+        <g  gorn="0.3.5" id="icon_2_">
+            <g  gorn="0.3.5.0" id="0.3.5.0">
+                <title  id="0.3.5.0.0">layer 21</title>
+                <g  gorn="0.3.5.0.1" id="0.3.5.0.1">
+                    <title  id="0.3.5.0.1.0">element:JP1</title>
+                    <g  gorn="0.3.5.0.1.1" id="0.3.5.0.1.1">
+                        <title  id="0.3.5.0.1.1.0">package:1X04</title>
+                        <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="93.729" fill="none" x2="90.129" gorn="0.3.5.0.1.1.1" stroke="#FFFFFF" id="0.3.5.0.1.1.1"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="90.129" fill="none" x2="88.328" gorn="0.3.5.0.1.1.2" stroke="#FFFFFF" id="0.3.5.0.1.1.2"/>
+                        <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="88.328" fill="none" x2="90.129" gorn="0.3.5.0.1.1.3" stroke="#FFFFFF" id="0.3.5.0.1.1.3"/>
+                        <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="102.729" fill="none" x2="100.93" gorn="0.3.5.0.1.1.4" stroke="#FFFFFF" id="0.3.5.0.1.1.4"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="100.93" fill="none" x2="97.328" gorn="0.3.5.0.1.1.5" stroke="#FFFFFF" id="0.3.5.0.1.1.5"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="97.328" fill="none" x2="95.528" gorn="0.3.5.0.1.1.6" stroke="#FFFFFF" id="0.3.5.0.1.1.6"/>
+                        <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="95.528" fill="none" x2="97.328" gorn="0.3.5.0.1.1.7" stroke="#FFFFFF" id="0.3.5.0.1.1.7"/>
+                        <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="97.328" fill="none" x2="100.93" gorn="0.3.5.0.1.1.8" stroke="#FFFFFF" id="0.3.5.0.1.1.8"/>
+                        <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="100.93" fill="none" x2="102.729" gorn="0.3.5.0.1.1.9" stroke="#FFFFFF" id="0.3.5.0.1.1.9"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="93.729" fill="none" x2="95.528" gorn="0.3.5.0.1.1.10" stroke="#FFFFFF" id="0.3.5.0.1.1.10"/>
+                        <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="95.528" fill="none" x2="93.729" gorn="0.3.5.0.1.1.11" stroke="#FFFFFF" id="0.3.5.0.1.1.11"/>
+                        <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="90.129" fill="none" x2="93.729" gorn="0.3.5.0.1.1.12" stroke="#FFFFFF" id="0.3.5.0.1.1.12"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="115.328" fill="none" x2="111.729" gorn="0.3.5.0.1.1.13" stroke="#FFFFFF" id="0.3.5.0.1.1.13"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="111.729" fill="none" x2="109.93" gorn="0.3.5.0.1.1.14" stroke="#FFFFFF" id="0.3.5.0.1.1.14"/>
+                        <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="109.93" fill="none" x2="111.729" gorn="0.3.5.0.1.1.15" stroke="#FFFFFF" id="0.3.5.0.1.1.15"/>
+                        <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="109.93" fill="none" x2="108.129" gorn="0.3.5.0.1.1.16" stroke="#FFFFFF" id="0.3.5.0.1.1.16"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="108.129" fill="none" x2="104.528" gorn="0.3.5.0.1.1.17" stroke="#FFFFFF" id="0.3.5.0.1.1.17"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="104.528" fill="none" x2="102.729" gorn="0.3.5.0.1.1.18" stroke="#FFFFFF" id="0.3.5.0.1.1.18"/>
+                        <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="102.729" fill="none" x2="104.528" gorn="0.3.5.0.1.1.19" stroke="#FFFFFF" id="0.3.5.0.1.1.19"/>
+                        <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="104.528" fill="none" x2="108.129" gorn="0.3.5.0.1.1.20" stroke="#FFFFFF" id="0.3.5.0.1.1.20"/>
+                        <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="108.129" fill="none" x2="109.93" gorn="0.3.5.0.1.1.21" stroke="#FFFFFF" id="0.3.5.0.1.1.21"/>
+                        <line stroke-linecap="round" y1="8.189"  y2="4.59" stroke-width="0.576" x1="117.129" fill="none" x2="117.129" gorn="0.3.5.0.1.1.22" stroke="#FFFFFF" id="0.3.5.0.1.1.22"/>
+                        <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="115.328" fill="none" x2="117.129" gorn="0.3.5.0.1.1.23" stroke="#FFFFFF" id="0.3.5.0.1.1.23"/>
+                        <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="117.129" fill="none" x2="115.328" gorn="0.3.5.0.1.1.24" stroke="#FFFFFF" id="0.3.5.0.1.1.24"/>
+                        <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="111.729" fill="none" x2="115.328" gorn="0.3.5.0.1.1.25" stroke="#FFFFFF" id="0.3.5.0.1.1.25"/>
+                        <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.5.0.1.1.26" stroke="#FFFFFF" id="0.3.5.0.1.1.26" d="M88.328,4.59"/>
+                        <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.5.0.1.1.27" stroke="#FFFFFF" id="0.3.5.0.1.1.27" d="M88.328,8.189"/>
+                    </g>
+                </g>
+                <g  gorn="0.3.5.0.2" id="0.3.5.0.2">
+                    <title  id="0.3.5.0.2.0">element:JP2</title>
+                    <g  gorn="0.3.5.0.2.1" id="0.3.5.0.2.1">
+                        <title  id="0.3.5.0.2.1.0">package:STAND-OFF</title>
+                    </g>
+                </g>
+                <g  gorn="0.3.5.0.3" id="0.3.5.0.3">
+                    <title  id="0.3.5.0.3.0">element:JP3</title>
+                    <g  gorn="0.3.5.0.3.1" id="0.3.5.0.3.1">
+                        <title  id="0.3.5.0.3.1.0">package:STAND-OFF</title>
+                    </g>
+                </g>
+                <g  gorn="0.3.5.0.4" id="0.3.5.0.4">
+                    <title  id="0.3.5.0.4.0">element:JP5</title>
+                    <g  gorn="0.3.5.0.4.1" id="0.3.5.0.4.1">
+                        <title  id="0.3.5.0.4.1.0">package:FIDUCIAL-1X2.5</title>
+                    </g>
+                </g>
+                <g  gorn="0.3.5.0.5" id="0.3.5.0.5">
+                    <title  id="0.3.5.0.5.0">element:JP6</title>
+                    <g  gorn="0.3.5.0.5.1" id="0.3.5.0.5.1">
+                        <title  id="0.3.5.0.5.1.0">package:FIDUCIAL-1X2.5</title>
+                    </g>
+                </g>
+                <g  gorn="0.3.5.0.6" id="0.3.5.0.6">
+                    <title  id="0.3.5.0.6.0">element:R1</title>
+                    <g  gorn="0.3.5.0.6.1" id="0.3.5.0.6.1">
+                        <title  id="0.3.5.0.6.1.0">package:0402-RES</title>
+                    </g>
+                </g>
+                <g  gorn="0.3.5.0.7" id="0.3.5.0.7">
+                    <title  id="0.3.5.0.7.0">element:R2</title>
+                    <g  gorn="0.3.5.0.7.1" id="0.3.5.0.7.1">
+                        <title  id="0.3.5.0.7.1.0">package:0402-RES</title>
+                    </g>
+                </g>
+                <g  gorn="0.3.5.0.8" id="0.3.5.0.8">
+                    <title  id="0.3.5.0.8.0">element:U$2</title>
+                    <g  gorn="0.3.5.0.8.1" id="0.3.5.0.8.1">
+                        <title  id="0.3.5.0.8.1.0">package:OSHW-LOGO-M</title>
+                    </g>
+                </g>
+            </g>
+            <circle cy="6.39"  cx="113.528" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.5.1" stroke="#9A916C" id="connector3_2_"/>
+            <rect  width="4.104" stroke-width="1.224" x="111.478" fill="none" gorn="0.3.5.2" stroke="#9A916C" id="0.3.5.2" y="4.338" height="4.103"/>
+            <circle cy="6.39"  cx="106.328" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.5.3" stroke="#9A916C" id="connector2_5_"/>
+            <circle cy="6.39"  cx="99.129" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.5.4" stroke="#9A916C" id="connector1_2_"/>
+            <circle cy="6.39"  cx="91.93" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.5.5" stroke="#9A916C" id="connector0_2_"/>
+        </g>
+        <g  gorn="0.3.6" id="0.3.6">
+            <title  id="0.3.6.0">layer 21</title>
+            <g  gorn="0.3.6.1" id="0.3.6.1">
+                <title  id="0.3.6.1.0">element:JP1</title>
+                <g  gorn="0.3.6.1.1" id="0.3.6.1.1">
+                    <title  id="0.3.6.1.1.0">package:1X04</title>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="36.126" fill="none" x2="32.527" gorn="0.3.6.1.1.1" stroke="#FFFFFF" id="0.3.6.1.1.1"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="32.527" fill="none" x2="30.726" gorn="0.3.6.1.1.2" stroke="#FFFFFF" id="0.3.6.1.1.2"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="30.726" fill="none" x2="32.527" gorn="0.3.6.1.1.3" stroke="#FFFFFF" id="0.3.6.1.1.3"/>
+                    <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="45.126" fill="none" x2="43.328" gorn="0.3.6.1.1.4" stroke="#FFFFFF" id="0.3.6.1.1.4"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="43.328" fill="none" x2="39.726" gorn="0.3.6.1.1.5" stroke="#FFFFFF" id="0.3.6.1.1.5"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="39.726" fill="none" x2="37.925" gorn="0.3.6.1.1.6" stroke="#FFFFFF" id="0.3.6.1.1.6"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="37.925" fill="none" x2="39.726" gorn="0.3.6.1.1.7" stroke="#FFFFFF" id="0.3.6.1.1.7"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="39.726" fill="none" x2="43.328" gorn="0.3.6.1.1.8" stroke="#FFFFFF" id="0.3.6.1.1.8"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="43.328" fill="none" x2="45.126" gorn="0.3.6.1.1.9" stroke="#FFFFFF" id="0.3.6.1.1.9"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="36.126" fill="none" x2="37.925" gorn="0.3.6.1.1.10" stroke="#FFFFFF" id="0.3.6.1.1.10"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="37.925" fill="none" x2="36.126" gorn="0.3.6.1.1.11" stroke="#FFFFFF" id="0.3.6.1.1.11"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="32.527" fill="none" x2="36.126" gorn="0.3.6.1.1.12" stroke="#FFFFFF" id="0.3.6.1.1.12"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="57.727" fill="none" x2="54.127" gorn="0.3.6.1.1.13" stroke="#FFFFFF" id="0.3.6.1.1.13"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="54.127" fill="none" x2="52.329" gorn="0.3.6.1.1.14" stroke="#FFFFFF" id="0.3.6.1.1.14"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="52.329" fill="none" x2="54.127" gorn="0.3.6.1.1.15" stroke="#FFFFFF" id="0.3.6.1.1.15"/>
+                    <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="52.329" fill="none" x2="50.528" gorn="0.3.6.1.1.16" stroke="#FFFFFF" id="0.3.6.1.1.16"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="50.528" fill="none" x2="46.925" gorn="0.3.6.1.1.17" stroke="#FFFFFF" id="0.3.6.1.1.17"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="46.925" fill="none" x2="45.126" gorn="0.3.6.1.1.18" stroke="#FFFFFF" id="0.3.6.1.1.18"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="45.126" fill="none" x2="46.925" gorn="0.3.6.1.1.19" stroke="#FFFFFF" id="0.3.6.1.1.19"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="46.925" fill="none" x2="50.528" gorn="0.3.6.1.1.20" stroke="#FFFFFF" id="0.3.6.1.1.20"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="50.528" fill="none" x2="52.329" gorn="0.3.6.1.1.21" stroke="#FFFFFF" id="0.3.6.1.1.21"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.6.1.1.22" stroke="#FFFFFF" id="0.3.6.1.1.22" d="M59.528,4.59"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.6.1.1.23" stroke="#FFFFFF" id="0.3.6.1.1.23" d="M59.528,8.189"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="57.727" fill="none" x2="59.528" gorn="0.3.6.1.1.24" stroke="#FFFFFF" id="0.3.6.1.1.24"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="59.528" fill="none" x2="57.727" gorn="0.3.6.1.1.25" stroke="#FFFFFF" id="0.3.6.1.1.25"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="54.127" fill="none" x2="57.727" gorn="0.3.6.1.1.26" stroke="#FFFFFF" id="0.3.6.1.1.26"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.6.1.1.27" stroke="#FFFFFF" id="0.3.6.1.1.27" d="M30.726,4.59"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.6.1.1.28" stroke="#FFFFFF" id="0.3.6.1.1.28" d="M30.726,8.189"/>
+                </g>
+            </g>
+            <g  gorn="0.3.6.2" id="0.3.6.2">
+                <title  id="0.3.6.2.0">element:JP2</title>
+                <g  gorn="0.3.6.2.1" id="0.3.6.2.1">
+                    <title  id="0.3.6.2.1.0">package:STAND-OFF</title>
+                </g>
+            </g>
+            <g  gorn="0.3.6.3" id="0.3.6.3">
+                <title  id="0.3.6.3.0">element:JP3</title>
+                <g  gorn="0.3.6.3.1" id="0.3.6.3.1">
+                    <title  id="0.3.6.3.1.0">package:STAND-OFF</title>
+                </g>
+            </g>
+            <g  gorn="0.3.6.4" id="0.3.6.4">
+                <title  id="0.3.6.4.0">element:JP5</title>
+                <g  gorn="0.3.6.4.1" id="0.3.6.4.1">
+                    <title  id="0.3.6.4.1.0">package:FIDUCIAL-1X2.5</title>
+                </g>
+            </g>
+            <g  gorn="0.3.6.5" id="0.3.6.5">
+                <title  id="0.3.6.5.0">element:JP6</title>
+                <g  gorn="0.3.6.5.1" id="0.3.6.5.1">
+                    <title  id="0.3.6.5.1.0">package:FIDUCIAL-1X2.5</title>
+                </g>
+            </g>
+            <g  gorn="0.3.6.6" id="0.3.6.6">
+                <title  id="0.3.6.6.0">element:R1</title>
+                <g  gorn="0.3.6.6.1" id="0.3.6.6.1">
+                    <title  id="0.3.6.6.1.0">package:0402-RES</title>
+                </g>
+            </g>
+            <g  gorn="0.3.6.7" id="0.3.6.7">
+                <title  id="0.3.6.7.0">element:R2</title>
+                <g  gorn="0.3.6.7.1" id="0.3.6.7.1">
+                    <title  id="0.3.6.7.1.0">package:0402-RES</title>
+                </g>
+            </g>
+            <g  gorn="0.3.6.8" id="0.3.6.8">
+                <title  id="0.3.6.8.0">element:U$2</title>
+                <g  gorn="0.3.6.8.1" id="0.3.6.8.1">
+                    <title  id="0.3.6.8.1.0">package:OSHW-LOGO-M</title>
+                </g>
+            </g>
+        </g>
+        <circle cy="6.39"  cx="55.926" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.7" stroke="#9A916C" id="connector3_3_"/>
+        <circle cy="6.39"  cx="48.726" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.8" stroke="#9A916C" id="connector2_7_"/>
+        <circle cy="6.39"  cx="41.527" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.9" stroke="#9A916C" id="connector1_3_"/>
+        <circle cy="6.39"  cx="34.328" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.10" stroke="#9A916C" id="connector0_3_"/>
+        <g  gorn="0.3.11" id="0.3.11">
+            <title  id="0.3.11.0">layer 21</title>
+            <g  gorn="0.3.11.1" id="0.3.11.1">
+                <title  id="0.3.11.1.0">element:JP1</title>
+                <g  gorn="0.3.11.1.1" id="0.3.11.1.1">
+                    <title  id="0.3.11.1.1.0">package:1X04</title>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="64.928" fill="none" x2="61.328" gorn="0.3.11.1.1.1" stroke="#FFFFFF" id="0.3.11.1.1.1"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="61.328" fill="none" x2="59.528" gorn="0.3.11.1.1.2" stroke="#FFFFFF" id="0.3.11.1.1.2"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="59.528" fill="none" x2="61.328" gorn="0.3.11.1.1.3" stroke="#FFFFFF" id="0.3.11.1.1.3"/>
+                    <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="73.928" fill="none" x2="72.129" gorn="0.3.11.1.1.4" stroke="#FFFFFF" id="0.3.11.1.1.4"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="72.129" fill="none" x2="68.527" gorn="0.3.11.1.1.5" stroke="#FFFFFF" id="0.3.11.1.1.5"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="68.527" fill="none" x2="66.727" gorn="0.3.11.1.1.6" stroke="#FFFFFF" id="0.3.11.1.1.6"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="66.727" fill="none" x2="68.527" gorn="0.3.11.1.1.7" stroke="#FFFFFF" id="0.3.11.1.1.7"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="68.527" fill="none" x2="72.129" gorn="0.3.11.1.1.8" stroke="#FFFFFF" id="0.3.11.1.1.8"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="72.129" fill="none" x2="73.928" gorn="0.3.11.1.1.9" stroke="#FFFFFF" id="0.3.11.1.1.9"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="64.928" fill="none" x2="66.727" gorn="0.3.11.1.1.10" stroke="#FFFFFF" id="0.3.11.1.1.10"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="66.727" fill="none" x2="64.928" gorn="0.3.11.1.1.11" stroke="#FFFFFF" id="0.3.11.1.1.11"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="61.328" fill="none" x2="64.928" gorn="0.3.11.1.1.12" stroke="#FFFFFF" id="0.3.11.1.1.12"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="86.527" fill="none" x2="82.928" gorn="0.3.11.1.1.13" stroke="#FFFFFF" id="0.3.11.1.1.13"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="82.928" fill="none" x2="81.129" gorn="0.3.11.1.1.14" stroke="#FFFFFF" id="0.3.11.1.1.14"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="81.129" fill="none" x2="82.928" gorn="0.3.11.1.1.15" stroke="#FFFFFF" id="0.3.11.1.1.15"/>
+                    <line stroke-linecap="round" y1="8.189"  y2="9.99" stroke-width="0.576" x1="81.129" fill="none" x2="79.328" gorn="0.3.11.1.1.16" stroke="#FFFFFF" id="0.3.11.1.1.16"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="9.99" stroke-width="0.576" x1="79.328" fill="none" x2="75.727" gorn="0.3.11.1.1.17" stroke="#FFFFFF" id="0.3.11.1.1.17"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="75.727" fill="none" x2="73.928" gorn="0.3.11.1.1.18" stroke="#FFFFFF" id="0.3.11.1.1.18"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="73.928" fill="none" x2="75.727" gorn="0.3.11.1.1.19" stroke="#FFFFFF" id="0.3.11.1.1.19"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="75.727" fill="none" x2="79.328" gorn="0.3.11.1.1.20" stroke="#FFFFFF" id="0.3.11.1.1.20"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="4.59" stroke-width="0.576" x1="79.328" fill="none" x2="81.129" gorn="0.3.11.1.1.21" stroke="#FFFFFF" id="0.3.11.1.1.21"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.11.1.1.22" stroke="#FFFFFF" id="0.3.11.1.1.22" d="M88.328,4.59"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.11.1.1.23" stroke="#FFFFFF" id="0.3.11.1.1.23" d="M88.328,8.189"/>
+                    <line stroke-linecap="round" y1="9.99"  y2="8.189" stroke-width="0.576" x1="86.527" fill="none" x2="88.328" gorn="0.3.11.1.1.24" stroke="#FFFFFF" id="0.3.11.1.1.24"/>
+                    <line stroke-linecap="round" y1="4.59"  y2="2.792" stroke-width="0.576" x1="88.328" fill="none" x2="86.527" gorn="0.3.11.1.1.25" stroke="#FFFFFF" id="0.3.11.1.1.25"/>
+                    <line stroke-linecap="round" y1="2.792"  y2="2.792" stroke-width="0.576" x1="82.928" fill="none" x2="86.527" gorn="0.3.11.1.1.26" stroke="#FFFFFF" id="0.3.11.1.1.26"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.11.1.1.27" stroke="#FFFFFF" id="0.3.11.1.1.27" d="M59.528,4.59"/>
+                    <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.3.11.1.1.28" stroke="#FFFFFF" id="0.3.11.1.1.28" d="M59.528,8.189"/>
+                </g>
+            </g>
+            <g  gorn="0.3.11.2" id="0.3.11.2">
+                <title  id="0.3.11.2.0">element:JP2</title>
+                <g  gorn="0.3.11.2.1" id="0.3.11.2.1">
+                    <title  id="0.3.11.2.1.0">package:STAND-OFF</title>
+                </g>
+            </g>
+            <g  gorn="0.3.11.3" id="0.3.11.3">
+                <title  id="0.3.11.3.0">element:JP3</title>
+                <g  gorn="0.3.11.3.1" id="0.3.11.3.1">
+                    <title  id="0.3.11.3.1.0">package:STAND-OFF</title>
+                </g>
+            </g>
+            <g  gorn="0.3.11.4" id="0.3.11.4">
+                <title  id="0.3.11.4.0">element:JP5</title>
+                <g  gorn="0.3.11.4.1" id="0.3.11.4.1">
+                    <title  id="0.3.11.4.1.0">package:FIDUCIAL-1X2.5</title>
+                </g>
+            </g>
+            <g  gorn="0.3.11.5" id="0.3.11.5">
+                <title  id="0.3.11.5.0">element:JP6</title>
+                <g  gorn="0.3.11.5.1" id="0.3.11.5.1">
+                    <title  id="0.3.11.5.1.0">package:FIDUCIAL-1X2.5</title>
+                </g>
+            </g>
+            <g  gorn="0.3.11.6" id="0.3.11.6">
+                <title  id="0.3.11.6.0">element:R1</title>
+                <g  gorn="0.3.11.6.1" id="0.3.11.6.1">
+                    <title  id="0.3.11.6.1.0">package:0402-RES</title>
+                </g>
+            </g>
+            <g  gorn="0.3.11.7" id="0.3.11.7">
+                <title  id="0.3.11.7.0">element:R2</title>
+                <g  gorn="0.3.11.7.1" id="0.3.11.7.1">
+                    <title  id="0.3.11.7.1.0">package:0402-RES</title>
+                </g>
+            </g>
+            <g  gorn="0.3.11.8" id="0.3.11.8">
+                <title  id="0.3.11.8.0">element:U$2</title>
+                <g  gorn="0.3.11.8.1" id="0.3.11.8.1">
+                    <title  id="0.3.11.8.1.0">package:OSHW-LOGO-M</title>
+                </g>
+            </g>
+        </g>
+        <circle cy="6.39"  cx="84.727" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.12" stroke="#9A916C" id="connector3_4_"/>
+        <circle cy="6.39"  cx="77.527" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.13" stroke="#9A916C" id="connector2_9_"/>
+        <circle cy="6.39"  cx="70.328" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.14" stroke="#9A916C" id="connector1_4_"/>
+        <circle cy="6.39"  cx="63.129" r="2.051" stroke-width="1.224" fill="none" gorn="0.3.15" stroke="#9A916C" id="connector0_4_"/>
+    </g>
+    <g  transform="matrix(1 0 0 1 97.3281 22.5908)">
+        <text  fill="#FFFFFF" gorn="0.4.0" font-family="Droid Sans" id="0.4" font-size="4">GND</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 97.3281 22.5908)">
+        <text  fill="#FFFFFF" gorn="0.5.0" font-family="Droid Sans" id="0.5" font-size="4">GND</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 97.3281 29.7925)">
+        <text  fill="#FFFFFF" gorn="0.6.0" font-family="Droid Sans" id="0.6" font-size="4">V</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 100.043 29.7925)">
+        <text  fill="#FFFFFF" gorn="0.7.0" font-family="Droid Sans" id="0.7" font-size="4">C</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 102.7324 29.7925)">
+        <text  fill="#FFFFFF" gorn="0.8.0" font-family="Droid Sans" id="0.8" font-size="4">C</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 97.1289 36.3198)">
+        <text  fill="#FFFFFF" gorn="0.9.0" font-family="Droid Sans" id="0.9" font-size="4">S</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 99.668 36.3198)">
+        <text  fill="#FFFFFF" gorn="0.10.0" font-family="Droid Sans" id="0.10" font-size="4">D</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 102.6465 36.3198)">
+        <text  fill="#FFFFFF" gorn="0.11.0" font-family="Droid Sans" id="0.11" font-size="4">A</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 97.1289 43.521)">
+        <text  fill="#FFFFFF" gorn="0.12.0" font-family="Droid Sans" id="0.12" font-size="4">SCL</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 113.0273 14.9287)">
+        <text  fill="#FFFFFF" gorn="0.13.0" font-family="Droid Sans" id="0.13" font-size="4">1</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 2.5273 14.9287)">
+        <text  fill="#FFFFFF" gorn="0.14.0" font-family="Droid Sans" id="0.14" font-size="4">16</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 23.8608 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.15.0" font-family="Droid Sans" id="0.15" font-size="8">L</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 28.2437 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.16.0" font-family="Droid Sans" id="0.16" font-size="8">C</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 33.6226 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.17.0" font-family="Droid Sans" id="0.17" font-size="8">M</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 40.2671 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.18.0" font-family="Droid Sans" id="0.18" font-size="8">1</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 45.2358 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.19.0" font-family="Droid Sans" id="0.19" font-size="8">6</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 50.2046 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.20.0" font-family="Droid Sans" id="0.20" font-size="8">0</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 55.1733 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.21.0" font-family="Droid Sans" id="0.21" font-size="8">2</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 60.1426 50.2612)">
+        <g  gorn="0.22.0" id="0.22">
+            <text  fill="#FFFFFF" gorn="0.22.0.0" font-family="Droid Sans" id="0.22.0" font-size="8"/>
+        </g>
+    </g>
+    <g  transform="matrix(1 0 0 1 62.8613 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.23.0" font-family="Droid Sans" id="0.23" font-size="8">I</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 66.0879 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.24.0" font-family="Droid Sans" id="0.24" font-size="8">I</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 69.3145 50.2612)">
+        <text  fill="#FFFFFF" gorn="0.25.0" font-family="Droid Sans" id="0.25" font-size="8">C</text>
+    </g>
+    <rect  width="19.843" x="72.186" fill="#29ABE2" gorn="0.26" id="0.26" y="15.086" height="19.843"/>
+    <circle cy="25.007"  cx="82.107" r="4.961" fill="#FFFFFF" gorn="0.27" id="0.27"/>
+    <rect  width="18.5" x="37.361" gorn="0.28" id="0.28" y="14.763" height="24.333"/>
+    <g  transform="matrix(1 0 0 1 2.5273 20.5903)">
+        <text  fill="#FFFFFF" gorn="0.29.0" font-family="Droid Sans" id="0.29" font-size="4">LED</text>
+    </g>
+    <title  id="0.30">package:1X04</title>
+    <title  id="0.31">package:STAND-OFF</title>
+    <title  id="0.32">package:STAND-OFF</title>
+    <title  id="0.33">package:FIDUCIAL-1X2.5</title>
+    <title  id="0.34">package:FIDUCIAL-1X2.5</title>
+    <title  id="0.35">package:0402-RES</title>
+    <title  id="0.36">package:0402-RES</title>
+    <title  id="0.37">package:OSHW-LOGO-M</title>
+    <g  gorn="0.38" id="0.38">
+        <line stroke-linecap="round" y1="31.265"  y2="34.865" stroke-width="0.576" x1="9.125" fill="none" x2="9.125" gorn="0.38.0" stroke="#FFFFFF" id="0.38.0"/>
+        <line stroke-linecap="round" y1="34.865"  y2="36.666" stroke-width="0.576" x1="9.125" fill="none" x2="7.324" gorn="0.38.1" stroke="#FFFFFF" id="0.38.1"/>
+        <line stroke-linecap="round" y1="36.666"  y2="34.865" stroke-width="0.576" x1="3.725" fill="none" x2="1.926" gorn="0.38.2" stroke="#FFFFFF" id="0.38.2"/>
+        <line stroke-linecap="round" y1="22.265"  y2="24.063" stroke-width="0.576" x1="7.324" fill="none" x2="9.125" gorn="0.38.3" stroke="#FFFFFF" id="0.38.3"/>
+        <line stroke-linecap="round" y1="24.063"  y2="27.666" stroke-width="0.576" x1="9.125" fill="none" x2="9.125" gorn="0.38.4" stroke="#FFFFFF" id="0.38.4"/>
+        <line stroke-linecap="round" y1="27.666"  y2="29.466" stroke-width="0.576" x1="9.125" fill="none" x2="7.324" gorn="0.38.5" stroke="#FFFFFF" id="0.38.5"/>
+        <line stroke-linecap="round" y1="29.466"  y2="27.666" stroke-width="0.576" x1="3.725" fill="none" x2="1.926" gorn="0.38.6" stroke="#FFFFFF" id="0.38.6"/>
+        <line stroke-linecap="round" y1="27.666"  y2="24.063" stroke-width="0.576" x1="1.926" fill="none" x2="1.926" gorn="0.38.7" stroke="#FFFFFF" id="0.38.7"/>
+        <line stroke-linecap="round" y1="24.063"  y2="22.265" stroke-width="0.576" x1="1.926" fill="none" x2="3.725" gorn="0.38.8" stroke="#FFFFFF" id="0.38.8"/>
+        <line stroke-linecap="round" y1="31.265"  y2="29.466" stroke-width="0.576" x1="9.125" fill="none" x2="7.324" gorn="0.38.9" stroke="#FFFFFF" id="0.38.9"/>
+        <line stroke-linecap="round" y1="29.466"  y2="31.265" stroke-width="0.576" x1="3.725" fill="none" x2="1.926" gorn="0.38.10" stroke="#FFFFFF" id="0.38.10"/>
+        <line stroke-linecap="round" y1="34.865"  y2="31.265" stroke-width="0.576" x1="1.926" fill="none" x2="1.926" gorn="0.38.11" stroke="#FFFFFF" id="0.38.11"/>
+        <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.38.12" stroke="#FFFFFF" id="0.38.12" d="M7.324,22.265"/>
+        <line stroke-linecap="round" y1="22.265"  y2="22.265" stroke-width="0.576" x1="3.725" fill="none" x2="7.324" gorn="0.38.13" stroke="#FFFFFF" id="0.38.13"/>
+        <path stroke-linecap="round"  stroke-width="0.576" fill="none" gorn="0.38.14" stroke="#FFFFFF" id="0.38.14" d="M7.324,22.265"/>
+        <line stroke-linecap="round" y1="36.666"  y2="36.666" stroke-width="0.576" x1="7.324" fill="none" x2="3.725" gorn="0.38.15" stroke="#FFFFFF" id="0.38.15"/>
+        <circle cy="25.864"  cx="5.524" r="2.052" stroke-width="1.224" fill="none" gorn="0.38.16" stroke="#9A916C" id="connector1_5_"/>
+        <circle cy="33.064"  cx="5.524" r="2.052" stroke-width="1.224" fill="none" gorn="0.38.17" stroke="#9A916C" id="connector0_5_"/>
+    </g>
+    <rect stroke-linecap="round"  width="2.333" stroke-width="0.576" x="13.694" fill="#FF0000" gorn="0.39" stroke="#FFFFFF" id="0.39" y="31.262" height="5"/>
+    <g  transform="matrix(1 0 0 1 10.8608 41.9292)">
+        <text  fill="#FFFFFF" gorn="0.40.0" font-family="Droid Sans" id="0.40" font-size="4">P</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 13.1479 41.9292)">
+        <text  fill="#FFFFFF" gorn="0.41.0" font-family="Droid Sans" id="0.41" font-size="4">o</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 15.5229 41.9292)">
+        <text  fill="#FFFFFF" gorn="0.42.0" font-family="Droid Sans" id="0.42" font-size="4">w</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 18.855 41.9292)">
+        <text  fill="#FFFFFF" gorn="0.43.0" font-family="Droid Sans" id="0.43" font-size="4">e</text>
+    </g>
+    <g  transform="matrix(1 0 0 1 21.1636 41.9292)">
+        <text  fill="#FFFFFF" gorn="0.44.0" font-family="Droid Sans" id="0.44" font-size="4">r</text>
+    </g>
+</svg>
