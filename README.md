@@ -8,9 +8,13 @@ This would allow to speed up or slow down the time.
 ## Hardware
 
 You are going to need:
-- ESP8266 (wemos or nodemcu version) 
-- 1602 LCD screen
-- rotary encoder
+- ESP8266 ([wemos](https://www.aliexpress.com/wholesale?SearchText=wemos+d1+mini) or [nodemcu](https://www.aliexpress.com/wholesale?SearchText=nodemcu) version) 
+- [1602 LCD screen with i2c  converter](https://www.aliexpress.com/wholesale?SearchText=lcd+1602+i2c)
+- rotary encoder, i.e. [KY-040](https://www.aliexpress.com/wholesale?SearchText=ky-040+rotary+encoder)
+
+### Schema
+
+[![Fritzing Wemos D1 Mini schema](./misc/img/wemos-d1-mini-s.png)](./misc/img/wemos-d1-mini.png)
 
 ## Development
 
@@ -31,3 +35,8 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 1. Press `[ctlr] + [,]`
 2. Search for `C_Cpp.clang_format_fallback`
 3. Just change the value in the textfield from `Visual Studio` to `LLVM`
+
+## Fritzing Parts
+
+1. [KY-040 Rotary Encoder](https://forum.fritzing.org/t/ky-040-rotary-encoder-breakout-board-part/11073)
+2. [Wemos D1 Mini](https://github.com/mcauser/Fritzing-Part-WeMos-D1-Mini/tree/master/dist)
