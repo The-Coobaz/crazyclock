@@ -15,6 +15,7 @@ You are going to need:
 ### Schema
 
 [![Fritzing Wemos D1 Mini schema](./misc/img/wemos-d1-mini-s.png)](./misc/img/wemos-d1-mini.png)
+
 ## Development
 
 ### VS Code
