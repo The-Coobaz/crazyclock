@@ -8,7 +8,6 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-20.04
     steps:
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -23,6 +22,12 @@ jobs:
 
       - name: List Dir
         run: ls -lah
-      
+
       - name: Disk Usage
         run: du -h -d2
+
+      - name: Compile tests
+        run: cd crazyclock/src && make -C test
+
+      - name: Run tests
+        run: cd src && make -C test runtests
