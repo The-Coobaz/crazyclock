@@ -1,11 +1,27 @@
-name: Unit tests with EpoxyDuino
+name: Continuous Integration
+
 on:
   - push
   - pull_request
 
 jobs:
+  # https://github.com/marketplace/actions/clang-format-check#single-path
+  formatting-check:
+    name: Formatting Check
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Run clang-format style check for C/C++/Protobuf programs.
+      uses: jidicula/clang-format-action@v4.5.0
+      with:
+        clang-format-version: '13'
+        check-path: 'src'
+  
   tests:
     name: Unit Tests
+    needs: formatting-check
     runs-on: ubuntu-20.04
     env:
       # https://arduino.github.io/arduino-cli/0.21/installation/#download
