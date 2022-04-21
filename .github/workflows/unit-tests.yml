@@ -23,8 +23,10 @@ jobs:
       - name: List Dir
         run: ls -lah
 
-      - name: Disk Usage
-        run: du -h -d2
+      - name: Download Arduino cli
+        run: |
+          wget https://downloads.arduino.cc/arduino-cli/arduino-cli_0.21.1_Linux_64bit.tar.gz
+          tar -zxf arduino-cli_0.21.1_Linux_64bit.tar.gz
 
       - name: Compile tests
         run: cd crazyclock/src && make -C test
