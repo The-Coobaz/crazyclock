@@ -7,6 +7,9 @@ jobs:
   tests:
     name: Unit Tests
     runs-on: ubuntu-20.04
+    env:
+      # https://arduino.github.io/arduino-cli/0.21/installation/#download
+      ARDUINO_CLI_FILE: arduino-cli_0.21.1_Linux_64bit.tar.gz
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,12 +25,22 @@ jobs:
 
       - name: Download Arduino cli
         run: |
-          wget https://downloads.arduino.cc/arduino-cli/arduino-cli_0.21.1_Linux_64bit.tar.gz
-          tar -zxf arduino-cli_0.21.1_Linux_64bit.tar.gz
+          wget https://downloads.arduino.cc/arduino-cli/$ARDUINO_CLI_FILE
+          tar -zxf $ARDUINO_CLI_FILE
+          rm -fr $$ARDUINO_CLI_FILE
           ./arduino-cli config init
+
+      - name: Init Arduino cli config
+        run: ./arduino-cli config init --overwrite
+
+      - name: Install esp8266
+        run: |
           ./arduino-cli config add board_manager.additional_urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
           ./arduino-cli core update-index
           ./arduino-cli core install esp8266:esp8266
+
+      - name: Install Libraries
+        run: ./arduino-cli lib install AUnit
 
       - name: List Dir
         run: ls -lah
