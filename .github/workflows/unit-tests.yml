@@ -48,7 +48,7 @@ jobs:
         run: ls -lah && ls -lah $HOME/Arduino/libraries
 
       - name: Compile tests
-        run: cd crazyclock/src && make -C test
+        run: make -C crazyclock/src/test
 
       - name: Run tests
-        run: cd src && make -C test runtests
+        run: make -C crazyclock/src/test runtests
