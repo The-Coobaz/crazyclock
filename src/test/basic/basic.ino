@@ -10,10 +10,10 @@ test(correct) {
   assertEqual(x, 1);
 }
 
-test(incorrect) {
-  int x = 1;
-  assertNotEqual(x, 1);
-}
+// test(incorrect) {
+//   int x = 1;
+//   assertNotEqual(x, 1);
+// }
 
 //----------------------------------------------------------------------------
 // setup() and loop()
@@ -25,10 +25,7 @@ void setup() {
   while (!Serial)
     ; // for the Arduino Leonardo/Micro only
 
-  Serial.println(F("This test should produce the following:"));
-  Serial.println(
-      F("1 passed, 1 failed, 0 skipped, 0 timed out, out of 2 test(s)."));
-  Serial.println(F("----"));
+  Serial.println(F("This line will appear in console"));
 }
 
 void loop() { aunit::TestRunner::run(); }
