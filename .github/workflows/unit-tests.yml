@@ -43,7 +43,7 @@ jobs:
         run: ./arduino-cli lib install AUnit
 
       - name: List Dir
-        run: ls -lah
+        run: ls -lah && ls -lah $HOME/Arduino/libraries
 
       - name: Compile tests
         run: cd crazyclock/src && make -C test
