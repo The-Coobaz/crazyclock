@@ -10,6 +10,8 @@ jobs:
     env:
       # https://arduino.github.io/arduino-cli/0.21/installation/#download
       ARDUINO_CLI_FILE: arduino-cli_0.21.1_Linux_64bit.tar.gz
+      # https://github.com/bxparks/EpoxyDuino#additional-arduino-library-locations
+      ARDUINO_LIB_DIRS: $HOME/Arduino/libraries
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,7 +29,7 @@ jobs:
         run: |
           wget https://downloads.arduino.cc/arduino-cli/$ARDUINO_CLI_FILE
           tar -zxf $ARDUINO_CLI_FILE
-          rm -fr $$ARDUINO_CLI_FILE
+          rm -fr $ARDUINO_CLI_FILE
           ./arduino-cli config init
 
       - name: Init Arduino cli config
