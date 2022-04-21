@@ -1,0 +1,28 @@
+name: Unit tests with EpoxyDuino
+on:
+  - push
+  - pull_request
+
+jobs:
+  tests:
+    name: Unit Tests
+    runs-on: ubuntu-20.04
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: crazyclock
+
+      - name: Checkout EpoxyDuino
+        uses: actions/checkout@v3
+        with:
+          repository: bxparks/EpoxyDuino
+          ref: v1.3.0
+          path: EpoxyDuino
+
+      - name: List Dir
+        run: ls -lah
+      
+      - name: Disk Usage
+        run: du -h -d2
