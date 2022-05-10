@@ -42,7 +42,7 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 
 1. [Install arduino-cli](https://arduino.github.io/arduino-cli/0.22/installation/)
 2. Create configuration file: `arduino-cli config init`
-3. Add esp8266 URL for board manager [in your config file](https://arduino.github.io/arduino-cli/0.22/getting-started/#adding-3rd-party-cores):
+3. Add esp8266 URL for board manager:
 
     ```
     arduino-cli config add board_manager.additional_urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
@@ -52,8 +52,8 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 
     ```bash
     arduino-cli core update-index
-    arduino-cli core  install esp8266:esp8266
-    arduino-cli core  list
+    arduino-cli core install esp8266:esp8266
+    arduino-cli core list
     arduino-cli board listall esp8266:d1
     ```
 
