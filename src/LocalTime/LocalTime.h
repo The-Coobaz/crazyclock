@@ -6,8 +6,6 @@
 
 class LocalTime {
 
-private:
-
 public:
   LocalTime();
 

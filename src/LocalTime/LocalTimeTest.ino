@@ -1,5 +1,5 @@
-#include <Arduino.h>
 #include <AUnit.h>
+#include <Arduino.h>
 
 #include "LocalTime.h"
 

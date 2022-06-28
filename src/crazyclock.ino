@@ -13,7 +13,7 @@ int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
 char zerro[] = {"0"};
-  
+
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
 // Example for Arduino UNO with input signals on pin 2 and 3
 #define PIN_IN1 2
@@ -72,7 +72,7 @@ void loop() {
 }
 void whatTime() { // this function synchronises time with NTP and normalizes the
   // tick to 1 second
-  //it should also update RTC
+  // it should also update RTC
   timeClient.update();
   mH = timeClient.getHours();
   mM = timeClient.getMinutes();
@@ -80,13 +80,13 @@ void whatTime() { // this function synchronises time with NTP and normalizes the
   tick = 1000;
   change = false;
   Serial.println((String)mH + ":" + mM + ":" + mS);
-  //if update succeded, update rtc time.
-  //here be dragons
+  // if update succeded, update rtc time.
+  // here be dragons
 }
-void rtcSynchro(){
-  //get time from RTC
-  //update time variables
-  //we are going to use this function as main clock machine
+void rtcSynchro() {
+  // get time from RTC
+  // update time variables
+  // we are going to use this function as main clock machine
 }
 
 void checkEncoder() {
@@ -114,7 +114,7 @@ void checkEncoder() {
 void ticTac() {
 
   // here the clock works
-  //this needs complete rebuild in order to work with RTC
+  // this needs complete rebuild in order to work with RTC
 
   if ((millis() >= myMillis) and tick > 0) {
     showMe(); // first show, then add second
