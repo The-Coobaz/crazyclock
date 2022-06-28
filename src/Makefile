@@ -1,17 +1,17 @@
 # https://github.com/bxparks/EpoxyDuino#managing-multiple-makefiles
 
-default:
-	set -e; \
-	for i in */Makefile; do \
-		echo '==== Making:' $$(dirname $$i); \
-		$(MAKE) -C $$(dirname $$i) -j; \
-	done
-
-runtests:
+runtests: make_all
 	@set -e; \
 	for i in */Makefile; do \
 		echo '==== Running:' $$(dirname $$i); \
 		$$(dirname $$i)/$$(dirname $$i)Test.out; \
+	done
+
+make_all:
+	@set -e; \
+	for i in */Makefile; do \
+		echo '==== Making:' $$(dirname $$i); \
+		$(MAKE) -C $$(dirname $$i) -j; \
 	done
 
 clean:
