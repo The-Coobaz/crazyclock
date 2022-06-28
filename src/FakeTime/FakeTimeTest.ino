@@ -1,9 +1,10 @@
 #line 2 "FakeTime.ino"
 
-#include "../../crazyclock/FakeTime/FakeTime.h"
+// https://github.com/bxparks/EpoxyDuino#difference-from-arduino-ide
+#include <Arduino.h>
 #include <AUnit.h>
 
-// To run tests please: `export ARDUINO_LIB_DIRS=${HOME}/Arduino/libraries`
+#include "FakeTime.h"
 
 test(correct) {
   FakeTime fakeTime(0L);

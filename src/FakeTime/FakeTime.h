@@ -1,6 +1,8 @@
 
-#ifndef CRAZYCLOCK_FAKE_TIME
-#define CRAZYCLOCK_FAKE_TIME
+#ifndef CRAZYCLOCK_FAKE_TIME_H
+#define CRAZYCLOCK_FAKE_TIME_H
+
+#include <Arduino.h>
 
 class FakeTime {
 
