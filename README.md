@@ -94,9 +94,8 @@ In `src` directory:
 Add environment variable in your console for  `arduino-cli` libraries:
 
 ```bash
-ARDUINO_CLI_LIB_DIR=$(arduino-cli config dump | \
+export ARDUINO_CLI_DIR=$(arduino-cli config dump | \
   grep -A 3 -e "^directories:" | \
   grep "user:" | \
   awk -F ': ' '{print $2}')
-echo ${ARDUINO_CLI_LIB_DIR}
 ```

@@ -3,4 +3,5 @@
 
 APP_NAME := FakeTime
 ARDUINO_LIBS := AUnit
-include ../../../../EpoxyDuino/EpoxyDuino.mk
+ARDUINO_LIB_DIRS := ${ARDUINO_CLI_DIR}/libraries
+include ../../../libraries/EpoxyDuino/EpoxyDuino.mk

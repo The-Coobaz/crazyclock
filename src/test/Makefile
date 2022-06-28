@@ -18,3 +18,9 @@ clean:
 		echo '==== Cleaning:' $$(dirname $$i); \
 		$(MAKE) -C $$(dirname $$i) clean; \
 	done
+
+compile_main:
+	set -e; \
+	for i in ../crazyclock/*.cpp; do \
+		echo '==== Making:' $$(dirname $$i); \
+	done
