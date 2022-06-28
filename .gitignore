@@ -9,3 +9,6 @@ bazel-*
 /build
 *.o
 *.out
+
+# files that needs to be downloaded
+/libraries/*
