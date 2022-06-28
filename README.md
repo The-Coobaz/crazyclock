@@ -91,7 +91,7 @@ In `src` directory:
 1. AUnit library: `arduino-cli lib install AUnit`
 2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.3.0 in `libraries` folder
 
-Add environment variable in your console for  `arduino-cli` libraries:
+Set environment variable `ARDUINO_CLI_DIR` for  `arduino-cli` libraries:
 
 ```bash
 export ARDUINO_CLI_DIR=$(arduino-cli config dump | \

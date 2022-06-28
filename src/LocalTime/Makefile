@@ -1,7 +1,7 @@
 # See https://github.com/bxparks/EpoxyDuino for documentation about this
 # Makefile to compile and run Arduino programs natively on Linux or MacOS.
 
-# Required for Time libraries checking old version of Arduino and including WProgram.h
+# Required for Time libraries - otherwise they try to include WProgram.h
 EXTRA_CPPFLAGS := -D ARDUINO=123
 
 APP_NAME := LocalTimeTest
