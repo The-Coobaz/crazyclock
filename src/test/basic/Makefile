@@ -3,4 +3,8 @@
 
 APP_NAME := basic
 ARDUINO_LIBS := AUnit
-include ../../../../EpoxyDuino/EpoxyDuino.mk
+ARDUINO_LIB_DIRS := \
+	$(arduino_ide_dir)/portable/packages/arduino/hardware/avr/1.8.2/libraries \
+	$(arduino_ide_dir)/libraries \
+	$(arduino_ide_dir)/hardware/arduino/avr/libraries
+include ../../../libraries/EpoxyDuino/EpoxyDuino.mk

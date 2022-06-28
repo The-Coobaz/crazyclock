@@ -83,3 +83,20 @@ In `src` directory:
 
 1. [KY-040 Rotary Encoder](https://forum.fritzing.org/t/ky-040-rotary-encoder-breakout-board-part/11073)
 2. [Wemos D1 Mini](https://github.com/mcauser/Fritzing-Part-WeMos-D1-Mini/tree/master/dist)
+
+### AUnit
+
+#### Requirements
+
+1. AUnit library: `arduino-cli lib install AUnit`
+2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.3.0 in `libraries` folder
+
+Add environment variable in your console for  `arduino-cli` libraries:
+
+```bash
+ARDUINO_CLI_LIB_DIR=$(arduino-cli config dump | \
+  grep -A 3 -e "^directories:" | \
+  grep "user:" | \
+  awk -F ': ' '{print $2}')
+echo ${ARDUINO_CLI_LIB_DIR}
+```
