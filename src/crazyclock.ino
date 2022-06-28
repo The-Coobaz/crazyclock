@@ -13,7 +13,7 @@ int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
 char zerro[] = {"0"};
-
+  
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
 // Example for Arduino UNO with input signals on pin 2 and 3
 #define PIN_IN1 2

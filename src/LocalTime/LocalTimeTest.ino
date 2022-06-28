@@ -1,4 +1,3 @@
-// https://github.com/bxparks/EpoxyDuino#difference-from-arduino-ide
 #include <Arduino.h>
 #include <AUnit.h>
 

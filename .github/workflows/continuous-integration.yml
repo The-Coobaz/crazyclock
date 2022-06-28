@@ -24,10 +24,10 @@ jobs:
     needs: formatting-check
     runs-on: ubuntu-20.04
     env:
-      # https://arduino.github.io/arduino-cli/0.21/installation/#download
-      ARDUINO_CLI_FILE: arduino-cli_0.21.1_Linux_64bit.tar.gz
-      # https://github.com/bxparks/EpoxyDuino#additional-arduino-library-locations
-      ARDUINO_LIB_DIRS: ${HOME}/Arduino/libraries
+      # https://arduino.github.io/arduino-cli/latest/installation/#download
+      ARDUINO_CLI_FILE: arduino-cli_latest_Linux_64bit.tar.gz
+      # for https://github.com/bxparks/EpoxyDuino#additional-arduino-library-locations
+      ARDUINO_CLI_DIR: ${HOME}/Arduino
     steps:
       - name: Checkout
         uses: actions/checkout@v3
