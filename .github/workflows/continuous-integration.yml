@@ -39,7 +39,7 @@ jobs:
         with:
           repository: bxparks/EpoxyDuino
           ref: v1.3.0
-          path: EpoxyDuino
+          path: crazyclock/libraries/EpoxyDuino
 
       - name: Download Arduino cli
         run: |
@@ -60,11 +60,14 @@ jobs:
       - name: Install Libraries
         run: ./arduino-cli lib install AUnit
 
-      - name: List Dir
-        run: ls -lah && ls -lah $HOME/Arduino/libraries
+      - name: List top directory
+        run: ls -lah
+
+      - name: List libraries
+        run: ls -lah $HOME/Arduino/libraries
 
       - name: Compile tests
-        run: make -C crazyclock/src/test
+        run: make -C crazyclock/src/
 
       - name: Run tests
-        run: make -C crazyclock/src/test runtests
+        run: make -C crazyclock/src/ runtests
