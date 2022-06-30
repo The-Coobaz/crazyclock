@@ -83,3 +83,14 @@ In `src` directory:
 
 1. [KY-040 Rotary Encoder](https://forum.fritzing.org/t/ky-040-rotary-encoder-breakout-board-part/11073)
 2. [Wemos D1 Mini](https://github.com/mcauser/Fritzing-Part-WeMos-D1-Mini/tree/master/dist)
+
+### Automated tests
+
+#### Requirements
+
+1. AUnit library: `arduino-cli lib install AUnit`
+2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.3.0 in crazyclock `libraries` folder
+3. Set environment variable `ARDUINO_CLI_DIR` for  `arduino-cli` libraries:
+    ```bash
+    export ARDUINO_CLI_DIR=${HOME}/Arduino
+    ```
