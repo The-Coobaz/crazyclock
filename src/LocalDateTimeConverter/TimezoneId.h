@@ -1,6 +1,0 @@
-#ifndef CRAZYCLOCK_TIMEZONE_ID_H
-#define CRAZYCLOCK_TIMEZONE_ID_H
-
-
-
-#endif

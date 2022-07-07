@@ -32,18 +32,26 @@ test(utc_conversion_to_seconds) {
   // given
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
 
-  assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getEpochSeconds(), 1644842096ul);
-  assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(), 1644842096ul);
-  assertEqual(utc.fromUtc(2020, 2, 29, 0, 0, 0).getEpochSeconds(), 1582934400ul);
-  assertEqual(utc.fromUtc(2020, 2, 29, 0, 0, 0).getLocalSeconds(), 1582934400ul);
-  assertEqual(utc.fromUtc(2050, 8, 15, 17, 15, 0).getEpochSeconds(), 2544196500ul);
-  assertEqual(utc.fromUtc(2050, 8, 15, 17, 15, 0).getLocalSeconds(), 2544196500ul);
-  assertEqual(utc.fromUtc(2100, 8, 15, 17, 15, 0).getEpochSeconds(), 4122033300ul);
-  assertEqual(utc.fromUtc(2100, 8, 15, 17, 15, 0).getLocalSeconds(), 4122033300ul);
+  assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getEpochSeconds(),
+              1644842096ul);
+  assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(),
+              1644842096ul);
+  assertEqual(utc.fromUtc(2020, 2, 29, 0, 0, 0).getEpochSeconds(),
+              1582934400ul);
+  assertEqual(utc.fromUtc(2020, 2, 29, 0, 0, 0).getLocalSeconds(),
+              1582934400ul);
+  assertEqual(utc.fromUtc(2050, 8, 15, 17, 15, 0).getEpochSeconds(),
+              2544196500ul);
+  assertEqual(utc.fromUtc(2050, 8, 15, 17, 15, 0).getLocalSeconds(),
+              2544196500ul);
+  assertEqual(utc.fromUtc(2100, 8, 15, 17, 15, 0).getEpochSeconds(),
+              4122033300ul);
+  assertEqual(utc.fromUtc(2100, 8, 15, 17, 15, 0).getLocalSeconds(),
+              4122033300ul);
 
   // 15th of August 2200
   // number overflow?
-  //assertEqual(utc.fromUtc(2200, 8, 15, 17, 15, 0), 7277706900ul);
+  // assertEqual(utc.fromUtc(2200, 8, 15, 17, 15, 0), 7277706900ul);
 }
 
 test(pl_conversion_to_seconds) {
@@ -53,14 +61,21 @@ test(pl_conversion_to_seconds) {
   // epoch start
   assertEqual(pl.fromUtc(0ul).getLocalSeconds(), 3600ul);
 
-  assertEqual(pl.fromUtc(2022, 2, 14, 12, 34, 56).getEpochSeconds(), 1644842096ul);
-  assertEqual(pl.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(), 1644842096ul + 3600);
+  assertEqual(pl.fromUtc(2022, 2, 14, 12, 34, 56).getEpochSeconds(),
+              1644842096ul);
+  assertEqual(pl.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(),
+              1644842096ul + 3600);
   assertEqual(pl.fromUtc(2020, 2, 29, 0, 0, 0).getEpochSeconds(), 1582934400ul);
-  assertEqual(pl.fromUtc(2020, 2, 29, 0, 0, 0).getLocalSeconds(), 1582934400ul + 3600);
-  assertEqual(pl.fromUtc(2050, 8, 15, 17, 15, 0).getEpochSeconds(), 2544196500ul);
-  assertEqual(pl.fromUtc(2050, 8, 15, 17, 15, 0).getLocalSeconds(), 2544196500ul + 7200);
-  assertEqual(pl.fromUtc(2100, 8, 15, 17, 15, 0).getEpochSeconds(), 4122033300ul);
-  assertEqual(pl.fromUtc(2100, 8, 15, 17, 15, 0).getLocalSeconds(), 4122033300ul + 7200);
+  assertEqual(pl.fromUtc(2020, 2, 29, 0, 0, 0).getLocalSeconds(),
+              1582934400ul + 3600);
+  assertEqual(pl.fromUtc(2050, 8, 15, 17, 15, 0).getEpochSeconds(),
+              2544196500ul);
+  assertEqual(pl.fromUtc(2050, 8, 15, 17, 15, 0).getLocalSeconds(),
+              2544196500ul + 7200);
+  assertEqual(pl.fromUtc(2100, 8, 15, 17, 15, 0).getEpochSeconds(),
+              4122033300ul);
+  assertEqual(pl.fromUtc(2100, 8, 15, 17, 15, 0).getLocalSeconds(),
+              4122033300ul + 7200);
 }
 
 // in Spring we change the clock from 2 AM to 3 AM

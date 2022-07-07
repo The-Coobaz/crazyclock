@@ -14,11 +14,11 @@ TimeChangeRule stdRule = {"CET", Last, Sun, Oct, 3, 60};
 TimeChangeRule dstRule = {"CEST", Last, Sun, Mar, 2, 120};
 Timezone pl(dstRule, stdRule);
 
-LocalDateTimeConverter::LocalDateTimeConverter(int tzId) {
-  timezoneId = tzId;
-}
+LocalDateTimeConverter::LocalDateTimeConverter(int tzId) { timezoneId = tzId; }
 
-LocalDateTime LocalDateTimeConverter::fromUtc(int year, int month, int day, int hour, int minute, int second) {
+LocalDateTime LocalDateTimeConverter::fromUtc(int year, int month, int day,
+                                              int hour, int minute,
+                                              int second) {
   TimeElements timeElements;
   timeElements.Year = year - 1970;
   timeElements.Month = month;
@@ -34,7 +34,7 @@ LocalDateTime LocalDateTimeConverter::fromUtc(int year, int month, int day, int 
 
 LocalDateTime LocalDateTimeConverter::fromUtc(unsigned long epochSeconds) {
   unsigned long localSeconds;
-  if(this->timezoneId == plId) {
+  if (this->timezoneId == plId) {
     localSeconds = pl.toLocal(epochSeconds);
   } else {
     localSeconds = epochSeconds;
@@ -42,5 +42,7 @@ LocalDateTime LocalDateTimeConverter::fromUtc(unsigned long epochSeconds) {
   return LocalDateTime(epochSeconds, localSeconds);
 }
 
-LocalDateTimeConverter LocalDateTimeConverter::UTC = LocalDateTimeConverter(utcId);
-LocalDateTimeConverter LocalDateTimeConverter::PL = LocalDateTimeConverter(plId);
+LocalDateTimeConverter LocalDateTimeConverter::UTC =
+    LocalDateTimeConverter(utcId);
+LocalDateTimeConverter LocalDateTimeConverter::PL =
+    LocalDateTimeConverter(plId);

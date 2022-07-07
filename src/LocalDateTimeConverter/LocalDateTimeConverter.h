@@ -5,16 +5,17 @@
 
 class LocalDateTimeConverter {
 
-  private:
-    LocalDateTimeConverter(int timezoneId);
-    int timezoneId;
+private:
+  LocalDateTimeConverter(int timezoneId);
+  int timezoneId;
 
-  public:
-    static LocalDateTimeConverter UTC;
-    static LocalDateTimeConverter PL;
+public:
+  static LocalDateTimeConverter UTC;
+  static LocalDateTimeConverter PL;
 
-    LocalDateTime fromUtc(int year, int month, int day, int hour, int minute, int second);
-    LocalDateTime fromUtc(unsigned long epochSeconds);
+  LocalDateTime fromUtc(int year, int month, int day, int hour, int minute,
+                        int second);
+  LocalDateTime fromUtc(unsigned long epochSeconds);
 };
 
 #endif
