@@ -13,9 +13,6 @@ class LocalDateTime {
     LocalDateTime(unsigned long epochSeconds, unsigned long localSeconds);
     unsigned long getEpochSeconds();
     unsigned long getLocalSeconds();
-
-    int getH();
-    int getM();
 };
 
 #endif

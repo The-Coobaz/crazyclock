@@ -26,16 +26,11 @@ test(valentines_day) {
 
   // then
   assertEqual(valentines.getEpochSeconds(), expectedEpochSeconds);
-  assertEqual(valentines.getH(), 13);
-  assertEqual(valentines.getM(), 34);
 }
 
-test(utc_conversion_to_seconds_and_hours) {
+test(utc_conversion_to_seconds) {
   // given
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
-
-  // epoch start
-  assertEqual(utc.fromUtc(0ul).getH(), 0);
 
   assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getEpochSeconds(), 1644842096ul);
   assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(), 1644842096ul);
@@ -46,16 +41,9 @@ test(utc_conversion_to_seconds_and_hours) {
   assertEqual(utc.fromUtc(2100, 8, 15, 17, 15, 0).getEpochSeconds(), 4122033300ul);
   assertEqual(utc.fromUtc(2100, 8, 15, 17, 15, 0).getLocalSeconds(), 4122033300ul);
 
-  // valentines day
-  assertEqual(utc.fromUtc(1644842096ul).getH(), 12);
-  // 29th of February 2020
-  assertEqual(utc.fromUtc(1582934400ul).getH(), 0);
-  // 15th of August 2050
-  assertEqual(utc.fromUtc(2544196500ul).getH(), 17);
-  // 15th of August 2100
-  assertEqual(utc.fromUtc(4122033300ul).getH(), 17);
   // 15th of August 2200
-  //assertEqual(utc.fromUtc(7277706900ul), convert(2200, 8, 15, 17, 15, 0));
+  // number overflow?
+  //assertEqual(utc.fromUtc(2200, 8, 15, 17, 15, 0), 7277706900ul);
 }
 
 test(pl_conversion_to_seconds) {
@@ -63,7 +51,6 @@ test(pl_conversion_to_seconds) {
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
   // epoch start
-  assertEqual(pl.fromUtc(0ul).getH(), 1);
   assertEqual(pl.fromUtc(0ul).getLocalSeconds(), 3600ul);
 
   assertEqual(pl.fromUtc(2022, 2, 14, 12, 34, 56).getEpochSeconds(), 1644842096ul);

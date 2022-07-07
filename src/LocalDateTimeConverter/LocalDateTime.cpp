@@ -12,11 +12,3 @@ unsigned long LocalDateTime::getEpochSeconds() {
 unsigned long LocalDateTime::getLocalSeconds() {
     return this->_localSeconds;
 };
-
-int LocalDateTime::getH() {
-  return (this->_localSeconds / 3600) % 24;
-};
-
-int LocalDateTime::getM() {
-  return (this->_localSeconds / 60) % 60;
-};
