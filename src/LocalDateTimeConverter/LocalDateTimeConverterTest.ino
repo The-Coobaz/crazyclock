@@ -1,12 +1,25 @@
 #include <AUnit.h>
 #include <Arduino.h>
 
-#include "LocalTime.h"
+#include "LocalDateTimeConverter.h"
 
-test(dummy_unit_test) {
-  LocalTime localTime;
-  unsigned long actual = localTime.fromEpochSeconds(0);
-  assertEqual(actual, 0UL);
+test(epoch_start_test) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  unsigned long epochStart = 0;
+  unsigned long expected = 3600;
+
+  // when
+  unsigned long actual = pl.fromEpochSeconds(epochStart);
+
+  // then
+  assertEqual(actual, expected);
+}
+
+test(last_second_of_summer_time) {
+
+  
+
 }
 
 //----------------------------------------------------------------------------

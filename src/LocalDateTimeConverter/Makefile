@@ -4,7 +4,7 @@
 # Required for Time libraries - otherwise they try to include WProgram.h
 EXTRA_CPPFLAGS := -D ARDUINO=123
 
-APP_NAME := LocalTimeTest
+APP_NAME := LocalDateTimeConverterTest
 ARDUINO_LIBS := AUnit Timezone Time
 ARDUINO_LIB_DIRS := ${ARDUINO_CLI_DIR}/libraries
 include ../../libraries/EpoxyDuino/EpoxyDuino.mk
