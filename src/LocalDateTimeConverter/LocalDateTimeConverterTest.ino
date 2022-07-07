@@ -76,7 +76,7 @@ test(pl_conversion_to_seconds) {
               4122033300ul + 7200);
 }
 
-// in Spring we change the clock from 2 AM to 3 AM
+// in March we change the clock from 2 AM to 3 AM
 test(pl_conversion_near_spring_time_change_2020) {
   // given
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
@@ -89,7 +89,7 @@ test(pl_conversion_near_spring_time_change_2020) {
   assertEqual(after.getLocalSeconds(), after.getEpochSeconds() + 7200);
 }
 
-// in Spring we change the clock from 2 AM to 3 AM
+// in October we change the clock from 3 AM to 2 AM
 test(pl_conversion_near_autumn_time_change_2020) {
   // given
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
