@@ -1,19 +1,20 @@
-#ifndef CRAZYCLOCK_FAKE_TIME_H
-#define CRAZYCLOCK_FAKE_TIME_H
+#ifndef CRAZYCLOCK_LOCAL_DATE_TIME_CONVERTER_H
+#define CRAZYCLOCK_LOCAL_DATE_TIME_CONVERTER_H
 
-#include <Time.h>
+#include "LocalDateTime.h"
 
 class LocalDateTimeConverter {
 
-private:
-  LocalDateTimeConverter(int timezoneId);
-  int timezoneId;
+  private:
+    LocalDateTimeConverter(int timezoneId);
+    int timezoneId;
 
-public:
-  static LocalDateTimeConverter UTC;
-  static LocalDateTimeConverter PL;
+  public:
+    static LocalDateTimeConverter UTC;
+    static LocalDateTimeConverter PL;
 
-  unsigned long fromUtc(unsigned long epochSeconds);
+    LocalDateTime fromUtc(int year, int month, int day, int hour, int minute, int second);
+    LocalDateTime fromUtc(unsigned long epochSeconds);
 };
 
 #endif
