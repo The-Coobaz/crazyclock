@@ -1,7 +1,21 @@
 #include <AUnit.h>
 #include <Arduino.h>
 
+#include <Time.h>
+
 #include "LocalDateTimeConverter.h"
+
+unsigned long convert(int year, int month, int day, int hour, int minute,
+                      int second) {
+  tmElements_t tmElements;
+  tmElements.Year = year - 1970;
+  tmElements.Month = month;
+  tmElements.Day = day;
+  tmElements.Hour = hour;
+  tmElements.Minute = minute;
+  tmElements.Second = second;
+  return makeTime(tmElements);
+}
 
 test(epoch_start_test) {
   // given
@@ -10,16 +24,38 @@ test(epoch_start_test) {
   unsigned long expected = 3600;
 
   // when
-  unsigned long actual = pl.fromEpochSeconds(epochStart);
+  unsigned long actual = pl.fromUtc(epochStart);
 
   // then
   assertEqual(actual, expected);
 }
 
-test(last_second_of_summer_time) {
+test(valentines_day) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  unsigned long utcTime = convert(2022, 2, 14, 12, 34, 56);
+  unsigned long expectedPLTime = convert(2022, 2, 14, 13, 34, 56);
 
-  
+  // when
+  unsigned long actual = pl.fromUtc(utcTime);
 
+  // then
+  assertEqual(actual, expectedPLTime);
+}
+
+test(utc_conversion) {
+  // epoch start
+  assertEqual(0000000000ul, convert(1970, 1, 1, 0, 0, 0));
+  // valentines day
+  assertEqual(1644842096ul, convert(2022, 2, 14, 12, 34, 56));
+  // 29th of February 2020
+  assertEqual(1582934400ul, convert(2020, 2, 29, 0, 0, 0));
+  // 15th of August 2050
+  assertEqual(2544196500ul, convert(2050, 8, 15, 17, 15, 0));
+  // 15th of August 2100
+  assertEqual(4122033300ul, convert(2100, 8, 15, 17, 15, 0));
+  // 15th of August 2200
+  //assertEqual(7277706900ul, convert(2200, 8, 15, 17, 15, 0));
 }
 
 //----------------------------------------------------------------------------
