@@ -1,6 +1,6 @@
 # crazyclock
 
-[![clang-format Check](https://github.com/The-Coobaz/crazyclock/actions/workflows/clang-format-check.yml/badge.svg)](https://github.com/The-Coobaz/crazyclock/actions/workflows/clang-format-check.yml)
+[![Continuous Integration](https://github.com/The-Coobaz/crazyclock/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/The-Coobaz/crazyclock/actions/workflows/continuous-integration.yml)
 
 The main idea of this project is arduino clock with flexible second time.
 This would allow to speed up or slow down the time.
