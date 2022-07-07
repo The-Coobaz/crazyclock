@@ -76,6 +76,38 @@ test(utc_conversion) {
   //assertEqual(utc.fromUtc(7277706900ul), convert(2200, 8, 15, 17, 15, 0));
 }
 
+test(pl_conversion) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+
+  // epoch start
+  assertEqual(pl.fromUtc(0000000000ul), convert(1970, 1, 1, 1, 0, 0));
+  // valentines day
+  assertEqual(pl.fromUtc(1644842096ul), convert(2022, 2, 14, 13, 34, 56));
+  // 29th of February 2020
+  assertEqual(pl.fromUtc(1582934400ul), convert(2020, 2, 29, 1, 0, 0));
+  // 15th of August 2050
+  assertEqual(pl.fromUtc(2544196500ul), convert(2050, 8, 15, 19, 15, 0));
+  // 15th of August 2100
+  assertEqual(pl.fromUtc(4122033300ul), convert(2100, 8, 15, 19, 15, 0));
+  // 15th of August 2200
+  //assertEqual(utc.fromUtc(7277706900ul), convert(2200, 8, 15, 17, 15, 0));
+}
+
+test(pl_conversion_near_time_change) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+
+  unsigned long epochSeconds;
+
+  // 29th of March 2020 (night of time change)
+  epochSeconds = convert(2020, 3, 29, 1, 0, 59);
+  assertEqual(pl.fromUtc(epochSeconds), epochSeconds + 3600);
+
+  epochSeconds = convert(2020, 3, 29, 2, 0, 1);
+  assertEqual(pl.fromUtc(epochSeconds), epochSeconds + 7200);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------

@@ -10,7 +10,7 @@ const int plId = 1;
 // Poland switches back to regular time on the last Sunday of October.
 // https://cyclinghikes.com/what-time-is-poland-now/#Do_clocks_change_in_Poland
 TimeChangeRule stdRule = {"CET", Last, Sun, Nov, 2, 60};
-TimeChangeRule dstRule = {"CEST", Last, Sun, Mar, 2, 120};
+TimeChangeRule dstRule = {"CEST", Last, Sun, Mar, 3, 120};
 Timezone pl(dstRule, stdRule);
 
 LocalDateTimeConverter::LocalDateTimeConverter(int tzId) {
