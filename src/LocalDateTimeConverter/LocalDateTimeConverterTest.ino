@@ -1,8 +1,6 @@
 #include <AUnit.h>
 #include <Arduino.h>
 
-#include <Time.h>
-
 #include "LocalDateTimeConverter.h"
 
 test(epoch_start_test) {
