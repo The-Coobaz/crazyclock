@@ -57,7 +57,7 @@ jobs:
           ./arduino-cli core install esp8266:esp8266
 
       - name: Install Libraries
-        run: ./arduino-cli lib install AUnit
+        run: ./arduino-cli lib install AUnit Time Timezone
 
       - name: List top directory
         run: ls -lah
