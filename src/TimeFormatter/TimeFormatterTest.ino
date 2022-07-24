@@ -24,7 +24,7 @@ test(should_convert_valid_times) {
   assertEqual(formattedTimeBuffer, "00:00:01");
 }
 
-test(should_handle_error_correctly) {
+test(should_handle_hours_errors_correctly) {
 
   int status = SUCCESS;
   char formattedTimeBuffer[20] = "<initial value>";
@@ -32,10 +32,22 @@ test(should_handle_error_correctly) {
   status = formatTime(-1, 34, 56, formattedTimeBuffer);
   assertEqual(status, INCORRECT_HOUR);
   assertEqual(formattedTimeBuffer, "<initial value>");
+}
+
+test(should_handle_minutes_errors_correctly) {
+
+  int status = SUCCESS;
+  char formattedTimeBuffer[20] = "<initial value>";
 
   status = formatTime(0, 60, 0, formattedTimeBuffer);
   assertEqual(status, INCORRECT_MINUTE);
   assertEqual(formattedTimeBuffer, "<initial value>");
+}
+
+test(should_handle_seconds_errors_correctly) {
+
+  int status = SUCCESS;
+  char formattedTimeBuffer[20] = "<initial value>";
 
   status = formatTime(6, 5, 65, formattedTimeBuffer);
   assertEqual(status, INCORRECT_SECOND);

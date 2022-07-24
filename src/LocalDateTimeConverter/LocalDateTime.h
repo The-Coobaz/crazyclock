@@ -2,7 +2,7 @@
 #define CRAZYCLOCK_LOCAL_DATE_TIME_H
 
 /**
- * Representation of time converted from UTC to local time.
+ * Representation of local time converted from UTC.
  */
 class LocalDateTime {
 
