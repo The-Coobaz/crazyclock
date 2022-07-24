@@ -3,6 +3,11 @@
 
 #include "LocalDateTime.h"
 
+/**
+ * Converter to for getting correct local time
+ * based on UTC time or number seconds from January 1st, 1970.
+ * Helps getting the local time from NTP server
+ */
 class LocalDateTimeConverter {
 
 private:
