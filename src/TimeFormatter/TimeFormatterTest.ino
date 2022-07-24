@@ -5,10 +5,41 @@
 
 test(should_convert_valid_times) {
 
-    char actual[] = "00:00:00";
+  char formattedTimeBuffer[20] = "<initial value>";
 
-    formatTime(12,34,56, actual);
-    assertEqual(actual, "12:34:56");
+  int status = formatTime(12, 34, 56, formattedTimeBuffer);
+  assertEqual(status, SUCCESS);
+  assertEqual(formattedTimeBuffer, "12:34:56");
+
+  formatTime(0, 0, 0, formattedTimeBuffer);
+  assertEqual(status, SUCCESS);
+  assertEqual(formattedTimeBuffer, "00:00:00");
+
+  formatTime(6, 30, 0, formattedTimeBuffer);
+  assertEqual(status, SUCCESS);
+  assertEqual(formattedTimeBuffer, "06:30:00");
+
+  formatTime(0, 0, 1, formattedTimeBuffer);
+  assertEqual(status, SUCCESS);
+  assertEqual(formattedTimeBuffer, "00:00:01");
+}
+
+test(should_handle_error_correctly) {
+
+  int status = SUCCESS;
+  char formattedTimeBuffer[20] = "<initial value>";
+
+  status = formatTime(-1, 34, 56, formattedTimeBuffer);
+  assertEqual(status, INCORRECT_HOUR);
+  assertEqual(formattedTimeBuffer, "<initial value>");
+
+  status = formatTime(0, 60, 0, formattedTimeBuffer);
+  assertEqual(status, INCORRECT_MINUTE);
+  assertEqual(formattedTimeBuffer, "<initial value>");
+
+  status = formatTime(6, 5, 65, formattedTimeBuffer);
+  assertEqual(status, INCORRECT_SECOND);
+  assertEqual(formattedTimeBuffer, "<initial value>");
 }
 
 //----------------------------------------------------------------------------

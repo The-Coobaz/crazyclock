@@ -2,6 +2,9 @@
 #define CRAZYCLOCK_LOCAL_DATE_TIME_H
 
 #define SUCCESS 0
+#define INCORRECT_HOUR 1
+#define INCORRECT_MINUTE 2
+#define INCORRECT_SECOND 3
 
 /**
  * Format the time into the buffer (should be at least 8 characters long).
