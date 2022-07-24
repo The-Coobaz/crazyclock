@@ -3,6 +3,10 @@
 
 #include "LocalDateTime.h"
 
+/**
+ * Calculates correct local time based on UTC time
+ * or UTC number of seconds since January 1st, 1970.
+ */
 class LocalDateTimeConverter {
 
 private:
