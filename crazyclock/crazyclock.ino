@@ -6,8 +6,13 @@
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 
+#include "TimeFormatter/TimeFormatter.h"
+
 const char *ssid = "SSID";
 const char *password = "PASS";
+
+char *timeToShow = "00:00:00";
+char *tickToShow = "tick:00000000000000000000ms";
 
 int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
@@ -79,7 +84,8 @@ void whatTime() { // this function synchronises time with NTP and normalizes the
   mS = timeClient.getSeconds();
   tick = 1000;
   change = false;
-  Serial.println((String)mH + ":" + mM + ":" + mS);
+  formatTime(mH, mM, mS, timeToShow);
+  Serial.println(timeToShow);
   // if update succeded, update rtc time.
   // here be dragons
 }
@@ -155,37 +161,18 @@ void ticTac() {
   };
 }
 void showMe() {
-  Serial.print((String)mH + ":");
-  if (mM < 10) {
-    Serial.print(zerro[0]);
-  }
-  Serial.print((String)mM + ":");
-  if (mS < 10) {
-    Serial.print(zerro[0]);
-  }
-  Serial.print(mS);
-  Serial.println(); // debug output
-  // here we show the result on the screen TODO
+  formatTime(mH, mM, mS, timeToShow);
+
+  Serial.println(timeToShow);
+
   lcd.setCursor(0, 0);
-  if (mH < 10) {
-    lcd.print(String("0"));
-    lcd.setCursor(1, 0);
-  }
-  lcd.print(String(mH) + String(":"));
-  // lcd.print(":");
+  lcd.print(timeToShow);
 
-  if (mM < 10) {
-    lcd.setCursor(3, 0);
-    lcd.print("0");
-  }
-  lcd.print(String(mM) + String(":"));
-  if (mS < 10) {
-
-    lcd.print(String("0"));
-  }
-  lcd.print(String(mS));
   lcd.setCursor(0, 1);
-  lcd.print(String("tick:") + String(tick) + String("ms "));
+  sprintf(tickToShow, "tick:%dms", tick);
+  lcd.print(tickToShow);
+
+  // prints question mark if the tick was changed
   if (change) {
     lcd.setCursor(15, 0);
     lcd.print("?");
