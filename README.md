@@ -69,15 +69,15 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 
 #### Compile and Upload
 
-In `src` directory:
+In root directory:
 
 1. Install required libraries (i.e. [hd44780](https://github.com/duinoWitchery/hd44780)):
 
     ```bash
-    arduino-cli lib install "hd44780"
+    arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
     ```
-2. Compile: `arduino-cli compile --fqbn esp8266:esp8266:d1 crazyclock/`
-3. Upload: `arduino-cli upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0 crazyclock/`
+2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/`
+3. Upload: `arduino-cli --verbose upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0 crazyclock/`
 
 ## Fritzing Parts
 
