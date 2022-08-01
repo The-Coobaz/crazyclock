@@ -36,6 +36,10 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 2. Search for `C_Cpp.clang_format_fallback`
 3. Just change the value in the textfield from `Visual Studio` to `LLVM`
 
+### Working with Arduino IDE
+
+We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9).
+
 ### Working with arduino-cli
 
 #### Arduino CLI setup
