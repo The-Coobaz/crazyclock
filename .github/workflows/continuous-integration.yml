@@ -33,22 +33,9 @@ jobs:
           wget https://downloads.arduino.cc/arduino-cli/${ARDUINO_CLI_FILE}
           tar -zxf ${ARDUINO_CLI_FILE}
           rm -fr ${ARDUINO_CLI_FILE}
-          ./arduino-cli config init
 
       - name: Init Arduino cli config
         run: ./arduino-cli config init --overwrite
-
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          path: crazyclock
-
-      - name: Checkout EpoxyDuino
-        uses: actions/checkout@v3
-        with:
-          repository: bxparks/EpoxyDuino
-          ref: v1.3.0
-          path: crazyclock/libraries/EpoxyDuino
 
       - name: Install esp8266
         run: |
@@ -65,13 +52,25 @@ jobs:
       - name: List libraries
         run: ls -lah $HOME/Arduino/libraries
 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: crazyclock
+
+      - name: Checkout EpoxyDuino
+        uses: actions/checkout@v3
+        with:
+          repository: bxparks/EpoxyDuino
+          ref: v1.3.0
+          path: crazyclock/libraries/EpoxyDuino
+
       - name: Compile tests
         run: make -C crazyclock/crazyclock/ make_all
 
       - name: Run tests
         run: make -C crazyclock/crazyclock/ runtests
 
-  build:
+  compile:
     name: Compile for Wemos D1
     runs-on: ubuntu-20.04
     steps:
@@ -80,7 +79,6 @@ jobs:
           wget https://downloads.arduino.cc/arduino-cli/${ARDUINO_CLI_FILE}
           tar -zxf ${ARDUINO_CLI_FILE}
           rm -fr ${ARDUINO_CLI_FILE}
-          ./arduino-cli config init
 
       - name: Init Arduino cli config
         run: ./arduino-cli config init --overwrite
