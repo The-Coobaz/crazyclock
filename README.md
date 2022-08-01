@@ -69,7 +69,7 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 
 #### Compile and Upload
 
-In `crazyclock` directory:
+In root directory:
 
 1. Install required libraries (i.e. [hd44780](https://github.com/duinoWitchery/hd44780)):
 
