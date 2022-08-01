@@ -65,10 +65,10 @@ jobs:
           path: crazyclock/libraries/EpoxyDuino
 
       - name: Compile tests
-        run: make -C crazyclock/crazyclock/ make_all
+        run: make -C crazyclock/src/ make_all
 
       - name: Run tests
-        run: make -C crazyclock/crazyclock/ runtests
+        run: make -C crazyclock/src/ runtests
 
   compile:
     name: Compile for Wemos D1
