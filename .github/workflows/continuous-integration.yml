@@ -91,5 +91,8 @@ jobs:
           ./arduino-cli core update-index
           ./arduino-cli core install esp8266:esp8266
 
-      - name: Compile sketch for Wemos D1
-        run: arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/crazyclock/
+      - name: Install Libraries Required by Sketch
+        run: ./arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
+
+      - name: Compile Sketch for Wemos D1
+        run: ./arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/crazyclock/
