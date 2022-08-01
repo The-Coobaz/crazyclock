@@ -20,7 +20,6 @@ jobs:
 
   tests:
     name: Unit Tests
-    needs: formatting-check
     runs-on: ubuntu-20.04
     env:
       # https://arduino.github.io/arduino-cli/latest/installation/#download
