@@ -43,7 +43,7 @@ jobs:
           ./arduino-cli core update-index
           ./arduino-cli core install esp8266:esp8266
 
-      - name: Install Libraries
+      - name: Install Libraries Required by Unit Tests
         run: ./arduino-cli lib install AUnit Time Timezone
 
       - name: List top directory
@@ -94,6 +94,9 @@ jobs:
 
       - name: List top directory
         run: ls -lah
+
+      - name: List libraries
+        run: ls -lah $HOME/Arduino/libraries
 
       - name: Checkout
         uses: actions/checkout@v3
