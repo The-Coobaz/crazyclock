@@ -7,7 +7,7 @@
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 
 const char *ssid = "SSID";
-const char *password = "PASS";
+const char    *password = "PASS";
 
 int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
