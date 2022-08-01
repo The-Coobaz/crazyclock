@@ -36,6 +36,12 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 2. Search for `C_Cpp.clang_format_fallback`
 3. Just change the value in the textfield from `Visual Studio` to `LLVM`
 
+### Working with Arduino IDE
+
+For compiling in [Arduino IDE]() add `TimeFormatter.h`, `TimeFormatter.cpp` by clicking:
+
+- Sketch -> Add File...
+
 ### Working with arduino-cli
 
 #### Arduino CLI setup
