@@ -76,8 +76,8 @@ In root directory:
     ```bash
     arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
     ```
-2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/`
-3. Upload: `arduino-cli --verbose upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0 crazyclock/`
+2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`
+3. Upload: `arduino-cli --verbose upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0`
 
 ## Fritzing Parts
 

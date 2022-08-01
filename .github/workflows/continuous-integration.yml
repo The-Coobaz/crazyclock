@@ -104,4 +104,4 @@ jobs:
           path: crazyclock
 
       - name: Compile Sketch for Wemos D1
-        run: ./arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/crazyclock/
+        run: ./arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/
