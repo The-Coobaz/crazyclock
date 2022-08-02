@@ -5,6 +5,8 @@
 #include <Wire.h>
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
+// https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
+#include "src/TimeFormatter/TimeFormatter.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -13,6 +15,8 @@ int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
 char zerro[] = {"0"};
+
+char formattedTimeBuffer[20] = "<initial value>";
 
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
 // Example for Arduino UNO with input signals on pin 2 and 3
@@ -155,35 +159,12 @@ void ticTac() {
   };
 }
 void showMe() {
-  Serial.print((String)mH + ":");
-  if (mM < 10) {
-    Serial.print(zerro[0]);
-  }
-  Serial.print((String)mM + ":");
-  if (mS < 10) {
-    Serial.print(zerro[0]);
-  }
-  Serial.print(mS);
-  Serial.println(); // debug output
-  // here we show the result on the screen TODO
+  formatTime(mH, mM, mS, formattedTimeBuffer);
+  Serial.println(formattedTimeBuffer);
+
   lcd.setCursor(0, 0);
-  if (mH < 10) {
-    lcd.print(String("0"));
-    lcd.setCursor(1, 0);
-  }
-  lcd.print(String(mH) + String(":"));
-  // lcd.print(":");
+  lcd.print(formattedTimeBuffer);
 
-  if (mM < 10) {
-    lcd.setCursor(3, 0);
-    lcd.print("0");
-  }
-  lcd.print(String(mM) + String(":"));
-  if (mS < 10) {
-
-    lcd.print(String("0"));
-  }
-  lcd.print(String(mS));
   lcd.setCursor(0, 1);
   lcd.print(String("tick:") + String(tick) + String("ms "));
   if (change) {

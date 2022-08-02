@@ -65,10 +65,10 @@ jobs:
           path: crazyclock/libraries/EpoxyDuino
 
       - name: Compile tests
-        run: make -C crazyclock/crazyclock/ make_all
+        run: make -C crazyclock/src/ make_all
 
       - name: Run tests
-        run: make -C crazyclock/crazyclock/ runtests
+        run: make -C crazyclock/src/ runtests
 
   compile:
     name: Compile for Wemos D1
@@ -90,7 +90,7 @@ jobs:
           ./arduino-cli core install esp8266:esp8266
 
       - name: Install Libraries Required by Sketch
-        run: ./arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
+        run: ./arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone"
 
       - name: List top directory
         run: ls -lah
@@ -104,4 +104,4 @@ jobs:
           path: crazyclock
 
       - name: Compile Sketch for Wemos D1
-        run: ./arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/crazyclock/
+        run: ./arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/

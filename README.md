@@ -36,6 +36,10 @@ you need to update the settings to [Format Curly Braces on Same Line](https://st
 2. Search for `C_Cpp.clang_format_fallback`
 3. Just change the value in the textfield from `Visual Studio` to `LLVM`
 
+### Working with Arduino IDE
+
+We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9).
+
 ### Working with arduino-cli
 
 #### Arduino CLI setup
@@ -76,8 +80,8 @@ In root directory:
     ```bash
     arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
     ```
-2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1 crazyclock/`
-3. Upload: `arduino-cli --verbose upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0 crazyclock/`
+2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`
+3. Upload: `arduino-cli --verbose upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0`
 
 ## Fritzing Parts
 
