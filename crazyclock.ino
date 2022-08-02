@@ -159,7 +159,7 @@ void ticTac() {
   };
 }
 void showMe() {
-  formatTime(mH, mM, mM, formattedTimeBuffer);
+  formatTime(mH, mM, mS, formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
   lcd.setCursor(0, 0);
