@@ -102,6 +102,100 @@ test(pl_conversion_near_autumn_time_change_2020) {
   assertEqual(after.getLocalSeconds(), after.getEpochSeconds() + 3600);
 }
 
+test(local_date_get_time_fragments_at_epoch_start_utc) {
+  // given
+  LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
+
+  // epoch start
+  LocalDateTime utcEpochStart = utc.fromUtc(0ul);
+  assertEqual(utcEpochStart.getLocalTimeFragment(HOURS), 0);
+  assertEqual(utcEpochStart.getLocalTimeFragment(MINUTES), 0);
+  assertEqual(utcEpochStart.getLocalTimeFragment(SECONDS), 0);
+}
+
+test(local_date_get_time_fragments_at_epoch_start_pl) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+
+  // epoch start
+  LocalDateTime plEpochStart = pl.fromUtc(0ul);
+  assertEqual(plEpochStart.getLocalTimeFragment(HOURS), 1);
+  assertEqual(plEpochStart.getLocalTimeFragment(MINUTES), 0);
+  assertEqual(plEpochStart.getLocalTimeFragment(SECONDS), 0);
+}
+
+test(local_date_get_time_fragments_at_valentines_utc) {
+  LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
+  LocalDateTime valentines = utc.fromUtc(2022, 2, 14, 12, 34, 56);
+
+  assertEqual(valentines.getLocalTimeFragment(HOURS), 12);
+  assertEqual(valentines.getLocalTimeFragment(MINUTES), 34);
+  assertEqual(valentines.getLocalTimeFragment(SECONDS), 56);
+}
+
+test(local_date_get_time_fragments_at_valentines_pl) {
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  LocalDateTime valentines = pl.fromUtc(2022, 2, 14, 12, 34, 56);
+
+  assertEqual(valentines.getLocalTimeFragment(HOURS), 13);
+  assertEqual(valentines.getLocalTimeFragment(MINUTES), 34);
+  assertEqual(valentines.getLocalTimeFragment(SECONDS), 56);
+}
+
+test(local_date_get_time_fragments_utc_increased_seconds) {
+  LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
+  unsigned long epochSeconds = 9876543210;
+  LocalDateTime original = utc.fromUtc(epochSeconds);
+  LocalDateTime increased = utc.fromUtc(epochSeconds + 1);
+
+  assertEqual(original.getLocalTimeFragment(SECONDS) + 1, increased.getLocalTimeFragment(SECONDS));
+}
+
+test(local_date_get_time_fragments_utc_increased_minutes) {
+  LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
+  unsigned long epochSeconds = 9876543210;
+  LocalDateTime original = utc.fromUtc(epochSeconds);
+  LocalDateTime increased = utc.fromUtc(epochSeconds + 60);
+
+  assertEqual(original.getLocalTimeFragment(MINUTES) + 1, increased.getLocalTimeFragment(MINUTES));
+}
+
+test(local_date_get_time_fragments_utc_increased_hours) {
+  LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
+  unsigned long epochSeconds = 9876543210;
+  LocalDateTime original = utc.fromUtc(epochSeconds);
+  LocalDateTime increased = utc.fromUtc(epochSeconds + 3600);
+
+  assertEqual(original.getLocalTimeFragment(HOURS) + 1, increased.getLocalTimeFragment(HOURS));
+}
+
+test(local_date_get_time_fragments_pl_increased_seconds) {
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  unsigned long epochSeconds = 9876543210;
+  LocalDateTime original = pl.fromUtc(epochSeconds);
+  LocalDateTime increased = pl.fromUtc(epochSeconds + 1);
+
+  assertEqual(original.getLocalTimeFragment(SECONDS) + 1, increased.getLocalTimeFragment(SECONDS));
+}
+
+test(local_date_get_time_fragments_pl_increased_minutes) {
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  unsigned long epochSeconds = 9876543210;
+  LocalDateTime original = pl.fromUtc(epochSeconds);
+  LocalDateTime increased = pl.fromUtc(epochSeconds + 60);
+
+  assertEqual(original.getLocalTimeFragment(MINUTES) + 1, increased.getLocalTimeFragment(MINUTES));
+}
+
+test(local_date_get_time_fragments_pl_increased_hours) {
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  unsigned long epochSeconds = 9876543210;
+  LocalDateTime original = pl.fromUtc(epochSeconds);
+  LocalDateTime increased = pl.fromUtc(epochSeconds + 3600);
+
+  assertEqual(original.getLocalTimeFragment(HOURS) + 1, increased.getLocalTimeFragment(HOURS));
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
