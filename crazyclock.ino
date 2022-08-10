@@ -7,6 +7,7 @@
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/TimeFormatter/TimeFormatter.h"
+#include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
