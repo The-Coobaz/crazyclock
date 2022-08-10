@@ -6,8 +6,8 @@
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
-#include "src/TimeFormatter/TimeFormatter.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
+#include "src/TimeFormatter/TimeFormatter.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -76,9 +76,11 @@ void loop() {
   checkEncoder();
   ticTac();
 }
-void resetToRealTime() { // this function synchronises time with NTP and normalizes the
-  // tick to 1 second
-  // it should also update RTC
+
+// this function synchronises time with NTP and
+// normalizes the tick to 1 second
+// it should also update RTC
+void resetToRealTime() {
   timeClient.update();
   unsigned long epochSeconds = timeClient.getEpochTime();
   LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);

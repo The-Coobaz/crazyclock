@@ -148,7 +148,8 @@ test(local_date_get_time_fragments_utc_increased_seconds) {
   LocalDateTime original = utc.fromUtc(epochSeconds);
   LocalDateTime increased = utc.fromUtc(epochSeconds + 1);
 
-  assertEqual(original.getLocalTimeFragment(SECONDS) + 1, increased.getLocalTimeFragment(SECONDS));
+  assertEqual(original.getLocalTimeFragment(SECONDS) + 1,
+              increased.getLocalTimeFragment(SECONDS));
 }
 
 test(local_date_get_time_fragments_utc_increased_minutes) {
@@ -157,7 +158,8 @@ test(local_date_get_time_fragments_utc_increased_minutes) {
   LocalDateTime original = utc.fromUtc(epochSeconds);
   LocalDateTime increased = utc.fromUtc(epochSeconds + 60);
 
-  assertEqual(original.getLocalTimeFragment(MINUTES) + 1, increased.getLocalTimeFragment(MINUTES));
+  assertEqual(original.getLocalTimeFragment(MINUTES) + 1,
+              increased.getLocalTimeFragment(MINUTES));
 }
 
 test(local_date_get_time_fragments_utc_increased_hours) {
@@ -166,7 +168,8 @@ test(local_date_get_time_fragments_utc_increased_hours) {
   LocalDateTime original = utc.fromUtc(epochSeconds);
   LocalDateTime increased = utc.fromUtc(epochSeconds + 3600);
 
-  assertEqual(original.getLocalTimeFragment(HOURS) + 1, increased.getLocalTimeFragment(HOURS));
+  assertEqual(original.getLocalTimeFragment(HOURS) + 1,
+              increased.getLocalTimeFragment(HOURS));
 }
 
 test(local_date_get_time_fragments_pl_increased_seconds) {
@@ -175,7 +178,8 @@ test(local_date_get_time_fragments_pl_increased_seconds) {
   LocalDateTime original = pl.fromUtc(epochSeconds);
   LocalDateTime increased = pl.fromUtc(epochSeconds + 1);
 
-  assertEqual(original.getLocalTimeFragment(SECONDS) + 1, increased.getLocalTimeFragment(SECONDS));
+  assertEqual(original.getLocalTimeFragment(SECONDS) + 1,
+              increased.getLocalTimeFragment(SECONDS));
 }
 
 test(local_date_get_time_fragments_pl_increased_minutes) {
@@ -184,7 +188,8 @@ test(local_date_get_time_fragments_pl_increased_minutes) {
   LocalDateTime original = pl.fromUtc(epochSeconds);
   LocalDateTime increased = pl.fromUtc(epochSeconds + 60);
 
-  assertEqual(original.getLocalTimeFragment(MINUTES) + 1, increased.getLocalTimeFragment(MINUTES));
+  assertEqual(original.getLocalTimeFragment(MINUTES) + 1,
+              increased.getLocalTimeFragment(MINUTES));
 }
 
 test(local_date_get_time_fragments_pl_increased_hours) {
@@ -193,7 +198,8 @@ test(local_date_get_time_fragments_pl_increased_hours) {
   LocalDateTime original = pl.fromUtc(epochSeconds);
   LocalDateTime increased = pl.fromUtc(epochSeconds + 3600);
 
-  assertEqual(original.getLocalTimeFragment(HOURS) + 1, increased.getLocalTimeFragment(HOURS));
+  assertEqual(original.getLocalTimeFragment(HOURS) + 1,
+              increased.getLocalTimeFragment(HOURS));
 }
 
 //----------------------------------------------------------------------------
