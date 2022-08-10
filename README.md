@@ -32,7 +32,7 @@ See also instructions on the web:
 
 For VS Code install [Clang-Format](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format) extension.
 
-Now code should be formatted automatically with `[ctlr] + [shift] + [i]`
+To format currently edited file use `[ctlr] + [shift] + [i]` [keyboard shortcut](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference).
 
 ### Working with Arduino IDE
 
