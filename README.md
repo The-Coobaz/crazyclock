@@ -8,8 +8,9 @@ This would allow to speed up or slow down the time.
 ## Hardware
 
 You are going to need:
-- ESP8266 ([wemos](https://www.aliexpress.com/wholesale?SearchText=wemos+d1+mini) or [nodemcu](https://www.aliexpress.com/wholesale?SearchText=nodemcu) version) 
-- [1602 LCD screen with i2c  converter](https://www.aliexpress.com/wholesale?SearchText=lcd+1602+i2c)
+
+- ESP8266 ([wemos](https://www.aliexpress.com/wholesale?SearchText=wemos+d1+mini) or [nodemcu](https://www.aliexpress.com/wholesale?SearchText=nodemcu) version)
+- [1602 LCD screen with i2c converter](https://www.aliexpress.com/wholesale?SearchText=lcd+1602+i2c)
 - rotary encoder, i.e. [KY-040](https://www.aliexpress.com/wholesale?SearchText=ky-040+rotary+encoder)
 
 ### Schema
@@ -29,12 +30,9 @@ See also instructions on the web:
 
 #### Formatting
 
-For VS Code with [C/C++ Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-you need to update the settings to [Format Curly Braces on Same Line](https://stackoverflow.com/a/69560647/1823545):
+For VS Code install [Clang-Format](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format) extension.
 
-1. Press `[ctlr] + [,]`
-2. Search for `C_Cpp.clang_format_fallback`
-3. Just change the value in the textfield from `Visual Studio` to `LLVM`
+Now code should be formatted automatically with `[ctlr] + [shift] + [i]`
 
 ### Working with Arduino IDE
 
@@ -48,28 +46,29 @@ We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-fro
 2. Create configuration file: `arduino-cli config init`
 3. Add esp8266 URL for board manager:
 
-    ```
-    arduino-cli config add board_manager.additional_urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
-    ```
-3. Configure the [autocompletion for command-line](https://arduino.github.io/arduino-cli/0.22/command-line-completion/#generate-the-completion-file) (optional step)
-3. Install Wemos D1 Mini board:
+   ```
+   arduino-cli config add board_manager.additional_urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
+   ```
 
-    ```bash
-    arduino-cli core update-index
-    arduino-cli core install esp8266:esp8266
-    arduino-cli core list
-    arduino-cli board listall esp8266:d1
-    ```
+4. Configure the [autocompletion for command-line](https://arduino.github.io/arduino-cli/0.22/command-line-completion/#generate-the-completion-file) (optional step)
+5. Install Wemos D1 Mini board:
+
+   ```bash
+   arduino-cli core update-index
+   arduino-cli core install esp8266:esp8266
+   arduino-cli core list
+   arduino-cli board listall esp8266:d1
+   ```
 
 #### Connecting esp-8266 (or Wemos)
 
 1. Watch for logs with: `sudo dmesg -w | grep USB`
 2. Connect your device via USB
-3. Write down the ID for the USB device (i.e. *ttyUSB0*)
+3. Write down the ID for the USB device (i.e. _ttyUSB0_)
 4. Show permissions for the device: `ls -lah /dev/ttyUSB0`
-5. Write down the group of the device (i.e. *uucp*)
+5. Write down the group of the device (i.e. _uucp_)
 6. Add your user to the above group: `sudo usermod -a -G uucp $USER`
-7. *logout* and *login* again to apply changes
+7. _logout_ and _login_ again to apply changes
 
 #### Compile and Upload
 
@@ -77,9 +76,10 @@ In root directory:
 
 1. Install required libraries (i.e. [hd44780](https://github.com/duinoWitchery/hd44780)):
 
-    ```bash
-    arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
-    ```
+   ```bash
+   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
+   ```
+
 2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`
 3. Upload: `arduino-cli --verbose upload --fqbn esp8266:esp8266:d1 --port /dev/ttyUSB0`
 
@@ -94,7 +94,7 @@ In root directory:
 
 1. AUnit library: `arduino-cli lib install AUnit`
 2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.3.0 in crazyclock `libraries` folder
-3. Set environment variable `ARDUINO_CLI_DIR` for  `arduino-cli` libraries:
-    ```bash
-    export ARDUINO_CLI_DIR=${HOME}/Arduino
-    ```
+3. Set environment variable `ARDUINO_CLI_DIR` for `arduino-cli` libraries:
+   ```bash
+   export ARDUINO_CLI_DIR=${HOME}/Arduino
+   ```
