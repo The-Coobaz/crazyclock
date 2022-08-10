@@ -65,7 +65,7 @@ void setup() {
   lcd.clear();
 
   timeClient.begin();
-  whatTime();
+  resetToRealTime();
   // tick=-1000; //For debug purposes
   myMillis = (millis() + tick);
 }
@@ -74,7 +74,7 @@ void loop() {
   checkEncoder();
   ticTac();
 }
-void whatTime() { // this function synchronises time with NTP and normalizes the
+void resetToRealTime() { // this function synchronises time with NTP and normalizes the
   // tick to 1 second
   // it should also update RTC
   timeClient.update();
@@ -112,7 +112,7 @@ void checkEncoder() {
     showMe();                     // show the result immediately
   }
   if (digitalRead(13) == 0) { // if reset pressed, return to NTP time
-    whatTime();
+    resetToRealTime();
   }
 }
 void ticTac() {
