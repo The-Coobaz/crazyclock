@@ -6,11 +6,13 @@
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
+#include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 #include "src/TimeFormatter/TimeFormatter.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
 
+LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
 int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
@@ -32,7 +34,7 @@ unsigned long
     myMillis; // maybe myMillis should be a function returning the result?
 
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 3600, 60000);
+NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
 hd44780_I2Cexp lcd;
 const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
@@ -65,7 +67,7 @@ void setup() {
   lcd.clear();
 
   timeClient.begin();
-  whatTime();
+  resetToRealTime();
   // tick=-1000; //For debug purposes
   myMillis = (millis() + tick);
 }
@@ -74,16 +76,21 @@ void loop() {
   checkEncoder();
   ticTac();
 }
-void whatTime() { // this function synchronises time with NTP and normalizes the
-  // tick to 1 second
-  // it should also update RTC
+
+// this function synchronises time with NTP and
+// normalizes the tick to 1 second
+// it should also update RTC
+void resetToRealTime() {
   timeClient.update();
-  mH = timeClient.getHours();
-  mM = timeClient.getMinutes();
-  mS = timeClient.getSeconds();
+  unsigned long epochSeconds = timeClient.getEpochTime();
+  LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
+  mH = localDateTime.getLocalTimeFragment(HOURS);
+  mM = localDateTime.getLocalTimeFragment(MINUTES);
+  mS = localDateTime.getLocalTimeFragment(SECONDS);
   tick = 1000;
   change = false;
-  Serial.println((String)mH + ":" + mM + ":" + mS);
+  formatTime(mH, mM, mS, formattedTimeBuffer);
+  Serial.println(formattedTimeBuffer);
   // if update succeded, update rtc time.
   // here be dragons
 }
@@ -112,7 +119,7 @@ void checkEncoder() {
     showMe();                     // show the result immediately
   }
   if (digitalRead(13) == 0) { // if reset pressed, return to NTP time
-    whatTime();
+    resetToRealTime();
   }
 }
 void ticTac() {
