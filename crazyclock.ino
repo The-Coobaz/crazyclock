@@ -30,6 +30,9 @@ char formattedTimeBuffer[20] = "<initial value>";
 #define PIN_IN1 12
 #define PIN_IN2 14
 #endif
+
+#define RESET_BUTTON_PIN 13
+
 unsigned long
     myMillis; // maybe myMillis should be a function returning the result?
 
@@ -41,7 +44,7 @@ const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 
 void setup() {
-  pinMode(13, INPUT);
+  pinMode(RESET_BUTTON_PIN, INPUT);
   int status;
   status = lcd.begin(LCD_COLS, LCD_ROWS);
   if (status) // non zero status means it was unsuccesful
@@ -118,7 +121,7 @@ void checkEncoder() {
     myMillis = (millis() + tick); // reset counting after tick change
     showMe();                     // show the result immediately
   }
-  if (digitalRead(13) == 0) { // if reset pressed, return to NTP time
+  if (digitalRead(RESET_BUTTON_PIN) == 0) { // if reset pressed, return to NTP time
     resetToRealTime();
   }
 }
