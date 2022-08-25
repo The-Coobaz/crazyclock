@@ -75,7 +75,7 @@ void setup() {
 }
 
 void loop() {
-  checkEncoder();
+  checkRotaryEncoder();
   ticTac();
 }
 
@@ -92,7 +92,7 @@ void resetToRealTime() {
   Serial.println(formattedTimeBuffer);
 }
 
-void checkEncoder() {
+void checkRotaryEncoder() {
   static int pos = 0;
   encoder.tick();
   int newPos = encoder.getPosition();
@@ -107,21 +107,22 @@ void checkEncoder() {
 
     pos = newPos;
     myMillis = (millis() + tick); // reset counting after tick change
-    showMe();                     // show the result immediately
+    updateDisplayedTime();        // show the result immediately
   }
-  if (digitalRead(RESET_BUTTON_PIN) == 0) { // if reset pressed, return to NTP time
+  if (digitalRead(RESET_BUTTON_PIN) == 0) {
     resetToRealTime();
   }
 }
+
 void ticTac() {
 
   if ((millis() >= myMillis) and tick > 0) {
-    showMe(); // first show, then add second
+    updateDisplayedTime(); // first show, then add second
     mS++;
     myMillis = (millis() + tick);
 
   } else if ((millis() >= myMillis) and tick < 0) {
-    showMe();
+    updateDisplayedTime();
     mS--;
     myMillis = (millis() + abs(tick));
 
@@ -154,7 +155,7 @@ void ticTac() {
   };
 }
 
-void showMe() {
+void updateDisplayedTime() {
   formatTime(mH, mM, mS, formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
