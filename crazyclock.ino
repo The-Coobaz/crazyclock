@@ -71,7 +71,6 @@ void setup() {
 
   timeClient.begin();
   resetToRealTime();
-  // tick=-1000; //For debug purposes
   myMillis = (millis() + tick);
 }
 
@@ -80,9 +79,6 @@ void loop() {
   ticTac();
 }
 
-// this function synchronises time with NTP and
-// normalizes the tick to 1 second
-// it should also update RTC
 void resetToRealTime() {
   timeClient.update();
   unsigned long epochSeconds = timeClient.getEpochTime();
@@ -94,17 +90,9 @@ void resetToRealTime() {
   change = false;
   formatTime(mH, mM, mS, formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
-  // if update succeded, update rtc time.
-  // here be dragons
-}
-void rtcSynchro() {
-  // get time from RTC
-  // update time variables
-  // we are going to use this function as main clock machine
 }
 
 void checkEncoder() {
-
   static int pos = 0;
   encoder.tick();
   int newPos = encoder.getPosition();
@@ -126,9 +114,6 @@ void checkEncoder() {
   }
 }
 void ticTac() {
-
-  // here the clock works
-  // this needs complete rebuild in order to work with RTC
 
   if ((millis() >= myMillis) and tick > 0) {
     showMe(); // first show, then add second
@@ -168,6 +153,7 @@ void ticTac() {
     mH = mH + 24;
   };
 }
+
 void showMe() {
   formatTime(mH, mM, mS, formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
