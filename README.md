@@ -34,6 +34,13 @@ For VS Code install [Clang-Format](https://marketplace.visualstudio.com/items?it
 
 To format currently edited file use `[ctlr] + [shift] + [i]` [keyboard shortcut](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference).
 
+To format all files at once (with [clang-format](https://clang.llvm.org/docs/ClangFormat.html) installed on your system):
+
+```bash
+clang-format -style=llvm -i crazyclock.ino
+find src -iname "*.h" -o -iname "*.cpp" -o -iname "*.ino" | xargs clang-format -style=llvm -i
+```
+
 ### Working with Arduino IDE
 
 We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9).
