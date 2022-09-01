@@ -30,6 +30,9 @@ char formattedTimeBuffer[20] = "<initial value>";
 #define PIN_IN1 12
 #define PIN_IN2 14
 #endif
+
+#define RESET_BUTTON_PIN 13
+
 unsigned long
     myMillis; // maybe myMillis should be a function returning the result?
 
@@ -41,7 +44,7 @@ const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 
 void setup() {
-  pinMode(13, INPUT);
+  pinMode(RESET_BUTTON_PIN, INPUT);
   int status;
   status = lcd.begin(LCD_COLS, LCD_ROWS);
   if (status) // non zero status means it was unsuccesful
@@ -68,18 +71,14 @@ void setup() {
 
   timeClient.begin();
   resetToRealTime();
-  // tick=-1000; //For debug purposes
   myMillis = (millis() + tick);
 }
 
 void loop() {
-  checkEncoder();
+  checkRotaryEncoder();
   ticTac();
 }
 
-// this function synchronises time with NTP and
-// normalizes the tick to 1 second
-// it should also update RTC
 void resetToRealTime() {
   timeClient.update();
   unsigned long epochSeconds = timeClient.getEpochTime();
@@ -91,17 +90,9 @@ void resetToRealTime() {
   change = false;
   formatTime(mH, mM, mS, formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
-  // if update succeded, update rtc time.
-  // here be dragons
-}
-void rtcSynchro() {
-  // get time from RTC
-  // update time variables
-  // we are going to use this function as main clock machine
 }
 
-void checkEncoder() {
-
+void checkRotaryEncoder() {
   static int pos = 0;
   encoder.tick();
   int newPos = encoder.getPosition();
@@ -116,24 +107,22 @@ void checkEncoder() {
 
     pos = newPos;
     myMillis = (millis() + tick); // reset counting after tick change
-    showMe();                     // show the result immediately
+    updateDisplayedTime();        // show the result immediately
   }
-  if (digitalRead(13) == 0) { // if reset pressed, return to NTP time
+  if (digitalRead(RESET_BUTTON_PIN) == 0) {
     resetToRealTime();
   }
 }
+
 void ticTac() {
 
-  // here the clock works
-  // this needs complete rebuild in order to work with RTC
-
   if ((millis() >= myMillis) and tick > 0) {
-    showMe(); // first show, then add second
+    updateDisplayedTime(); // first show, then add second
     mS++;
     myMillis = (millis() + tick);
 
   } else if ((millis() >= myMillis) and tick < 0) {
-    showMe();
+    updateDisplayedTime();
     mS--;
     myMillis = (millis() + abs(tick));
 
@@ -165,7 +154,8 @@ void ticTac() {
     mH = mH + 24;
   };
 }
-void showMe() {
+
+void updateDisplayedTime() {
   formatTime(mH, mM, mS, formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
