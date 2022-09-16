@@ -56,10 +56,8 @@ We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-fro
 
    ```bash
    arduino-cli core update-index
-   arduino-cli core install arduino:avr
    arduino-cli core install esp8266:esp8266
    arduino-cli core list
-   arduino-cli board listall arduino:avr:uno
    arduino-cli board listall esp8266:d1
    ```
 
