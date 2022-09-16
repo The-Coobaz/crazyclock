@@ -80,7 +80,7 @@ In root directory:
 1. Install required libraries (i.e. [hd44780](https://github.com/duinoWitchery/hd44780)):
 
    ```bash
-   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Timezone" "DS3231"
+   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone" "DS3231"
    ```
 
 2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`

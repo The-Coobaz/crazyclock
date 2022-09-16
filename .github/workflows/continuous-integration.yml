@@ -90,7 +90,7 @@ jobs:
           ./arduino-cli core install esp8266:esp8266
 
       - name: Install Libraries Required by Sketch
-        run: ./arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone"
+        run: ./arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone" "DS3231"
 
       - name: List top directory
         run: ls -lah
