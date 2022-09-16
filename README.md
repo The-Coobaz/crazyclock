@@ -56,8 +56,10 @@ We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-fro
 
    ```bash
    arduino-cli core update-index
+   arduino-cli core install arduino:avr
    arduino-cli core install esp8266:esp8266
    arduino-cli core list
+   arduino-cli board listall arduino:avr:uno
    arduino-cli board listall esp8266:d1
    ```
 
@@ -78,7 +80,7 @@ In root directory:
 1. Install required libraries (i.e. [hd44780](https://github.com/duinoWitchery/hd44780)):
 
    ```bash
-   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder"
+   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Timezone" "DS3231"
    ```
 
 2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`
