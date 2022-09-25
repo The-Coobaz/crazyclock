@@ -17,6 +17,12 @@ public:
   long getSeconds();
   long getMillis();
 
+  /**
+   * Can be used to calculate current time with milliseconds precision.
+   * With the usage of Arduino millis() function:
+   * 1. We observe when the second is changed (i.e. from real-time clock)
+   * 2. By getting millis() we can calculate time elapsed from that change
+   */
   static PassedTime fromDistance(unsigned long newSecondStartedAt,
                                  unsigned long currentMillis);
 };
