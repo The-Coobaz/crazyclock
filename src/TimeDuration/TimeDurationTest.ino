@@ -3,7 +3,7 @@
 
 #include "TimeDuration.h"
 
-test(should_create_distance_from_zeros) {
+test(should_create_duration_from_zeros) {
 
   TimeDuration actual = TimeDuration::fromDistance(0L, 0L);
 
@@ -11,7 +11,7 @@ test(should_create_distance_from_zeros) {
   assertEqual(actual.getMillis(), 0L);
 }
 
-test(should_correctly_calculate_distance_from_same_values) {
+test(should_correctly_calculate_duration_from_same_values) {
   unsigned long newSecondObservedAt = 12345L;
   unsigned long distanceTo = 12345L;
 
@@ -41,7 +41,7 @@ test(should_correctly_calculate_more_than_second) {
 }
 
 test(should_correctly_calculate_when_millis_resets) {
-  long from = (ARDUINO_MAX_MILLIS) - 300L;
+  long from = (ARDUINO_MAX_MILLIS)-300L;
   long to = 21L;
 
   TimeDuration actual = TimeDuration::fromDistance(from, to);
@@ -49,9 +49,9 @@ test(should_correctly_calculate_when_millis_resets) {
   assertEqual(actual.getMillis(), 321L);
 }
 
-
-test(should_correctly_calculate_duration_longer_than_second_when_millis_resets) {
-  long from = (ARDUINO_MAX_MILLIS) - 300L;
+test(
+    should_correctly_calculate_duration_longer_than_second_when_millis_resets) {
+  long from = (ARDUINO_MAX_MILLIS)-300L;
   long to = 1234567890L;
 
   TimeDuration actual = TimeDuration::fromDistance(from, to);

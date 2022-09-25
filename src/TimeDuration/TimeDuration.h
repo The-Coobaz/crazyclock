@@ -24,7 +24,7 @@ public:
    * 2. By getting millis() we can calculate time elapsed from that change
    */
   static TimeDuration fromDistance(unsigned long newSecondStartedAt,
-                                 unsigned long currentMillis);
+                                   unsigned long currentMillis);
 };
 
 #endif
