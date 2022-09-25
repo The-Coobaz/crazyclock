@@ -38,6 +38,15 @@ test(should_correctly_calculate_more_than_second) {
   assertEqual(actual.getMillis(), 890L);
 }
 
+test(should_correctly_calculate_when_millis_resets) {
+  long from = ARDUINO_MAX_MILLIX - 300L;
+  long to = 21L;
+
+  PassedTime actual = PassedTime::fromDistance(from, to);
+  assertEqual(actual.getSeconds(), 0L);
+  assertEqual(actual.getMillis(), 321L);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
