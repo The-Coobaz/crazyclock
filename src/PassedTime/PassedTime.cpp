@@ -8,7 +8,13 @@ PassedTime::PassedTime(long seconds, long millis) {
 PassedTime PassedTime::fromDistance(long startMillis, long endMillis) {
   // result is long, because we expect non-negative arguments
   // (they should be greater or equal zero)
-  long passedMillis = endMillis - startMillis;
+  long passedMillis;
+  if (startMillis <= endMillis) {
+    passedMillis = endMillis - startMillis;
+  } else {
+    // this can happen if millis() functions resets to zero
+    passedMillis = ((ARDUINO_MAX_MILLIS) - startMillis) + endMillis;
+  }
   long passedSeconds = passedMillis / 1000;
   return PassedTime(passedSeconds, passedMillis % 1000);
 };

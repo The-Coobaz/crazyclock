@@ -39,7 +39,7 @@ test(should_correctly_calculate_more_than_second) {
 }
 
 test(should_correctly_calculate_when_millis_resets) {
-  long from = ARDUINO_MAX_MILLIX - 300L;
+  long from = (ARDUINO_MAX_MILLIS) - 300L;
   long to = 21L;
 
   PassedTime actual = PassedTime::fromDistance(from, to);
