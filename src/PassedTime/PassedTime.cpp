@@ -6,8 +6,11 @@ PassedTime::PassedTime(long seconds, long millis) {
 };
 
 PassedTime PassedTime::fromDistance(long startMillis, long endMillis) {
-  long long passedMillis = endMillis - startMillis;
-  return PassedTime(0L, passedMillis);
+  // result is long, because we expect non-negative arguments
+  // (they should be greater or equal zero)
+  long passedMillis = endMillis - startMillis;
+  long passedSeconds = passedMillis / 1000;
+  return PassedTime(passedSeconds, passedMillis % 1000);
 };
 
 long PassedTime::getSeconds() { return this->_seconds; }
