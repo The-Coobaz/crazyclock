@@ -8,16 +8,17 @@
 class PassedTime {
 
 private:
-    long _seconds;
-    long _millis;
+  long _seconds;
+  long _millis;
 
-    PassedTime(long seconds, long millis);
+  PassedTime(long seconds, long millis);
 
 public:
-    static PassedTime fromDistance(unsigned long startMillis, unsigned long endMillis);
+  long getSeconds();
+  long getMillis();
 
-    long getSeconds();
-    long getMillis();
+  static PassedTime fromDistance(unsigned long newSecondStartedAt,
+                                 unsigned long currentMillis);
 };
 
 #endif

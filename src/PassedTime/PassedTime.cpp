@@ -5,19 +5,19 @@ PassedTime::PassedTime(long seconds, long millis) {
   this->_millis = millis;
 };
 
-PassedTime PassedTime::fromDistance(unsigned long startMillis,
-                                    unsigned long endMillis) {
+long PassedTime::getSeconds() { return this->_seconds; }
+
+long PassedTime::getMillis() { return this->_millis; }
+
+PassedTime PassedTime::fromDistance(unsigned long newSecondStartedAt,
+                                    unsigned long currentMillis) {
   long long passedMillis;
-  if (startMillis <= endMillis) {
-    passedMillis = endMillis - startMillis;
+  if (newSecondStartedAt <= currentMillis) {
+    passedMillis = currentMillis - newSecondStartedAt;
   } else {
     // this can happen if millis() functions resets to zero
-    passedMillis = ((ARDUINO_MAX_MILLIS)-startMillis) + endMillis;
+    passedMillis = ((ARDUINO_MAX_MILLIS)-newSecondStartedAt) + currentMillis;
   }
   long passedSeconds = passedMillis / 1000;
   return PassedTime(passedSeconds, passedMillis % 1000);
 };
-
-long PassedTime::getSeconds() { return this->_seconds; }
-
-long PassedTime::getMillis() { return this->_millis; }

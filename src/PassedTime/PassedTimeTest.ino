@@ -12,6 +12,8 @@ test(should_create_distance_from_zeros) {
 }
 
 test(should_correctly_calculate_distance_from_same_values) {
+  unsigned long newSecondObservedAt = 12345L;
+  unsigned long distanceTo = 12345L;
 
   PassedTime actual = PassedTime::fromDistance(12345L, 12345L);
   assertEqual(actual.getSeconds(), 0L);
