@@ -1,6 +1,16 @@
 #include <AUnit.h>
 #include <Arduino.h>
 
+#include "PassedTime.h"
+
+test(should_create_distance_from_zeros) {
+
+  PassedTime actual = PassedTime::fromDistance(0L, 0L);
+
+  assertEqual(actual.getSeconds(), 0L);
+  assertEqual(actual.getMillis(), 0L);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
