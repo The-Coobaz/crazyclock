@@ -11,12 +11,11 @@
 class LocalDateTime {
 
 private:
-  unsigned long _epochSeconds;
   unsigned long _localSeconds;
 
 public:
-  LocalDateTime(unsigned long epochSeconds, unsigned long localSeconds);
-  unsigned long getEpochSeconds();
+  LocalDateTime(unsigned long localSeconds);
+
   unsigned long getLocalSeconds();
 
   int getLocalTimeFragment(int unit);

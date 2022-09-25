@@ -38,7 +38,7 @@ LocalDateTime LocalDateTimeConverter::fromUtc(unsigned long epochSeconds) {
   } else {
     localSeconds = epochSeconds;
   }
-  return LocalDateTime(epochSeconds, localSeconds);
+  return LocalDateTime(localSeconds);
 }
 
 LocalDateTimeConverter LocalDateTimeConverter::UTC =
