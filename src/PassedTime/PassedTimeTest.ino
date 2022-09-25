@@ -11,6 +11,17 @@ test(should_create_distance_from_zeros) {
   assertEqual(actual.getMillis(), 0L);
 }
 
+test(should_correctly_calculate_distance_from_same_values) {
+
+  PassedTime actual = PassedTime::fromDistance(12345L, 12345L);
+  assertEqual(actual.getSeconds(), 0L);
+  assertEqual(actual.getMillis(), 0L);
+
+  actual = PassedTime::fromDistance(-5L, -5L);
+  assertEqual(actual.getSeconds(), 0L);
+  assertEqual(actual.getMillis(), 0L);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
