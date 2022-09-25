@@ -3,6 +3,9 @@
 
 #include "LocalDateTimeConverter.h"
 
+// UTC seconds for 2022-02-14T12:34:56UTC
+unsigned long valentinesUTCSecond = 1644842096ul;
+
 test(epoch_start_test) {
   // given
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
@@ -22,11 +25,9 @@ test(valentines_day) {
   LocalDateTime valentinesInUTC = utc.fromUtc(2022, 2, 14, 12, 34, 56);
   LocalDateTime valentinesInPL = pl.fromUtc(2022, 2, 14, 12, 34, 56);
 
-  unsigned long expectedUTCSecond = 1644842096ul;
-
   // then
-  assertEqual(valentinesInUTC.getLocalSeconds(), expectedUTCSecond);
-  assertEqual(valentinesInPL.getLocalSeconds(), expectedUTCSecond + 3600);
+  assertEqual(valentinesInUTC.getLocalSeconds(), valentinesUTCSecond);
+  assertEqual(valentinesInPL.getLocalSeconds(), valentinesUTCSecond + 3600);
 }
 
 test(utc_conversion_to_seconds) {
@@ -34,7 +35,7 @@ test(utc_conversion_to_seconds) {
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
 
   assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(),
-              1644842096ul);
+              valentinesUTCSecond);
   assertEqual(utc.fromUtc(2020, 2, 29, 0, 0, 0).getLocalSeconds(),
               1582934400ul);
   assertEqual(utc.fromUtc(2050, 8, 15, 17, 15, 0).getLocalSeconds(),
@@ -55,7 +56,7 @@ test(pl_conversion_to_seconds) {
   assertEqual(pl.fromUtc(0ul).getLocalSeconds(), 3600ul);
 
   assertEqual(pl.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(),
-              1644842096ul + 3600);
+              valentinesUTCSecond + 3600);
   assertEqual(pl.fromUtc(2020, 2, 29, 0, 0, 0).getLocalSeconds(),
               1582934400ul + 3600);
   assertEqual(pl.fromUtc(2050, 8, 15, 17, 15, 0).getLocalSeconds(),
@@ -132,6 +133,7 @@ test(local_date_get_time_fragments_at_valentines_pl) {
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
   LocalDateTime valentines = pl.fromUtc(2022, 2, 14, 12, 34, 56);
 
+  // noon in UTC on valentines day is 1 pm in Poland
   assertEqual(valentines.getLocalTimeFragment(HOURS), 13);
   assertEqual(valentines.getLocalTimeFragment(MINUTES), 34);
   assertEqual(valentines.getLocalTimeFragment(SECONDS), 56);
