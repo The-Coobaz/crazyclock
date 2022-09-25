@@ -1,0 +1,5 @@
+#ifndef CRAZYCLOCK_PASSED_MILLIS_H
+#define CRAZYCLOCK_PASSED_MILLIS_H
+
+
+#endif
