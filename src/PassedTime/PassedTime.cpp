@@ -6,7 +6,8 @@ PassedTime::PassedTime(long seconds, long millis) {
 };
 
 PassedTime PassedTime::fromDistance(long startMillis, long endMillis) {
-  return PassedTime(0L, 0L);
+  long long passedMillis = endMillis - startMillis;
+  return PassedTime(0L, passedMillis);
 };
 
 long PassedTime::getSeconds() { return this->_seconds; }

@@ -22,6 +22,14 @@ test(should_correctly_calculate_distance_from_same_values) {
   assertEqual(actual.getMillis(), 0L);
 }
 
+test(should_correctly_calculate_less_than_second) {
+  long from = 12345L;
+  long to = from + 345;
+  PassedTime actual = PassedTime::fromDistance(from, to);
+  assertEqual(actual.getSeconds(), 0L);
+  assertEqual(actual.getMillis(), 345L);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
