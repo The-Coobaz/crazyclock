@@ -12,6 +12,7 @@ You are going to need:
 - ESP8266 ([wemos](https://www.aliexpress.com/wholesale?SearchText=wemos+d1+mini) or [nodemcu](https://www.aliexpress.com/wholesale?SearchText=nodemcu) version)
 - [1602 LCD screen with i2c converter](https://www.aliexpress.com/wholesale?SearchText=lcd+1602+i2c)
 - rotary encoder, i.e. [KY-040](https://www.aliexpress.com/wholesale?SearchText=ky-040+rotary+encoder)
+- real time clock, i.e. [DS3231](https://www.aliexpress.com/w/wholesale-ds3231.html)
 
 ### Schema
 
