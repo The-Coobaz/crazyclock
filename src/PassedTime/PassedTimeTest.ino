@@ -47,6 +47,16 @@ test(should_correctly_calculate_when_millis_resets) {
   assertEqual(actual.getMillis(), 321L);
 }
 
+
+test(should_correctly_calculate_duration_longer_than_second_when_millis_resets) {
+  long from = (ARDUINO_MAX_MILLIS) - 300L;
+  long to = 1234567890L;
+
+  PassedTime actual = PassedTime::fromDistance(from, to);
+  assertEqual(actual.getSeconds(), 1234568L);
+  assertEqual(actual.getMillis(), 190L);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
