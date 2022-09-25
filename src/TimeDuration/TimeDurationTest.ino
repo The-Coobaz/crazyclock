@@ -1,11 +1,11 @@
 #include <AUnit.h>
 #include <Arduino.h>
 
-#include "PassedTime.h"
+#include "TimeDuration.h"
 
 test(should_create_distance_from_zeros) {
 
-  PassedTime actual = PassedTime::fromDistance(0L, 0L);
+  TimeDuration actual = TimeDuration::fromDistance(0L, 0L);
 
   assertEqual(actual.getSeconds(), 0L);
   assertEqual(actual.getMillis(), 0L);
@@ -15,11 +15,11 @@ test(should_correctly_calculate_distance_from_same_values) {
   unsigned long newSecondObservedAt = 12345L;
   unsigned long distanceTo = 12345L;
 
-  PassedTime actual = PassedTime::fromDistance(12345L, 12345L);
+  TimeDuration actual = TimeDuration::fromDistance(12345L, 12345L);
   assertEqual(actual.getSeconds(), 0L);
   assertEqual(actual.getMillis(), 0L);
 
-  actual = PassedTime::fromDistance(-5L, -5L);
+  actual = TimeDuration::fromDistance(-5L, -5L);
   assertEqual(actual.getSeconds(), 0L);
   assertEqual(actual.getMillis(), 0L);
 }
@@ -27,7 +27,7 @@ test(should_correctly_calculate_distance_from_same_values) {
 test(should_correctly_calculate_less_than_second) {
   long from = 12345L;
   long to = from + 345;
-  PassedTime actual = PassedTime::fromDistance(from, to);
+  TimeDuration actual = TimeDuration::fromDistance(from, to);
   assertEqual(actual.getSeconds(), 0L);
   assertEqual(actual.getMillis(), 345L);
 }
@@ -35,7 +35,7 @@ test(should_correctly_calculate_less_than_second) {
 test(should_correctly_calculate_more_than_second) {
   long from = 987654321L;
   long to = from + 1234567890;
-  PassedTime actual = PassedTime::fromDistance(from, to);
+  TimeDuration actual = TimeDuration::fromDistance(from, to);
   assertEqual(actual.getSeconds(), 1234567L);
   assertEqual(actual.getMillis(), 890L);
 }
@@ -44,7 +44,7 @@ test(should_correctly_calculate_when_millis_resets) {
   long from = (ARDUINO_MAX_MILLIS) - 300L;
   long to = 21L;
 
-  PassedTime actual = PassedTime::fromDistance(from, to);
+  TimeDuration actual = TimeDuration::fromDistance(from, to);
   assertEqual(actual.getSeconds(), 0L);
   assertEqual(actual.getMillis(), 321L);
 }
@@ -54,7 +54,7 @@ test(should_correctly_calculate_duration_longer_than_second_when_millis_resets) 
   long from = (ARDUINO_MAX_MILLIS) - 300L;
   long to = 1234567890L;
 
-  PassedTime actual = PassedTime::fromDistance(from, to);
+  TimeDuration actual = TimeDuration::fromDistance(from, to);
   assertEqual(actual.getSeconds(), 1234568L);
   assertEqual(actual.getMillis(), 190L);
 }

@@ -5,13 +5,13 @@
 // https://en.cppreference.com/w/cpp/language/types#Properties
 #define ARDUINO_MAX_MILLIS 4294967295UL
 
-class PassedTime {
+class TimeDuration {
 
 private:
   long _seconds;
   long _millis;
 
-  PassedTime(long seconds, long millis);
+  TimeDuration(long seconds, long millis);
 
 public:
   long getSeconds();
@@ -23,7 +23,7 @@ public:
    * 1. We observe when the second is changed (i.e. from real-time clock)
    * 2. By getting millis() we can calculate time elapsed from that change
    */
-  static PassedTime fromDistance(unsigned long newSecondStartedAt,
+  static TimeDuration fromDistance(unsigned long newSecondStartedAt,
                                  unsigned long currentMillis);
 };
 

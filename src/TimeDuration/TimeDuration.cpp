@@ -1,15 +1,15 @@
-#include "PassedTime.h"
+#include "TimeDuration.h"
 
-PassedTime::PassedTime(long seconds, long millis) {
+TimeDuration::TimeDuration(long seconds, long millis) {
   this->_seconds = seconds;
   this->_millis = millis;
 };
 
-long PassedTime::getSeconds() { return this->_seconds; }
+long TimeDuration::getSeconds() { return this->_seconds; }
 
-long PassedTime::getMillis() { return this->_millis; }
+long TimeDuration::getMillis() { return this->_millis; }
 
-PassedTime PassedTime::fromDistance(unsigned long newSecondStartedAt,
+TimeDuration TimeDuration::fromDistance(unsigned long newSecondStartedAt,
                                     unsigned long currentMillis) {
   long long passedMillis;
   if (newSecondStartedAt <= currentMillis) {
@@ -19,5 +19,5 @@ PassedTime PassedTime::fromDistance(unsigned long newSecondStartedAt,
     passedMillis = ((ARDUINO_MAX_MILLIS)-newSecondStartedAt) + currentMillis;
   }
   long passedSeconds = passedMillis / 1000;
-  return PassedTime(passedSeconds, passedMillis % 1000);
+  return TimeDuration(passedSeconds, passedMillis % 1000);
 };
