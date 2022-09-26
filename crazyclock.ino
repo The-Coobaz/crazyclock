@@ -8,7 +8,7 @@
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 #include "src/TimeFormatter/TimeFormatter.h"
-#include <ErriezDS3231.h>  //RTC library
+#include <ErriezDS3231.h> //RTC library
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -47,7 +47,7 @@ hd44780_I2Cexp lcd;
 const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
-ErriezDS3231 rtc; //rtc object
+ErriezDS3231 rtc; // rtc object
 void setup() {
   pinMode(RESET_BUTTON_PIN, INPUT);
   int status;
@@ -65,16 +65,19 @@ void setup() {
   }
 
   WiFi.begin(ssid, password);
-  for (int n=0;n==20,n++;){
-  //wait for 10 seconds to find wifi, then start without it
+  for (int n = 0; n == 20, n++;) {
+    // wait for 10 seconds to find wifi, then start without it
     delay(500);
     Serial.print(".");
     lcd.print(".");
-    if (WiFi.status() == WL_CONNECTED){
-      noWifi=false;
-      break;}//if wifi found, break loop
-    else{noWifi=true;};//continue without wifi
-    }
+    if (WiFi.status() == WL_CONNECTED) {
+      noWifi = false;
+      break;
+    } // if wifi found, break loop
+    else {
+      noWifi = true;
+    }; // continue without wifi
+  }
 
   lcd.clear();
 
@@ -89,21 +92,26 @@ void loop() {
 }
 
 void resetToRealTime() {
-  if (!timeClient.update()){
+  if (!timeClient.update()) {
     Serial.print("NTP time update failed");
-    noWifi=true;
-  } else {Serial.println("NTP time update successfull");}
+    noWifi = true;
+  } else {
+    Serial.println("NTP time update successfull");
+  }
   unsigned long epochSeconds = timeClient.getEpochTime();
   LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
   mH = localDateTime.getLocalTimeFragment(HOURS);
   mM = localDateTime.getLocalTimeFragment(MINUTES);
   mS = localDateTime.getLocalTimeFragment(SECONDS);
-  if (noWifi=false){rtc.setTime(mH, mM, mS);}//if time update failed, don't set rtc
-  else{rtc.getTime(&RTChour,&RTCminute,&RTCsecond);//get time from rtc instead
-mH=RTChour;
-mM=RTCminute;
-mS=RTCsecond;
-  };//RTC update
+  if (noWifi = false) {
+    rtc.setTime(mH, mM, mS);
+  } // if time update failed, don't set rtc
+  else {
+    rtc.getTime(&RTChour, &RTCminute, &RTCsecond); // get time from rtc instead
+    mH = RTChour;
+    mM = RTCminute;
+    mS = RTCsecond;
+  }; // RTC update
   tick = 1000;
   change = false;
   formatTime(mH, mM, mS, formattedTimeBuffer);
@@ -180,11 +188,11 @@ void updateDisplayedTime() {
   rtc.getTime(&RTChour, &RTCminute, &RTCsecond);
   Serial.print("RTC Time:");
   Serial.print(RTChour);
-  Serial.print(":");//just to compare real time and the fake one
+  Serial.print(":"); // just to compare real time and the fake one
   Serial.print(RTCminute);
   Serial.print(":");
   Serial.println(RTCsecond);
-  
+
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
 
