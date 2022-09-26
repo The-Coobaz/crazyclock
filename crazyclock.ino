@@ -17,7 +17,11 @@ LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
 int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
+bool noWifi;
 char zerro[] = {"0"};
+uint8_t RTChour;
+uint8_t RTCminute;
+uint8_t RTCsecond;
 
 char formattedTimeBuffer[20] = "<initial value>";
 
@@ -43,7 +47,7 @@ hd44780_I2Cexp lcd;
 const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
-
+ErriezDS3231 rtc; //rtc object
 void setup() {
   pinMode(RESET_BUTTON_PIN, INPUT);
   int status;
@@ -59,14 +63,18 @@ void setup() {
   while (!Serial) {
     // waits for serial port to be ready
   }
-  ErriezDS3231 rtc; //rtc object
-  WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED) {
+  WiFi.begin(ssid, password);
+  for (int n=0;n==20,n++;){
+  //wait for 10 seconds to find wifi, then start without it
     delay(500);
     Serial.print(".");
     lcd.print(".");
-  }
+    if (WiFi.status() == WL_CONNECTED){
+      noWifi=false;
+      break;}//if wifi found, break loop
+    else{noWifi=true;};//continue without wifi
+    }
 
   lcd.clear();
 
@@ -81,12 +89,21 @@ void loop() {
 }
 
 void resetToRealTime() {
-  timeClient.update();
+  if (!timeClient.update()){
+    Serial.print("NTP time update failed");
+    noWifi=true;
+  } else {Serial.println("NTP time update successfull");}
   unsigned long epochSeconds = timeClient.getEpochTime();
   LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
   mH = localDateTime.getLocalTimeFragment(HOURS);
   mM = localDateTime.getLocalTimeFragment(MINUTES);
   mS = localDateTime.getLocalTimeFragment(SECONDS);
+  if (noWifi=false){rtc.setTime(mH, mM, mS);}//if time update failed, don't set rtc
+  else{rtc.getTime(&RTChour,&RTCminute,&RTCsecond);//get time from rtc instead
+mH=RTChour;
+mM=RTCminute;
+mS=RTCsecond;
+  };//RTC update
   tick = 1000;
   change = false;
   formatTime(mH, mM, mS, formattedTimeBuffer);
@@ -158,8 +175,16 @@ void ticTac() {
 
 void updateDisplayedTime() {
   formatTime(mH, mM, mS, formattedTimeBuffer);
+  Serial.print("Local time:");
   Serial.println(formattedTimeBuffer);
-
+  rtc.getTime(&RTChour, &RTCminute, &RTCsecond);
+  Serial.print("RTC Time:");
+  Serial.print(RTChour);
+  Serial.print(":");//just to compare real time and the fake one
+  Serial.print(RTCminute);
+  Serial.print(":");
+  Serial.println(RTCsecond);
+  
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
 
