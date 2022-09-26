@@ -39,7 +39,7 @@ char formattedTimeBuffer[20] = "<initial value>";
 #define RESET_BUTTON_PIN 13
 
 unsigned long
-myMillis; // maybe myMillis should be a function returning the result?
+    myMillis; // maybe myMillis should be a function returning the result?
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -68,10 +68,10 @@ void setup() {
   for (int n = 0; n == 20, n++;) {
 <<<<<<< Updated upstream
     // wait for 10 seconds to find wifi, then start without it
-=======
-    //wait for 10 seconds to find wifi, then start without it
+    == == == =
+                 // wait for 10 seconds to find wifi, then start without it
 >>>>>>> Stashed changes
-    delay(500);
+        delay(500);
     Serial.print(".");
     lcd.print(".");
     if (WiFi.status() == WL_CONNECTED) {
@@ -82,19 +82,19 @@ void setup() {
     else {
       noWifi = true;
     }; // continue without wifi
-=======
-    }//if wifi found, break loop
-    else {
-      noWifi = true;
-    };//continue without wifi
+    == == == =
+  } // if wifi found, break loop
+  else {
+    noWifi = true;
+  }; // continue without wifi
 >>>>>>> Stashed changes
-  }
+}
 
-  lcd.clear();
+lcd.clear();
 
-  timeClient.begin();
-  resetToRealTime();
-  myMillis = (millis() + tick);
+timeClient.begin();
+resetToRealTime();
+myMillis = (millis() + tick);
 }
 
 void loop() {
@@ -123,21 +123,20 @@ void resetToRealTime() {
     mH = RTChour;
     mM = RTCminute;
     mS = RTCsecond;
-  }; // RTC update
-=======
-    rtc.setTime(mH, mM, mS); //if time update failed, don't set rtc
-  }
-  else {
-    rtc.getTime(&RTChour, &RTCminute, &RTCsecond); //get time from rtc instead
-    mH = RTChour;
-    mM = RTCminute;
-    mS = RTCsecond;
-  };//RTC update
+  };                                  // RTC update
+  == == == = rtc.setTime(mH, mM, mS); // if time update failed, don't set rtc
+}
+else {
+  rtc.getTime(&RTChour, &RTCminute, &RTCsecond); // get time from rtc instead
+  mH = RTChour;
+  mM = RTCminute;
+  mS = RTCsecond;
+}; // RTC update
 >>>>>>> Stashed changes
-  tick = 1000;
-  change = false;
-  formatTime(mH, mM, mS, formattedTimeBuffer);
-  Serial.println(formattedTimeBuffer);
+tick = 1000;
+change = false;
+formatTime(mH, mM, mS, formattedTimeBuffer);
+Serial.println(formattedTimeBuffer);
 }
 
 void checkRotaryEncoder() {
