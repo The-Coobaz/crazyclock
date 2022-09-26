@@ -65,30 +65,25 @@ void setup() {
   }
 
   WiFi.begin(ssid, password);
-  for (int n = 0; n == 20, n++;) {
+  Serial.println("Looking for the WiFi");
+  for (int n = 0; n < 30; n++) {
 
-    // wait for 10 seconds to find wifi, then start without it
-    == == == =
-                 // wait for 10 seconds to find wifi, then start without it
-
-        delay(500);
+    // wait for 15 seconds to find wifi, then start without it
+       
+    delay(500);
     Serial.print(".");
     lcd.print(".");
     if (WiFi.status() == WL_CONNECTED) {
       noWifi = false;
       break;
-
     } // if wifi found, break loop
     else {
       noWifi = true;
     }; // continue without wifi
-    == == == =
-  } // if wifi found, break loop
-  else {
-    noWifi = true;
-  }; // continue without wifi
+  }; // if wifi found, break loop
+  //continue without wifi
 
-}
+
 
 lcd.clear();
 
@@ -114,8 +109,8 @@ void resetToRealTime() {
   mH = localDateTime.getLocalTimeFragment(HOURS);
   mM = localDateTime.getLocalTimeFragment(MINUTES);
   mS = localDateTime.getLocalTimeFragment(SECONDS);
-  if (noWifi = false) {
-<<<<<<< Updated upstream
+  if (noWifi == false) {
+
     rtc.setTime(mH, mM, mS);
   } // if time update failed, don't set rtc
   else {
@@ -125,14 +120,8 @@ void resetToRealTime() {
     mS = RTCsecond;
   };                                  // RTC update
   rtc.setTime(mH, mM, mS); // if time update failed, don't set rtc
-}
-else {
-  rtc.getTime(&RTChour, &RTCminute, &RTCsecond); // get time from rtc instead
-  mH = RTChour;
-  mM = RTCminute;
-  mS = RTCsecond;
-}; // RTC update
->>>>>>> Stashed changes
+
+
 tick = 1000;
 change = false;
 formatTime(mH, mM, mS, formattedTimeBuffer);
@@ -227,3 +216,4 @@ void updateDisplayedTime() {
     lcd.print(" ");
   };
 }
+
