@@ -39,7 +39,7 @@ char formattedTimeBuffer[20] = "<initial value>";
 #define RESET_BUTTON_PIN 13
 
 unsigned long
-    myMillis; // maybe myMillis should be a function returning the result?
+myMillis; // maybe myMillis should be a function returning the result?
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -66,17 +66,28 @@ void setup() {
 
   WiFi.begin(ssid, password);
   for (int n = 0; n == 20, n++;) {
+<<<<<<< Updated upstream
     // wait for 10 seconds to find wifi, then start without it
+=======
+    //wait for 10 seconds to find wifi, then start without it
+>>>>>>> Stashed changes
     delay(500);
     Serial.print(".");
     lcd.print(".");
     if (WiFi.status() == WL_CONNECTED) {
       noWifi = false;
       break;
+<<<<<<< Updated upstream
     } // if wifi found, break loop
     else {
       noWifi = true;
     }; // continue without wifi
+=======
+    }//if wifi found, break loop
+    else {
+      noWifi = true;
+    };//continue without wifi
+>>>>>>> Stashed changes
   }
 
   lcd.clear();
@@ -104,6 +115,7 @@ void resetToRealTime() {
   mM = localDateTime.getLocalTimeFragment(MINUTES);
   mS = localDateTime.getLocalTimeFragment(SECONDS);
   if (noWifi = false) {
+<<<<<<< Updated upstream
     rtc.setTime(mH, mM, mS);
   } // if time update failed, don't set rtc
   else {
@@ -112,6 +124,16 @@ void resetToRealTime() {
     mM = RTCminute;
     mS = RTCsecond;
   }; // RTC update
+=======
+    rtc.setTime(mH, mM, mS); //if time update failed, don't set rtc
+  }
+  else {
+    rtc.getTime(&RTChour, &RTCminute, &RTCsecond); //get time from rtc instead
+    mH = RTChour;
+    mM = RTCminute;
+    mS = RTCsecond;
+  };//RTC update
+>>>>>>> Stashed changes
   tick = 1000;
   change = false;
   formatTime(mH, mM, mS, formattedTimeBuffer);
