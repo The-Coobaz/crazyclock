@@ -8,6 +8,7 @@
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 #include "src/TimeFormatter/TimeFormatter.h"
+#include <ErriezDS3231.h>
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -58,7 +59,7 @@ void setup() {
   while (!Serial) {
     // waits for serial port to be ready
   }
-
+  ErriezDS3231 rtc;
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
