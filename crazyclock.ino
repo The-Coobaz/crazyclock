@@ -162,7 +162,12 @@ void ticTac() {
     myMillis = (millis() + abs(tick));
 
   } // if our second has passed and tick is minus, decrement;
-
+  if (!change){
+    rtc.getTime(&RTChour, &RTCminute, &RTCsecond); // if time is not changed, synchronize with RTC every second
+    mH = RTChour;
+    mM = RTCminute;
+    mS = RTCsecond;
+  };       
   if (mS == 60 and tick > 0) {
     mS = 0;
     mM++; // if second has passed and tick is plus, increment minute
