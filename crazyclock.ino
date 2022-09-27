@@ -69,7 +69,7 @@ void setup() {
   for (int n = 0; n < 30; n++) {
 
     // wait for 15 seconds to find wifi, then start without it
-       
+
     delay(500);
     Serial.print(".");
     lcd.print(".");
@@ -80,16 +80,14 @@ void setup() {
     else {
       noWifi = true;
     }; // continue without wifi
-  }; // if wifi found, break loop
-  //continue without wifi
+  };   // if wifi found, break loop
+  // continue without wifi
 
+  lcd.clear();
 
-
-lcd.clear();
-
-timeClient.begin();
-resetToRealTime();
-myMillis = (millis() + tick);
+  timeClient.begin();
+  resetToRealTime();
+  myMillis = (millis() + tick);
 }
 
 void loop() {
@@ -118,13 +116,12 @@ void resetToRealTime() {
     mH = RTChour;
     mM = RTCminute;
     mS = RTCsecond;
-  };                                  // RTC update
- 
+  }; // RTC update
 
-tick = 1000;
-change = false;
-formatTime(mH, mM, mS, formattedTimeBuffer);
-Serial.println(formattedTimeBuffer);
+  tick = 1000;
+  change = false;
+  formatTime(mH, mM, mS, formattedTimeBuffer);
+  Serial.println(formattedTimeBuffer);
 }
 
 void checkRotaryEncoder() {
@@ -162,12 +159,14 @@ void ticTac() {
     myMillis = (millis() + abs(tick));
 
   } // if our second has passed and tick is minus, decrement;
-  if (!change){
-    rtc.getTime(&RTChour, &RTCminute, &RTCsecond); // if time is not changed, synchronize with RTC every second
+  if (!change) {
+    rtc.getTime(&RTChour, &RTCminute,
+                &RTCsecond); // if time is not changed, synchronize with RTC
+                             // every second
     mH = RTChour;
     mM = RTCminute;
     mS = RTCsecond;
-  };       
+  };
   if (mS == 60 and tick > 0) {
     mS = 0;
     mM++; // if second has passed and tick is plus, increment minute
@@ -220,4 +219,3 @@ void updateDisplayedTime() {
     lcd.print(" ");
   };
 }
-
