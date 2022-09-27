@@ -102,7 +102,7 @@ void resetToRealTime() {
     Serial.print("NTP time update failed");
     noWifi = true;
   } else {
-    Serial.println("NTP time update successfull");
+    Serial.println("NTP time update successful");
   }
   unsigned long epochSeconds = timeClient.getEpochTime();
   LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
@@ -119,8 +119,7 @@ void resetToRealTime() {
     mM = RTCminute;
     mS = RTCsecond;
   };                                  // RTC update
-  rtc.setTime(mH, mM, mS); // if time update failed, don't set rtc
-
+ 
 
 tick = 1000;
 change = false;
