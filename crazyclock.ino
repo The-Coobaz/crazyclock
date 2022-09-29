@@ -66,10 +66,8 @@ void setup() {
 
   WiFi.begin(ssid, password);
   Serial.println("Looking for the WiFi");
+  // wait for 15 seconds to find wifi, then start without it
   for (int n = 0; n < 30; n++) {
-
-    // wait for 15 seconds to find wifi, then start without it
-
     delay(500);
     Serial.print(".");
     lcd.print(".");
@@ -155,17 +153,16 @@ void ticTac() {
 
   } else if ((millis() >= myMillis) and tick < 0) {
     updateDisplayedTime();
+    // if our second has passed and tick is minus, decrement;
     mS--;
     myMillis = (millis() + abs(tick));
-
-  } // if our second has passed and tick is minus, decrement;
+  }
   if (!change) {
-    rtc.getTime(&RTChour, &RTCminute,
-                &RTCsecond); // if time is not changed, synchronize with RTC
-                             // every second
-    mH = RTChour;
-    mM = RTCminute;
-    mS = RTCsecond;
+    // if time is not changed, synchronize with RTC  every second
+    DateTime fromRtc = RTClib::now();
+    mH = fromRtc.hour();
+    mM = fromRtc.minute();
+    mS = fromRtc.second();
   };
   if (mS == 60 and tick > 0) {
     mS = 0;
