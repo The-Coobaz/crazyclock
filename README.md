@@ -81,7 +81,9 @@ In root directory:
 
    ```bash
    arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone"
-   arduino-cli lib install --git-url "https://github.com/NorthernWidget/DS3231.git"
+   arduino-cli lib uninstall "DS3231"
+   wget https://github.com/NorthernWidget/DS3231/archive/refs/tags/v1.1.1.zip
+   arduino-cli lib install --zip-path v1.1.1.zip
    ```
 
 2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`
