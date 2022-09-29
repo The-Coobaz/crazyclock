@@ -99,13 +99,13 @@ void resetToRealTime() {
   } else {
     Serial.println("NTP time update successfull");
   }
-  if (noWifi = false) {
-    unsigned long epochSeconds = timeClient.getEpochTime();
-    LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
-    mH = localDateTime.getLocalTimeFragment(HOURS);
-    mM = localDateTime.getLocalTimeFragment(MINUTES);
-    mS = localDateTime.getLocalTimeFragment(SECONDS);
+  unsigned long epochSeconds = timeClient.getEpochTime();
+  LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
+  mH = localDateTime.getLocalTimeFragment(HOURS);
+  mM = localDateTime.getLocalTimeFragment(MINUTES);
+  mS = localDateTime.getLocalTimeFragment(SECONDS);
 
+  if (noWifi = false) {
     rtc.setHour(mH);
     rtc.setMinute(mM);
     rtc.setSecond(mS);
