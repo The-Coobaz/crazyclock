@@ -12,9 +12,6 @@ test(should_create_duration_from_zeros) {
 }
 
 test(should_correctly_calculate_duration_from_same_values) {
-  unsigned long newSecondObservedAt = 12345L;
-  unsigned long distanceTo = 12345L;
-
   TimeDuration actual = TimeDuration::fromDistance(12345L, 12345L);
   assertEqual(actual.getSeconds(), 0L);
   assertEqual(actual.getMillis(), 0L);
