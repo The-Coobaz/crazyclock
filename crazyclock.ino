@@ -72,11 +72,12 @@ void setup() {
     lcd.print(".");
     if (WiFi.status() == WL_CONNECTED) {
       noWifi = false;
+      // if wifi found, break loop
       break;
-    } // if wifi found, break loop
-    else {
+    } else {
+      // continue without wifi
       noWifi = true;
-    }; // continue without wifi
+    };
   }
 
   lcd.clear();
@@ -105,9 +106,9 @@ void resetToRealTime() {
     mM = localDateTime.getLocalTimeFragment(MINUTES);
     mS = localDateTime.getLocalTimeFragment(SECONDS);
 
-    rtc.setHour((byte)mH);
+    rtc.setHour(mH);
     rtc.setMinute(mM);
-    rtc.setSecond((byte)mS);
+    rtc.setSecond(mS);
   } else {
     DateTime fromRtc = RTClib::now();
     mH = fromRtc.hour();
