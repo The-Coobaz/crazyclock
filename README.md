@@ -50,6 +50,7 @@ We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-fro
 
    ```
    arduino-cli config add board_manager.additional_urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
+   arduino-cli config set library.enable_unsafe_install true
    ```
 
 4. Configure the [autocompletion for command-line](https://arduino.github.io/arduino-cli/0.22/command-line-completion/#generate-the-completion-file) (optional step)
@@ -79,7 +80,8 @@ In root directory:
 1. Install required libraries (i.e. [hd44780](https://github.com/duinoWitchery/hd44780)):
 
    ```bash
-   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone" "DS3231"
+   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone"
+   arduino-cli lib install --git-url "https://github.com/NorthernWidget/DS3231.git"
    ```
 
 2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`
