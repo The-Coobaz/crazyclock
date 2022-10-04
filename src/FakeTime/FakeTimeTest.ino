@@ -7,10 +7,67 @@ test(should_correctly_return_hour_minutes_and_seconds) {
   // given
   FakeTime fakeTime = FakeTime(0, 1, 2);
 
+  // when
+  FakeTime actual = fakeTime.plusMillis(999);
+
   // then
-  assertEqual(fakeTime.hour(), 0);
-  assertEqual(fakeTime.minutes(), 1);
-  assertEqual(fakeTime.seconds(), 2);
+  assertEqual(actual.hour(), 0);
+  assertEqual(actual.minutes(), 1);
+  assertEqual(actual.seconds(), 2);
+}
+
+test(should_correctly_add_second_and_a_half) {
+  // given
+  FakeTime fakeTime = FakeTime(0, 1, 2);
+
+  // when
+  FakeTime actual = fakeTime.plusMillis(1500);
+
+  // then
+  assertEqual(actual.hour(), 0);
+  assertEqual(actual.minutes(), 1);
+  assertEqual(actual.seconds(), 3);
+}
+
+test(should_calculate_new_fake_time) {
+  // given
+  FakeTime fakeTime = FakeTime(17, 00, 00);
+
+  // when
+  int plusSeconds = 12;
+  FakeTime actual = fakeTime.plusMillis(plusSeconds * 1000);
+
+  // then
+  assertEqual(actual.hour(), 17);
+  assertEqual(actual.minutes(), 0);
+  assertEqual(actual.seconds(), 12);
+}
+
+test(should_calculate_new_fake_time_overflow_minutes) {
+  // given
+  FakeTime fakeTime = FakeTime(17, 00, 00);
+
+  // when
+  int plusSeconds = 333;
+  FakeTime actual = fakeTime.plusMillis(plusSeconds * 1000);
+
+  // then
+  assertEqual(actual.minutes(), 5);
+  assertEqual(actual.seconds(), 33);
+}
+
+test(should_calculate_new_fake_time_overflow_hours) {
+  // given
+  FakeTime fakeTime = FakeTime(17, 00, 00);
+
+  // when
+  int plusSeconds = 3600;
+  FakeTime actual = fakeTime.plusMillis(plusSeconds * 1000);
+
+  // then
+  assertEqual(actual.hour(), 18);
+  assertEqual(actual.minutes(), 0);
+  assertEqual(actual.seconds(), 0);
 }
 
 //----------------------------------------------------------------------------

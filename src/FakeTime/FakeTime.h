@@ -14,6 +14,8 @@ public:
   short hour();
   short minutes();
   short seconds();
+
+  FakeTime plusMillis(long millis);
 };
 
 #endif

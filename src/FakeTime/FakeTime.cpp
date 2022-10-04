@@ -11,3 +11,8 @@ short FakeTime::hour() { return this->_hour; }
 short FakeTime::minutes() { return this->_minutes; }
 
 short FakeTime::seconds() { return this->_seconds; }
+
+FakeTime FakeTime::plusMillis(long millis) {
+  // TODO: implement this correctly
+  return FakeTime(-1, -2, -3);
+}
