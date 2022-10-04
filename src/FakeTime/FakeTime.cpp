@@ -19,14 +19,6 @@ int FakeTime::formatTime(char *targetBuffer) {
     return INCORRECT_SECOND;
   }
 
-  char hourStr[3];
-  char minuteStr[3];
-  char secondStr[3];
-
-  sprintf(hourStr, "%02d", this->_h);
-  sprintf(minuteStr, "%02d", this->_m);
-  sprintf(secondStr, "%02d", this->_s);
-
-  sprintf(targetBuffer, "%s:%s:%s", hourStr, minuteStr, secondStr);
+  sprintf(targetBuffer, "%02d:%02d:%02d", this->_h, this->_m, this->_s);
   return SUCCESS;
 }
