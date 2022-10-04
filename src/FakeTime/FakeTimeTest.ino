@@ -3,7 +3,7 @@
 
 #include "FakeTime.h"
 
-test(should_convert_valid_times) {
+test(should_format_valid_times) {
 
   char formattedTimeBuffer[20] = "<initial value>";
   int status = FakeTime(12, 34, 56).formatTime(formattedTimeBuffer);
