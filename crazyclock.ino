@@ -7,8 +7,8 @@
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
+#include "src/FakeTime/FakeTime.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
-#include "src/TimeFormatter/TimeFormatter.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -118,8 +118,10 @@ void resetToRealTime() {
   };
   tick = 1000;
   change = false;
-  formatTime(mH, mM, mS, formattedTimeBuffer);
+  FakeTime real = FakeTime(mH, mM, mS);
+  real.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
+  delete &real;
 }
 
 void checkRotaryEncoder() {
@@ -192,18 +194,21 @@ void ticTac() {
 }
 
 void updateDisplayedTime() {
-  formatTime(mH, mM, mS, formattedTimeBuffer);
   Serial.print("Local time:");
+  FakeTime local = FakeTime(mH, mM, mS);
+  local.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
+  delete &local;
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
 
   // just to compare real time and the fake one
-  DateTime fromRtc = RTClib::now();
-  formatTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second(),
-             formattedTimeBuffer);
   Serial.print("RTC Time:");
+  DateTime fromRtc = RTClib::now();
+  FakeTime rtc = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
+  rtc.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
+  delete &rtc;
 
   lcd.setCursor(0, 1);
   lcd.print(String("tick:") + String(tick) + String("ms "));
