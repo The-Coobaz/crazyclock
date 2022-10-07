@@ -7,15 +7,15 @@
 #define INCORRECT_SECOND 3
 
 class FakeTime {
-  private:
-    int _h;
-    int _m;
-    int _s;
+private:
+  int _h;
+  int _m;
+  int _s;
 
-  public:
-    FakeTime(int h, int m, int s);
+public:
+  FakeTime(int h, int m, int s);
 
-    int formatTime(char *targetBuffer);
+  int formatTime(char *targetBuffer);
 };
 
 #endif
