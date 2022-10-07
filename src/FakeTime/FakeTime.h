@@ -16,6 +16,12 @@ public:
   FakeTime(int h, int m, int s);
 
   int formatTime(char *targetBuffer);
+
+  /**
+   * Updates the Fake time so that it show the hour, minute and second
+   * in future (after given milliseconds value).
+   */
+  void plusMillis(long millis);
 };
 
 #endif

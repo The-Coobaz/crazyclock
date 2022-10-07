@@ -22,3 +22,7 @@ int FakeTime::formatTime(char *targetBuffer) {
   sprintf(targetBuffer, "%02d:%02d:%02d", this->_h, this->_m, this->_s);
   return SUCCESS;
 }
+
+void FakeTime::plusMillis(long millis) {
+  // TODO: implement how the time changes when milliseconds are added
+}
