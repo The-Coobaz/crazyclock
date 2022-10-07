@@ -95,7 +95,7 @@ void loop() {
 
 void resetToRealTime() {
   if (!timeClient.update()) {
-    Serial.print("NTP time update failed");
+    Serial.println("NTP time update failed");
     noWifi = true;
   } else {
     Serial.println("NTP time update successful");
@@ -121,7 +121,6 @@ void resetToRealTime() {
   FakeTime real = FakeTime(mH, mM, mS);
   real.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
-  delete &real;
 }
 
 void checkRotaryEncoder() {
@@ -198,7 +197,6 @@ void updateDisplayedTime() {
   FakeTime local = FakeTime(mH, mM, mS);
   local.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
-  delete &local;
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
 
@@ -208,7 +206,6 @@ void updateDisplayedTime() {
   FakeTime rtc = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
   rtc.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
-  delete &rtc;
 
   lcd.setCursor(0, 1);
   lcd.print(String("tick:") + String(tick) + String("ms "));
