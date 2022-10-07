@@ -118,8 +118,10 @@ void resetToRealTime() {
   };
   tick = 1000;
   change = false;
-  FakeTime(mH, mM, mS).formatTime(formattedTimeBuffer);
+  FakeTime realTime =
+      FakeTime(mH, mM, mS) realTime.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
+  delete &realTime;
 }
 
 void checkRotaryEncoder() {
@@ -193,17 +195,21 @@ void ticTac() {
 
 void updateDisplayedTime() {
   Serial.print("Local time:");
-  FakeTime(mH, mM, mS).formatTime(formattedTimeBuffer);
+  FakeTime localTime = FakeTime(mH, mM, mS);
+  localTime.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
+  delete &localTime;
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
 
   // just to compare real time and the fake one
   Serial.print("RTC Time:");
   DateTime fromRtc = RTClib::now();
-  FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second())
-      .formatTime(formattedTimeBuffer);
+  FakeTime rtcTime =
+      FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
+  rtcTime.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
+  delete &rtcTime;
 
   lcd.setCursor(0, 1);
   lcd.print(String("tick:") + String(tick) + String("ms "));
