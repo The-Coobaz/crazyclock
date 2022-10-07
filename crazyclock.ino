@@ -95,7 +95,7 @@ void loop() {
 
 void resetToRealTime() {
   if (!timeClient.update()) {
-    Serial.print("NTP time update failed");
+    Serial.println("NTP time update failed");
     noWifi = true;
   } else {
     Serial.println("NTP time update successful");
