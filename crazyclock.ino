@@ -18,10 +18,6 @@ int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
 bool isNtpAvailable;
-char zerro[] = {"0"};
-uint8_t RTChour;
-uint8_t RTCminute;
-uint8_t RTCsecond;
 
 char formattedTimeBuffer[20] = "<initial value>";
 
@@ -38,8 +34,8 @@ char formattedTimeBuffer[20] = "<initial value>";
 
 #define RESET_BUTTON_PIN 13
 
-unsigned long
-    myMillis; // maybe myMillis should be a function returning the result?
+// maybe myMillis should be a function returning the result?
+unsigned long myMillis;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -54,9 +50,7 @@ void setup() {
   while (!Serial) {
     // waits for serial port to be ready
   }
-  Serial.println("\n================");
-  Serial.println("crazyclock");
-  Serial.println("================");
+  Serial.println("\n================\ncrazyclock\n================");
   Serial.println("Starting I2C...");
   Wire.begin();
 
