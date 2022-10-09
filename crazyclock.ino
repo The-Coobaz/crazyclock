@@ -17,7 +17,7 @@ LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
 int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
-bool wifiConnected;
+bool isNtpAvailable;
 char zerro[] = {"0"};
 uint8_t RTChour;
 uint8_t RTCminute;
@@ -66,6 +66,7 @@ void setup() {
     // non zero status means it was unsuccesful
     Serial.println("LCD error status: ");
     Serial.print(status);
+    // begin() failed so blink error code using the onboard LED if possible
     hd44780::fatalError(status); // does not return
   }
 
@@ -79,12 +80,12 @@ void setup() {
     Serial.print(".");
     lcd.print(".");
     if (WiFi.status() == WL_CONNECTED) {
-      wifiConnected = true;
+      isNtpAvailable = true;
       // if wifi found, break loop
       break;
     } else {
       // continue without wifi
-      wifiConnected = false;
+      isNtpAvailable = false;
     };
   }
 
@@ -103,7 +104,7 @@ void loop() {
 void resetToRealTime() {
   if (!timeClient.update()) {
     Serial.println("NTP time update failed");
-    wifiConnected = false;
+    isNtpAvailable = false;
   } else {
     Serial.println("NTP time update successful");
   }
@@ -113,7 +114,7 @@ void resetToRealTime() {
   mM = localDateTime.getLocalTimeFragment(MINUTES);
   mS = localDateTime.getLocalTimeFragment(SECONDS);
 
-  if (wifiConnected) {
+  if (isNtpAvailable) {
     Serial.println("Updating RTC with tim efrom NTP...");
     rtc.setHour(mH);
     rtc.setMinute(mM);
