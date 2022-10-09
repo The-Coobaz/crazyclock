@@ -17,7 +17,7 @@ LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
 int mH, mM, mS;  // crazydata
 int tick = 1000; // initial value of tick =1s
 bool change;     // change of time
-bool noWifi;
+bool isNtpAvailable;
 char zerro[] = {"0"};
 uint8_t RTChour;
 uint8_t RTCminute;
@@ -48,36 +48,44 @@ const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 DS3231 rtc;
+
 void setup() {
-  pinMode(RESET_BUTTON_PIN, INPUT);
-  int status;
-  status = lcd.begin(LCD_COLS, LCD_ROWS);
-  if (status) // non zero status means it was unsuccesful
-  {
-    // begin() failed so blink error code using the onboard LED if possible
-    hd44780::fatalError(status); // does not return
-  }
-  lcd.print("Waiting for WiFi");
-  lcd.setCursor(0, 1);
   Serial.begin(115200);
   while (!Serial) {
     // waits for serial port to be ready
   }
+  Serial.println("\n================");
+  Serial.println("crazyclock");
+  Serial.println("================");
+  Serial.println("Starting I2C...");
+  Wire.begin();
 
+  pinMode(RESET_BUTTON_PIN, INPUT);
+  int status = lcd.begin(LCD_COLS, LCD_ROWS);
+  if (status) {
+    // non zero status means it was unsuccesful
+    Serial.println("LCD error status: ");
+    Serial.print(status);
+    // begin() failed so blink error code using the onboard LED if possible
+    hd44780::fatalError(status); // does not return
+  }
+
+  Serial.println("Waiting for WiFi");
+  lcd.print("Waiting for WiFi");
+  lcd.setCursor(0, 1);
   WiFi.begin(ssid, password);
-  Serial.println("Looking for the WiFi");
   // wait for 15 seconds to find wifi, then start without it
   for (int n = 0; n < 30; n++) {
     delay(500);
     Serial.print(".");
     lcd.print(".");
     if (WiFi.status() == WL_CONNECTED) {
-      noWifi = false;
+      isNtpAvailable = true;
       // if wifi found, break loop
       break;
     } else {
       // continue without wifi
-      noWifi = true;
+      isNtpAvailable = false;
     };
   }
 
@@ -96,7 +104,7 @@ void loop() {
 void resetToRealTime() {
   if (!timeClient.update()) {
     Serial.println("NTP time update failed");
-    noWifi = true;
+    isNtpAvailable = false;
   } else {
     Serial.println("NTP time update successful");
   }
@@ -106,11 +114,13 @@ void resetToRealTime() {
   mM = localDateTime.getLocalTimeFragment(MINUTES);
   mS = localDateTime.getLocalTimeFragment(SECONDS);
 
-  if (noWifi = false) {
+  if (isNtpAvailable) {
+    Serial.println("Updating RTC with tim efrom NTP...");
     rtc.setHour(mH);
     rtc.setMinute(mM);
     rtc.setSecond(mS);
   } else {
+    Serial.println("NTP is not available. Getting the time from RTC...");
     DateTime fromRtc = RTClib::now();
     mH = fromRtc.hour();
     mM = fromRtc.minute();
@@ -120,6 +130,7 @@ void resetToRealTime() {
   change = false;
   FakeTime real = FakeTime(mH, mM, mS);
   real.formatTime(formattedTimeBuffer);
+  Serial.print("Resetting to real time: ");
   Serial.println(formattedTimeBuffer);
 }
 
@@ -203,8 +214,8 @@ void updateDisplayedTime() {
   // just to compare real time and the fake one
   Serial.print("RTC Time:");
   DateTime fromRtc = RTClib::now();
-  FakeTime rtc = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
-  rtc.formatTime(formattedTimeBuffer);
+  FakeTime real = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
+  real.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
   lcd.setCursor(0, 1);
