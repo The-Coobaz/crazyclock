@@ -57,6 +57,8 @@ void setup() {
   Serial.println("\n================");
   Serial.println("crazyclock");
   Serial.println("================");
+  Serial.println("Starting I2C...");
+  Wire.begin();
 
   pinMode(RESET_BUTTON_PIN, INPUT);
   int status = lcd.begin(LCD_COLS, LCD_ROWS);
