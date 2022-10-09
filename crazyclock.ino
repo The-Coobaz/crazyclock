@@ -203,8 +203,8 @@ void updateDisplayedTime() {
   // just to compare real time and the fake one
   Serial.print("RTC Time:");
   DateTime fromRtc = RTClib::now();
-  FakeTime rtc = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
-  rtc.formatTime(formattedTimeBuffer);
+  FakeTime real = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
+  real.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
   lcd.setCursor(0, 1);
