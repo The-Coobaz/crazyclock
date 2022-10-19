@@ -55,7 +55,9 @@ void setup() {
   }
   Serial.println("\n================\ncrazyclock\n================");
 
+  Wire.begin();
   beginLCD(&lcd, LCD_COLS, LCD_ROWS);
+  beginRTC(&lcd, &rtc);
   bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
   if (wifiAvailable) {
 

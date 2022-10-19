@@ -7,6 +7,7 @@
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 
 void beginLCD(hd44780_I2Cexp *lcd, int cols, int rows) {
+  Serial.println("Starting LCD...");
   int status = lcd->begin(cols, rows);
   if (status) {
     // non zero status means it was unsuccesful
@@ -18,6 +19,13 @@ void beginLCD(hd44780_I2Cexp *lcd, int cols, int rows) {
   } else {
     Serial.println("LCD Started");
   }
+}
+
+void beginRTC(hd44780_I2Cexp *lcd, DS3231 *rtc) {
+  Serial.println("Starting RTC...");
+  bool mode12 = false;
+  rtc->setClockMode(mode12);
+  Serial.println("RTC set to 24-hour mode");
 }
 
 bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
