@@ -52,3 +52,24 @@ bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
     return false;
   }
 }
+
+void checkRTC(hd44780_I2Cexp *lcd, DS3231 *rtc) {
+
+  DateTime fromRtc = RTClib::now();
+  bool isSecondOk = fromRtc.second() < 60 && fromRtc.second() >= 0;
+  bool isMinuteOk = fromRtc.minute() < 60 && fromRtc.minute() >= 0;
+  bool isHourOk = fromRtc.hour() < 24 && fromRtc.hour() >= 0;
+  bool readOk = isSecondOk && isMinuteOk && isHourOk;
+
+  if (!readOk) {
+    Serial.print("RTC error. Hour: ");
+    Serial.print(fromRtc.hour());
+    Serial.print("minute: ");
+    Serial.print(fromRtc.minute());
+    Serial.print("second: ");
+    Serial.println(fromRtc.second());
+    hd44780::fatalError(RTC_ERROR_STATUS);
+  } else {
+    Serial.println("RTC started");
+  }
+}

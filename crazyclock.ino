@@ -74,6 +74,7 @@ void setup() {
       rtc.setSecond(mS);
     }
   }
+  checkRTC(&lcd, &rtc);
 
   lcd.clear();
   resetToRealTime();
