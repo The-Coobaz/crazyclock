@@ -36,6 +36,7 @@ char formattedTimeBuffer[20] = "<initial value>";
 
 // maybe myMillis should be a function returning the result?
 unsigned long myMillis;
+unsigned long epochSeconds;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -64,28 +65,19 @@ void setup() {
     hd44780::fatalError(status); // does not return
   }
 
-  Serial.println("Waiting for WiFi");
-  lcd.print("Waiting for WiFi");
-  lcd.setCursor(0, 1);
-  WiFi.begin(ssid, password);
-  // wait for 15 seconds to find wifi, then start without it
-  for (int n = 0; n < 30; n++) {
-    delay(500);
-    Serial.print(".");
-    lcd.print(".");
-    if (WiFi.status() == WL_CONNECTED) {
-      isNtpAvailable = true;
-      // if wifi found, break loop
-      break;
-    } else {
-      // continue without wifi
-      isNtpAvailable = false;
-    };
+  isNtpAvailable = retrieveEpochTimeFromNTP(ssid, password, lcd, &epochSeconds);
+  if (isNtpAvailable) {
+    Serial.println("Updating RTC with time from NTP...");
+    LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
+    mH = localDateTime.getLocalTimeFragment(HOURS);
+    mM = localDateTime.getLocalTimeFragment(MINUTES);
+    mS = localDateTime.getLocalTimeFragment(SECONDS);
+    rtc.setHour(mH);
+    rtc.setMinute(mM);
+    rtc.setSecond(mS);
   }
-
   lcd.clear();
 
-  timeClient.begin();
   resetToRealTime();
   myMillis = (millis() + tick);
 }
@@ -95,31 +87,41 @@ void loop() {
   ticTac();
 }
 
-void resetToRealTime() {
-  if (!timeClient.update()) {
-    Serial.println("NTP time update failed");
-    isNtpAvailable = false;
-  } else {
-    Serial.println("NTP time update successful");
+bool retrieveEpochTimeFromNTP(const char *ssid, const char *password,
+                              hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
+  bool isNtpTimeRetrieved = false;
+  Serial.println("Waiting for WiFi");
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Waiting for WiFi");
+  lcd.setCursor(0, 1);
+  WiFi.begin(ssid, password);
+  // wait for 15 seconds to find wifi, then start without it
+  for (int n = 0; (n < 30) && (WiFi.status() != WL_CONNECTED); n++) {
+    delay(500);
+    Serial.print(".");
+    lcd.print(".");
   }
-  unsigned long epochSeconds = timeClient.getEpochTime();
-  LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
-  mH = localDateTime.getLocalTimeFragment(HOURS);
-  mM = localDateTime.getLocalTimeFragment(MINUTES);
-  mS = localDateTime.getLocalTimeFragment(SECONDS);
-
-  if (isNtpAvailable) {
-    Serial.println("Updating RTC with tim efrom NTP...");
-    rtc.setHour(mH);
-    rtc.setMinute(mM);
-    rtc.setSecond(mS);
+  if (WiFi.status() == WL_CONNECTED) {
+    timeClient.begin();
+    if (timeClient.update()) {
+      Serial.println("NTP time update successful");
+      *epochSeconds = timeClient.getEpochTime();
+      isNtpTimeRetrieved = true;
+    } else {
+      Serial.println("NTP time update failed");
+    }
   } else {
-    Serial.println("NTP is not available. Getting the time from RTC...");
-    DateTime fromRtc = RTClib::now();
-    mH = fromRtc.hour();
-    mM = fromRtc.minute();
-    mS = fromRtc.second();
-  };
+    Serial.println("Can not connect to WiFi. Will use RTC time.");
+  }
+  return isNtpTimeRetrieved;
+}
+
+void resetToRealTime() {
+  DateTime fromRtc = RTClib::now();
+  mH = fromRtc.hour();
+  mM = fromRtc.minute();
+  mS = fromRtc.second();
   tick = 1000;
   change = false;
   FakeTime real = FakeTime(mH, mM, mS);
