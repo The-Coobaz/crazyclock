@@ -3,8 +3,6 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <Wire.h>
-#include <hd44780.h>
-#include <hd44780ioClass/hd44780_I2Cexp.h>
 
 void beginLCD(hd44780_I2Cexp *lcd, int cols, int rows) {
   Serial.println("Starting LCD...");
@@ -48,7 +46,8 @@ bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
     Serial.println(ssid);
     return true;
   } else {
-    Serial.println("Can NOT connect to WiFi");
+    Serial.print("Can NOT connect to WiFi network: ");
+    Serial.println(ssid);
     return false;
   }
 }
@@ -69,7 +68,5 @@ void checkRTC(hd44780_I2Cexp *lcd, DS3231 *rtc) {
     Serial.print("second: ");
     Serial.println(fromRtc.second());
     hd44780::fatalError(RTC_ERROR_STATUS);
-  } else {
-    Serial.println("RTC started");
   }
 }

@@ -3,9 +3,7 @@
 
 #define RTC_ERROR_STATUS 3
 
-#include <Arduino.h>
 #include <DS3231.h>
-#include <Wire.h>
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 
