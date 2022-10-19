@@ -11,8 +11,7 @@ void beginLCD(hd44780_I2Cexp *lcd, int cols, int rows) {
     // non zero status means it was unsuccesful
     Serial.print("LCD error status: ");
     Serial.println(status);
-    // blink error code using the onboard LED if possible (stops program
-    // execution)
+    // blink error code using the onboard LED if possible (stops program)
     hd44780::fatalError(status);
   } else {
     Serial.println("LCD Started");
@@ -68,5 +67,7 @@ void checkRTC(hd44780_I2Cexp *lcd, DS3231 *rtc) {
     Serial.print("second: ");
     Serial.println(fromRtc.second());
     hd44780::fatalError(RTC_ERROR_STATUS);
+  } else {
+    Serial.println("RTC started");
   }
 }
