@@ -8,6 +8,7 @@
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/FakeTime/FakeTime.h"
+#include "src/HardwareCheck/HardwareCheck.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 
 const char *ssid = "SSID";
@@ -47,35 +48,32 @@ RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 DS3231 rtc;
 
 void setup() {
+  pinMode(RESET_BUTTON_PIN, INPUT);
   Serial.begin(115200);
   while (!Serial) {
     // waits for serial port to be ready
   }
   Serial.println("\n================\ncrazyclock\n================");
 
-  pinMode(RESET_BUTTON_PIN, INPUT);
-  int status = lcd.begin(LCD_COLS, LCD_ROWS);
-  if (status) {
-    // non zero status means it was unsuccesful
-    Serial.println("LCD error status: ");
-    Serial.print(status);
-    // begin() failed so blink error code using the onboard LED if possible
-    hd44780::fatalError(status); // does not return
+  beginLCD(&lcd, LCD_COLS, LCD_ROWS);
+  bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
+  if (wifiAvailable) {
+
+    isNtpAvailable = retrieveEpochTimeFromNTP(lcd, &epochSeconds);
+    if (isNtpAvailable) {
+
+      Serial.println("Updating RTC with time from NTP...");
+      LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
+      mH = localDateTime.getLocalTimeFragment(HOURS);
+      mM = localDateTime.getLocalTimeFragment(MINUTES);
+      mS = localDateTime.getLocalTimeFragment(SECONDS);
+      rtc.setHour(mH);
+      rtc.setMinute(mM);
+      rtc.setSecond(mS);
+    }
   }
 
-  isNtpAvailable = retrieveEpochTimeFromNTP(ssid, password, lcd, &epochSeconds);
-  if (isNtpAvailable) {
-    Serial.println("Updating RTC with time from NTP...");
-    LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
-    mH = localDateTime.getLocalTimeFragment(HOURS);
-    mM = localDateTime.getLocalTimeFragment(MINUTES);
-    mS = localDateTime.getLocalTimeFragment(SECONDS);
-    rtc.setHour(mH);
-    rtc.setMinute(mM);
-    rtc.setSecond(mS);
-  }
   lcd.clear();
-
   resetToRealTime();
   myMillis = (millis() + tick);
 }
@@ -85,32 +83,16 @@ void loop() {
   ticTac();
 }
 
-bool retrieveEpochTimeFromNTP(const char *ssid, const char *password,
-                              hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
+bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
   bool isNtpTimeRetrieved = false;
-  Serial.println("Waiting for WiFi");
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Waiting for WiFi");
-  lcd.setCursor(0, 1);
-  WiFi.begin(ssid, password);
-  // wait for 15 seconds to find wifi, then start without it
-  for (int n = 0; (n < 30) && (WiFi.status() != WL_CONNECTED); n++) {
-    delay(500);
-    Serial.print(".");
-    lcd.print(".");
-  }
-  if (WiFi.status() == WL_CONNECTED) {
-    timeClient.begin();
-    if (timeClient.update()) {
-      Serial.println("NTP time update successful");
-      *epochSeconds = timeClient.getEpochTime();
-      isNtpTimeRetrieved = true;
-    } else {
-      Serial.println("NTP time update failed");
-    }
+  Serial.println("Checking NTP...");
+  timeClient.begin();
+  if (timeClient.update()) {
+    Serial.println("NTP time update successful");
+    *epochSeconds = timeClient.getEpochTime();
+    isNtpTimeRetrieved = true;
   } else {
-    Serial.println("Can not connect to WiFi. Will use RTC time.");
+    Serial.println("NTP time update failed");
   }
   return isNtpTimeRetrieved;
 }
