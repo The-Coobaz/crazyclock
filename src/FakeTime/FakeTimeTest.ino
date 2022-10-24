@@ -15,9 +15,9 @@ test(should_update_valid_times) {
   tested.formatTime(formattedTimeBuffer);
   assertEqual(formattedTimeBuffer, "00:00:00");
 
-  tested.setTime(0, 6, 30);
+  tested.setTime(6, 30, 0);
   tested.formatTime(formattedTimeBuffer);
-  assertEqual(formattedTimeBuffer, "00:06:30");
+  assertEqual(formattedTimeBuffer, "06:30:00");
 
   tested.setTime(0, 0, 1);
   tested.formatTime(formattedTimeBuffer);
