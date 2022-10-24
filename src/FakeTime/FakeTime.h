@@ -16,7 +16,7 @@ public:
   FakeTime();
 
   int setTime(int h, int m, int s);
-  int formatTime(char *targetBuffer);
+  void formatTime(char *targetBuffer);
 };
 
 #endif

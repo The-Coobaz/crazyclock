@@ -5,7 +5,7 @@
 
 test(should_update_valid_times) {
   char formattedTimeBuffer[20] = "<initial value>";
-  FakeTime tested = FakeTime(0, 0, 0);
+  FakeTime tested = FakeTime();
 
   tested.setTime(12, 34, 56);
   tested.formatTime(formattedTimeBuffer);
@@ -27,7 +27,7 @@ test(should_update_valid_times) {
 test(should_handle_hours_errors_correctly_for_updates) {
 
   int status = SUCCESS;
-  FakeTime tested = FakeTime(0, 0, 0);
+  FakeTime tested = FakeTime();
 
   status = tested.setTime(-1, 34, 56);
   assertEqual(status, INCORRECT_HOUR);
@@ -36,7 +36,7 @@ test(should_handle_hours_errors_correctly_for_updates) {
 test(should_handle_minutes_errors_correctly_for_updates) {
 
   int status = SUCCESS;
-  FakeTime tested = FakeTime(0, 0, 0);
+  FakeTime tested = FakeTime();
 
   status = tested.setTime(0, 60, 0);
   assertEqual(status, INCORRECT_MINUTE);
@@ -45,7 +45,7 @@ test(should_handle_minutes_errors_correctly_for_updates) {
 test(should_handle_seconds_errors_correctly_for_updates) {
 
   int status = SUCCESS;
-  FakeTime tested = FakeTime(0, 0, 0);
+  FakeTime tested = FakeTime();
 
   status = tested.setTime(6, 5, 65);
   assertEqual(status, INCORRECT_SECOND);
