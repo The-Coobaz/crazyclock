@@ -13,7 +13,7 @@ private:
   int _s;
 
 public:
-  FakeTime(int h, int m, int s);
+  FakeTime();
 
   int setTime(int h, int m, int s);
   int formatTime(char *targetBuffer);

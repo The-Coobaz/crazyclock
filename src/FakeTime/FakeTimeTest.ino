@@ -3,56 +3,6 @@
 
 #include "FakeTime.h"
 
-test(should_format_valid_times) {
-
-  char formattedTimeBuffer[20] = "<initial value>";
-  int status = FakeTime(12, 34, 56).formatTime(formattedTimeBuffer);
-  assertEqual(status, SUCCESS);
-  assertEqual(formattedTimeBuffer, "12:34:56");
-
-  status = FakeTime(0, 0, 0).formatTime(formattedTimeBuffer);
-  assertEqual(status, SUCCESS);
-  assertEqual(formattedTimeBuffer, "00:00:00");
-
-  status = FakeTime(6, 30, 0).formatTime(formattedTimeBuffer);
-  assertEqual(status, SUCCESS);
-  assertEqual(formattedTimeBuffer, "06:30:00");
-
-  status = FakeTime(0, 0, 1).formatTime(formattedTimeBuffer);
-  assertEqual(status, SUCCESS);
-  assertEqual(formattedTimeBuffer, "00:00:01");
-}
-
-test(should_handle_hours_errors_correctly) {
-
-  int status = SUCCESS;
-  char formattedTimeBuffer[20] = "<initial value>";
-
-  status = FakeTime(-1, 34, 56).formatTime(formattedTimeBuffer);
-  assertEqual(status, INCORRECT_HOUR);
-  assertEqual(formattedTimeBuffer, "<initial value>");
-}
-
-test(should_handle_minutes_errors_correctly) {
-
-  int status = SUCCESS;
-  char formattedTimeBuffer[20] = "<initial value>";
-
-  status = FakeTime(0, 60, 0).formatTime(formattedTimeBuffer);
-  assertEqual(status, INCORRECT_MINUTE);
-  assertEqual(formattedTimeBuffer, "<initial value>");
-}
-
-test(should_handle_seconds_errors_correctly) {
-
-  int status = SUCCESS;
-  char formattedTimeBuffer[20] = "<initial value>";
-
-  status = FakeTime(6, 5, 65).formatTime(formattedTimeBuffer);
-  assertEqual(status, INCORRECT_SECOND);
-  assertEqual(formattedTimeBuffer, "<initial value>");
-}
-
 test(should_update_valid_times) {
   char formattedTimeBuffer[20] = "<initial value>";
   FakeTime tested = FakeTime(0, 0, 0);

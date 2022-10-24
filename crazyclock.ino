@@ -21,6 +21,8 @@ bool change;     // change of time
 bool isNtpAvailable;
 
 char formattedTimeBuffer[20] = "<initial value>";
+FakeTime timeFromRTC;
+FakeTime fakeTime;
 
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
 // Example for Arduino UNO with input signals on pin 2 and 3
@@ -46,6 +48,7 @@ const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 DS3231 rtc;
+DateTime rtcNow;
 
 void setup() {
   pinMode(RESET_BUTTON_PIN, INPUT);
@@ -100,16 +103,14 @@ bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
 }
 
 void resetToRealTime() {
-  DateTime fromRtc = RTClib::now();
-  mH = fromRtc.hour();
-  mM = fromRtc.minute();
-  mS = fromRtc.second();
-  delete &fromRtc;
+  rtcNow = RTClib::now();
+  mH = rtcNow.hour();
+  mM = rtcNow.minute();
+  mS = rtcNow.second();
   tick = 1000;
   change = false;
-  FakeTime real = FakeTime(mH, mM, mS);
-  real.formatTime(formattedTimeBuffer);
-  delete &real;
+  timeFromRTC.setTime(mH, mM, mS);
+  timeFromRTC.formatTime(formattedTimeBuffer);
   Serial.print("Resetting to real time: ");
   Serial.println(formattedTimeBuffer);
 }
@@ -151,11 +152,10 @@ void ticTac() {
   }
   if (!change) {
     // if time is not changed, synchronize with RTC  every second
-    DateTime fromRtc = RTClib::now();
-    mH = fromRtc.hour();
-    mM = fromRtc.minute();
-    mS = fromRtc.second();
-    delete &fromRtc;
+    rtcNow = RTClib::now();
+    mH = rtcNow.hour();
+    mM = rtcNow.minute();
+    mS = rtcNow.second();
   };
   if (mS == 60 and tick > 0) {
     mS = 0;
@@ -186,20 +186,17 @@ void ticTac() {
 
 void updateDisplayedTime() {
   Serial.print("Local time:");
-  FakeTime local = FakeTime(mH, mM, mS);
-  local.formatTime(formattedTimeBuffer);
-  delete &local;
+  fakeTime.setTime(mH, mM, mS);
+  fakeTime.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
 
   // just to compare real time and the fake one
   Serial.print("RTC Time:");
-  DateTime fromRtc = RTClib::now();
-  FakeTime real = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
-  delete &fromRtc;
-  real.formatTime(formattedTimeBuffer);
-  delete &real;
+  rtcNow = RTClib::now();
+  timeFromRTC.setTime(rtcNow.hour(), rtcNow.minute(), rtcNow.second());
+  timeFromRTC.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
   lcd.setCursor(0, 1);

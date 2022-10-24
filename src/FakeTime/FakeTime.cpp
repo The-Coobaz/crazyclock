@@ -2,10 +2,10 @@
 #include "FakeTime.h"
 #include <stdio.h>
 
-FakeTime::FakeTime(int h, int m, int s) {
-  this->_h = h;
-  this->_m = m;
-  this->_s = s;
+FakeTime::FakeTime() {
+  this->_h = 0;
+  this->_m = 0;
+  this->_s = 0;
 }
 
 int FakeTime::setTime(int h, int m, int s) {
