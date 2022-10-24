@@ -21,7 +21,7 @@ bool change;     // change of time
 bool isNtpAvailable;
 
 char formattedTimeBuffer[20] = "<initial value>";
-FakeTime timeFromRTC;
+FakeTime fakeTimeFromRTC;
 FakeTime fakeTime;
 
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
@@ -48,7 +48,7 @@ const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 DS3231 rtc;
-DateTime rtcNow;
+DateTime fromRtc;
 
 void setup() {
   pinMode(RESET_BUTTON_PIN, INPUT);
@@ -103,14 +103,14 @@ bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
 }
 
 void resetToRealTime() {
-  rtcNow = RTClib::now();
-  mH = rtcNow.hour();
-  mM = rtcNow.minute();
-  mS = rtcNow.second();
+  fromRtc = RTClib::now();
+  mH = fromRtc.hour();
+  mM = fromRtc.minute();
+  mS = fromRtc.second();
   tick = 1000;
   change = false;
-  timeFromRTC.setTime(mH, mM, mS);
-  timeFromRTC.formatTime(formattedTimeBuffer);
+  fakeTimeFromRTC.setTime(mH, mM, mS);
+  fakeTimeFromRTC.formatTime(formattedTimeBuffer);
   Serial.print("Resetting to real time: ");
   Serial.println(formattedTimeBuffer);
 }
@@ -152,10 +152,10 @@ void ticTac() {
   }
   if (!change) {
     // if time is not changed, synchronize with RTC  every second
-    rtcNow = RTClib::now();
-    mH = rtcNow.hour();
-    mM = rtcNow.minute();
-    mS = rtcNow.second();
+    fromRtc = RTClib::now();
+    mH = fromRtc.hour();
+    mM = fromRtc.minute();
+    mS = fromRtc.second();
   };
   if (mS == 60 and tick > 0) {
     mS = 0;
@@ -194,9 +194,9 @@ void updateDisplayedTime() {
 
   // just to compare real time and the fake one
   Serial.print("RTC Time:");
-  rtcNow = RTClib::now();
-  timeFromRTC.setTime(rtcNow.hour(), rtcNow.minute(), rtcNow.second());
-  timeFromRTC.formatTime(formattedTimeBuffer);
+  fromRtc = RTClib::now();
+  fakeTimeFromRTC.setTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
+  fakeTimeFromRTC.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
   lcd.setCursor(0, 1);
