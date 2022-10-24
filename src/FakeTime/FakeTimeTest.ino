@@ -53,6 +53,54 @@ test(should_handle_seconds_errors_correctly) {
   assertEqual(formattedTimeBuffer, "<initial value>");
 }
 
+test(should_update_valid_times) {
+  char formattedTimeBuffer[20] = "<initial value>";
+  FakeTime tested = FakeTime(0, 0, 0);
+
+  tested.setTime(12, 34, 56);
+  tested.formatTime(formattedTimeBuffer);
+  assertEqual(formattedTimeBuffer, "12:34:56");
+
+  tested.setTime(0, 0, 0);
+  tested.formatTime(formattedTimeBuffer);
+  assertEqual(formattedTimeBuffer, "00:00:00");
+
+  tested.setTime(0, 6, 30);
+  tested.formatTime(formattedTimeBuffer);
+  assertEqual(formattedTimeBuffer, "00:06:30");
+
+  tested.setTime(0, 0, 1);
+  tested.formatTime(formattedTimeBuffer);
+  assertEqual(formattedTimeBuffer, "00:00:01");
+}
+
+test(should_handle_hours_errors_correctly_for_updates) {
+
+  int status = SUCCESS;
+  FakeTime tested = FakeTime(0, 0, 0);
+
+  status = tested.setTime(-1, 34, 56);
+  assertEqual(status, INCORRECT_HOUR);
+}
+
+test(should_handle_minutes_errors_correctly_for_updates) {
+
+  int status = SUCCESS;
+  FakeTime tested = FakeTime(0, 0, 0);
+
+  status = tested.setTime(0, 60, 0);
+  assertEqual(status, INCORRECT_MINUTE);
+}
+
+test(should_handle_seconds_errors_correctly_for_updates) {
+
+  int status = SUCCESS;
+  FakeTime tested = FakeTime(0, 0, 0);
+
+  status = tested.setTime(6, 5, 65);
+  assertEqual(status, INCORRECT_SECOND);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------

@@ -104,10 +104,12 @@ void resetToRealTime() {
   mH = fromRtc.hour();
   mM = fromRtc.minute();
   mS = fromRtc.second();
+  delete &fromRtc;
   tick = 1000;
   change = false;
   FakeTime real = FakeTime(mH, mM, mS);
   real.formatTime(formattedTimeBuffer);
+  delete &real;
   Serial.print("Resetting to real time: ");
   Serial.println(formattedTimeBuffer);
 }
@@ -153,6 +155,7 @@ void ticTac() {
     mH = fromRtc.hour();
     mM = fromRtc.minute();
     mS = fromRtc.second();
+    delete &fromRtc;
   };
   if (mS == 60 and tick > 0) {
     mS = 0;
@@ -185,6 +188,7 @@ void updateDisplayedTime() {
   Serial.print("Local time:");
   FakeTime local = FakeTime(mH, mM, mS);
   local.formatTime(formattedTimeBuffer);
+  delete &local;
   Serial.println(formattedTimeBuffer);
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
@@ -193,7 +197,9 @@ void updateDisplayedTime() {
   Serial.print("RTC Time:");
   DateTime fromRtc = RTClib::now();
   FakeTime real = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
+  delete &fromRtc;
   real.formatTime(formattedTimeBuffer);
+  delete &real;
   Serial.println(formattedTimeBuffer);
 
   lcd.setCursor(0, 1);

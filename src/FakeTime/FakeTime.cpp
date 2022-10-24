@@ -8,6 +8,22 @@ FakeTime::FakeTime(int h, int m, int s) {
   this->_s = s;
 }
 
+int FakeTime::setTime(int h, int m, int s) {
+  if (h < 0 || h > 23) {
+    return INCORRECT_HOUR;
+  }
+  if (m < 0 || m > 59) {
+    return INCORRECT_MINUTE;
+  }
+  if (s < 0 || s > 59) {
+    return INCORRECT_SECOND;
+  }
+  this->_h = h;
+  this->_m = m;
+  this->_s = s;
+  return SUCCESS;
+}
+
 int FakeTime::formatTime(char *targetBuffer) {
   if (this->_h < 0 || this->_h > 23) {
     return INCORRECT_HOUR;
