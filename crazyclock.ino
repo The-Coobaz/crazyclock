@@ -48,7 +48,8 @@ const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 DS3231 rtc;
-DateTime fromRtc;
+bool is12HFormat;
+bool isPMTime;
 
 void setup() {
   pinMode(RESET_BUTTON_PIN, INPUT);
@@ -103,10 +104,9 @@ bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
 }
 
 void resetToRealTime() {
-  fromRtc = RTClib::now();
-  mH = fromRtc.hour();
-  mM = fromRtc.minute();
-  mS = fromRtc.second();
+  mH = rtc.getHour(is12HFormat, isPMTime);
+  mM = rtc.getMinute();
+  mS = rtc.getSecond();
   tick = 1000;
   change = false;
   fakeTimeFromRTC.setTime(mH, mM, mS);
@@ -152,10 +152,9 @@ void ticTac() {
   }
   if (!change) {
     // if time is not changed, synchronize with RTC  every second
-    fromRtc = RTClib::now();
-    mH = fromRtc.hour();
-    mM = fromRtc.minute();
-    mS = fromRtc.second();
+    mH = rtc.getHour(is12HFormat, isPMTime);
+    mM = rtc.getMinute();
+    mS = rtc.getSecond();
   };
   if (mS == 60 and tick > 0) {
     mS = 0;
@@ -194,8 +193,7 @@ void updateDisplayedTime() {
 
   // just to compare real time and the fake one
   Serial.print("RTC Time:");
-  fromRtc = RTClib::now();
-  fakeTimeFromRTC.setTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
+  fakeTimeFromRTC.setTime(rtc.getHour(is12HFormat, isPMTime), rtc.getMinute(), rtc.getSecond());
   fakeTimeFromRTC.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
