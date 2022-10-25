@@ -13,9 +13,10 @@ private:
   int _s;
 
 public:
-  FakeTime(int h, int m, int s);
+  FakeTime();
 
-  int formatTime(char *targetBuffer);
+  int setTime(int h, int m, int s);
+  void formatTime(char *targetBuffer);
 };
 
 #endif

@@ -21,6 +21,8 @@ bool change;     // change of time
 bool isNtpAvailable;
 
 char formattedTimeBuffer[20] = "<initial value>";
+FakeTime fakeTimeFromRTC;
+FakeTime fakeTime;
 
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
 // Example for Arduino UNO with input signals on pin 2 and 3
@@ -46,6 +48,8 @@ const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
 DS3231 rtc;
+bool is12h;
+bool isPM;
 
 void setup() {
   pinMode(RESET_BUTTON_PIN, INPUT);
@@ -100,14 +104,13 @@ bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
 }
 
 void resetToRealTime() {
-  DateTime fromRtc = RTClib::now();
-  mH = fromRtc.hour();
-  mM = fromRtc.minute();
-  mS = fromRtc.second();
+  mH = rtc.getHour(is12h, isPM);
+  mM = rtc.getMinute();
+  mS = rtc.getSecond();
   tick = 1000;
   change = false;
-  FakeTime real = FakeTime(mH, mM, mS);
-  real.formatTime(formattedTimeBuffer);
+  fakeTimeFromRTC.setTime(mH, mM, mS);
+  fakeTimeFromRTC.formatTime(formattedTimeBuffer);
   Serial.print("Resetting to real time: ");
   Serial.println(formattedTimeBuffer);
 }
@@ -149,10 +152,9 @@ void ticTac() {
   }
   if (!change) {
     // if time is not changed, synchronize with RTC  every second
-    DateTime fromRtc = RTClib::now();
-    mH = fromRtc.hour();
-    mM = fromRtc.minute();
-    mS = fromRtc.second();
+    mH = rtc.getHour(is12h, isPM);
+    mM = rtc.getMinute();
+    mS = rtc.getSecond();
   };
   if (mS == 60 and tick > 0) {
     mS = 0;
@@ -183,17 +185,17 @@ void ticTac() {
 
 void updateDisplayedTime() {
   Serial.print("Local time:");
-  FakeTime local = FakeTime(mH, mM, mS);
-  local.formatTime(formattedTimeBuffer);
+  fakeTime.setTime(mH, mM, mS);
+  fakeTime.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
 
   // just to compare real time and the fake one
   Serial.print("RTC Time:");
-  DateTime fromRtc = RTClib::now();
-  FakeTime real = FakeTime(fromRtc.hour(), fromRtc.minute(), fromRtc.second());
-  real.formatTime(formattedTimeBuffer);
+  fakeTimeFromRTC.setTime(rtc.getHour(is12h, isPM), rtc.getMinute(),
+                          rtc.getSecond());
+  fakeTimeFromRTC.formatTime(formattedTimeBuffer);
   Serial.println(formattedTimeBuffer);
 
   lcd.setCursor(0, 1);
