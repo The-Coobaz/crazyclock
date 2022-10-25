@@ -1,4 +1,5 @@
 #include <DS3231.h>
+#include <Debouncer.h>
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <RotaryEncoder.h>
@@ -15,44 +16,57 @@ const char *ssid = "SSID";
 const char *password = "PASS";
 
 LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
-int mH, mM, mS;  // crazydata
-int tick = 1000; // initial value of tick =1s
-bool change;     // change of time
-bool isNtpAvailable;
 
-char formattedTimeBuffer[20] = "<initial value>";
-FakeTime fakeTimeFromRTC;
-FakeTime fakeTime;
+char formattedTimeBuffer[19] = "<initial value>";
 
-#if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_NANO_EVERY)
-// Example for Arduino UNO with input signals on pin 2 and 3
-#define PIN_IN1 2
-#define PIN_IN2 3
-
-#elif defined(ESP8266)
 // Example for ESP8266 NodeMCU with input signals on pin D5 and D6
-#define PIN_IN1 12
-#define PIN_IN2 14
-#endif
+#define ROTARY_ENCODER_CLK D5
+#define ROTARY_ENCODER_DT D6
+#define ROTARY_ENCODER_BUTTON_PIN D7
 
-#define RESET_BUTTON_PIN 13
+// for rotary encoder switch active is low state
+Debouncer debouncer(ROTARY_ENCODER_BUTTON_PIN, 50, Debouncer::Active::L,
+                    Debouncer::DurationFrom::TRIGGER);
 
-// maybe myMillis should be a function returning the result?
 unsigned long myMillis;
 unsigned long epochSeconds;
+unsigned long localEpochSeconds;
+
+byte secondFromRtc;
+byte currentSecond;
+unsigned long newSecondStartedAtMillis;
+unsigned long currentMillis;
+
+unsigned long programStartedSeconds;
+unsigned long programStartedMillis;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
 hd44780_I2Cexp lcd;
 const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
-RotaryEncoder encoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
+RotaryEncoder encoder(ROTARY_ENCODER_DT, ROTARY_ENCODER_CLK,
+                      RotaryEncoder::LatchMode::TWO03);
+int pos = 0;
+int buttonState = 0;
 DS3231 rtc;
-bool is12h;
-bool isPM;
 
 void setup() {
-  pinMode(RESET_BUTTON_PIN, INPUT);
+  pinMode(ROTARY_ENCODER_BUTTON_PIN, INPUT_PULLUP);
+  delay(2000);
+  pinMode(LED_BUILTIN, OUTPUT);
+  debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    Serial.println("Resetting");
+    // TODO: reset = current pos should now be considered as "zero"
+    DateTime now = RTClib::now();
+    programStartedSeconds = now.unixtime();
+  });
+  debouncer.subscribe(Debouncer::Edge::FALL, [](const int state) {
+    // turns off built-in led
+    digitalWrite(LED_BUILTIN, LOW);
+  });
+
   Serial.begin(115200);
   while (!Serial) {
     // waits for serial port to be ready
@@ -61,17 +75,18 @@ void setup() {
 
   beginLCD(&lcd, LCD_COLS, LCD_ROWS);
   beginRTC(&lcd, &rtc);
-  bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
+  // bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
+  bool wifiAvailable = false;
   if (wifiAvailable) {
 
-    isNtpAvailable = retrieveEpochTimeFromNTP(lcd, &epochSeconds);
+    bool isNtpAvailable = retrieveEpochTimeFromNTP(lcd, &epochSeconds);
     if (isNtpAvailable) {
 
       Serial.println("Updating RTC with time from NTP...");
       LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
-      mH = localDateTime.getLocalTimeFragment(HOURS);
-      mM = localDateTime.getLocalTimeFragment(MINUTES);
-      mS = localDateTime.getLocalTimeFragment(SECONDS);
+      int mH = localDateTime.getLocalTimeFragment(HOURS);
+      int mM = localDateTime.getLocalTimeFragment(MINUTES);
+      int mS = localDateTime.getLocalTimeFragment(SECONDS);
       rtc.setHour(mH);
       rtc.setMinute(mM);
       rtc.setSecond(mS);
@@ -80,13 +95,52 @@ void setup() {
   checkRTC(&lcd, &rtc);
 
   lcd.clear();
-  resetToRealTime();
-  myMillis = (millis() + tick);
+
+  currentSecond = rtc.getSecond();
+  Serial.print("Current second value: ");
+  Serial.println(currentSecond);
+  while (currentSecond == rtc.getSecond()) {
+    // waits until new second starts
+  }
+  newSecondStartedAtMillis = millis();
+  // increases value of current second
+  currentSecond++;
+  Serial.print("New second started at millis: ");
+  Serial.println(newSecondStartedAtMillis);
+
+  DateTime now = RTClib::now();
+  programStartedSeconds = now.unixtime();
+  programStartedMillis = millis() - newSecondStartedAtMillis;
+  prettyPrint(formattedTimeBuffer, programStartedSeconds, programStartedMillis);
+  Serial.print("Program Started at: ");
+  Serial.println(formattedTimeBuffer);
 }
 
 void loop() {
+  debouncer.update();
+  secondFromRtc = rtc.getSecond();
+  if (currentSecond < secondFromRtc) {
+    newSecondStartedAtMillis = millis();
+    currentSecond = secondFromRtc;
+  }
+
+  DateTime now = RTClib::now();
+  localEpochSeconds = now.unixtime();
+  currentMillis = millis() - newSecondStartedAtMillis;
+  if (currentMillis > 1000) {
+    // re-adjusting values
+    localEpochSeconds = localEpochSeconds + (currentMillis / 1000);
+    currentMillis = currentMillis % 1000;
+  }
+
+  prettyPrint(formattedTimeBuffer, localEpochSeconds, currentMillis);
+  lcd.setCursor(0, 1);
+  lcd.print(formattedTimeBuffer);
   checkRotaryEncoder();
-  ticTac();
+}
+
+void prettyPrint(char *buffer, unsigned long epochSeconds, int millis) {
+  sprintf(buffer, "%9d.%03d", epochSeconds, millis);
 }
 
 bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
@@ -103,108 +157,14 @@ bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
   return isNtpTimeRetrieved;
 }
 
-void resetToRealTime() {
-  mH = rtc.getHour(is12h, isPM);
-  mM = rtc.getMinute();
-  mS = rtc.getSecond();
-  tick = 1000;
-  change = false;
-  fakeTimeFromRTC.setTime(mH, mM, mS);
-  fakeTimeFromRTC.formatTime(formattedTimeBuffer);
-  Serial.print("Resetting to real time: ");
-  Serial.println(formattedTimeBuffer);
-}
-
 void checkRotaryEncoder() {
-  static int pos = 0;
   encoder.tick();
   int newPos = encoder.getPosition();
 
   if (pos != newPos) {
-    change = true;
-    if (newPos > pos) {
-      tick = tick + 10;
-    } else {
-      tick = tick - 10;
-    }
-
+    Serial.print("New rotary position: ");
+    Serial.println(newPos);
     pos = newPos;
-    myMillis = (millis() + tick); // reset counting after tick change
-    updateDisplayedTime();        // show the result immediately
+    // TODO: calculate scaling factor based on rotary encoder position
   }
-  if (digitalRead(RESET_BUTTON_PIN) == 0) {
-    resetToRealTime();
-  }
-}
-
-void ticTac() {
-
-  if ((millis() >= myMillis) and tick > 0) {
-    updateDisplayedTime(); // first show, then add second
-    mS++;
-    myMillis = (millis() + tick);
-
-  } else if ((millis() >= myMillis) and tick < 0) {
-    updateDisplayedTime();
-    // if our second has passed and tick is minus, decrement;
-    mS--;
-    myMillis = (millis() + abs(tick));
-  }
-  if (!change) {
-    // if time is not changed, synchronize with RTC  every second
-    mH = rtc.getHour(is12h, isPM);
-    mM = rtc.getMinute();
-    mS = rtc.getSecond();
-  };
-  if (mS == 60 and tick > 0) {
-    mS = 0;
-    mM++; // if second has passed and tick is plus, increment minute
-  }
-
-  if (mM == 60 and tick > 0) {
-    mM = 0; // if minute has passed and tick is plus, increment hour
-    mH++;
-  }
-
-  if (mS < 0 and tick < 0) {
-    mS = 59;
-    mM--; // if second has passed and tick is minus, decrement minute
-  }
-
-  if (mM < 0 and tick < 0) {
-    mM = 59;
-    mH--; // if minute has passed and tick is minus, decrement hour
-  }
-  if (mH == 24) {
-    mH - 24;
-  }
-  if (mH == -1) {
-    mH = mH + 24;
-  };
-}
-
-void updateDisplayedTime() {
-  Serial.print("Local time:");
-  fakeTime.setTime(mH, mM, mS);
-  fakeTime.formatTime(formattedTimeBuffer);
-  Serial.println(formattedTimeBuffer);
-  lcd.setCursor(0, 0);
-  lcd.print(formattedTimeBuffer);
-
-  // just to compare real time and the fake one
-  Serial.print("RTC Time:");
-  fakeTimeFromRTC.setTime(rtc.getHour(is12h, isPM), rtc.getMinute(),
-                          rtc.getSecond());
-  fakeTimeFromRTC.formatTime(formattedTimeBuffer);
-  Serial.println(formattedTimeBuffer);
-
-  lcd.setCursor(0, 1);
-  lcd.print(String("tick:") + String(tick) + String("ms "));
-  if (change) {
-    lcd.setCursor(15, 0);
-    lcd.print("?");
-  } else {
-    lcd.setCursor(15, 0);
-    lcd.print(" ");
-  };
 }
