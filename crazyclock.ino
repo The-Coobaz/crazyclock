@@ -120,9 +120,9 @@ void checkRotaryEncoder() {
   if (pos != newPos) {
     change = true;
     if (newPos > pos) {
-      tick = tick + 50;
+      tick = tick + 10;
     } else {
-      tick = tick - 50;
+      tick = tick - 10;
     }
 
     pos = newPos;
