@@ -24,15 +24,12 @@ char formattedTimeBuffer[19] = "<initial value>";
 #define ROTARY_ENCODER_DT D6
 #define ROTARY_ENCODER_BUTTON_PIN D7
 
-// for rotary encoder switch active is low state
-Debouncer debouncer(ROTARY_ENCODER_BUTTON_PIN, 50, Debouncer::Active::L,
+Debouncer debouncer(ROTARY_ENCODER_BUTTON_PIN, 30, Debouncer::Active::L,
                     Debouncer::DurationFrom::TRIGGER);
 
-unsigned long myMillis;
 unsigned long epochSeconds;
 unsigned long localEpochSeconds;
 
-byte secondFromRtc;
 byte currentSecond;
 unsigned long newSecondStartedAtMillis;
 unsigned long currentMillis;
@@ -53,8 +50,16 @@ DS3231 rtc;
 
 void setup() {
   pinMode(ROTARY_ENCODER_BUTTON_PIN, INPUT_PULLUP);
-  delay(2000);
   pinMode(LED_BUILTIN, OUTPUT);
+  // gives some time for the hardware to start
+  delay(800);
+  Serial.begin(115200);
+  while (!Serial) {
+    // waits for serial port to be ready
+  }
+  // gives some time to connect Serial monitor
+  delay(2000);
+
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
     Serial.println("Resetting");
@@ -67,16 +72,11 @@ void setup() {
     digitalWrite(LED_BUILTIN, LOW);
   });
 
-  Serial.begin(115200);
-  while (!Serial) {
-    // waits for serial port to be ready
-  }
   Serial.println("\n================\ncrazyclock\n================");
 
   beginLCD(&lcd, LCD_COLS, LCD_ROWS);
   beginRTC(&lcd, &rtc);
-  // bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
-  bool wifiAvailable = false;
+  bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
   if (wifiAvailable) {
 
     bool isNtpAvailable = retrieveEpochTimeFromNTP(lcd, &epochSeconds);
@@ -118,10 +118,10 @@ void setup() {
 
 void loop() {
   debouncer.update();
-  secondFromRtc = rtc.getSecond();
-  if (currentSecond < secondFromRtc) {
+  byte rtcSec = rtc.getSecond();
+  if (currentSecond < rtcSec) {
     newSecondStartedAtMillis = millis();
-    currentSecond = secondFromRtc;
+    currentSecond = rtcSec;
   }
 
   DateTime now = RTClib::now();
@@ -132,7 +132,10 @@ void loop() {
     localEpochSeconds = localEpochSeconds + (currentMillis / 1000);
     currentMillis = currentMillis % 1000;
   }
+  // TODO: calculate fake time
+  // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
+  // shows real time local seconds and current millis on LCD
   prettyPrint(formattedTimeBuffer, localEpochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
