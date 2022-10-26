@@ -57,8 +57,6 @@ void setup() {
   while (!Serial) {
     // waits for serial port to be ready
   }
-  // gives some time to connect Serial monitor
-  delay(2000);
 
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
