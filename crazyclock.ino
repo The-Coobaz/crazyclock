@@ -17,7 +17,7 @@ const char *password = "PASS";
 
 LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
 
-char formattedTimeBuffer[19] = "<initial value>";
+char formattedTimeBuffer[20] = "<initial value>";
 
 // Example for ESP8266 NodeMCU with input signals on pin D5 and D6
 #define ROTARY_ENCODER_CLK D5
@@ -28,7 +28,6 @@ Debouncer debouncer(ROTARY_ENCODER_BUTTON_PIN, 30, Debouncer::Active::L,
                     Debouncer::DurationFrom::TRIGGER);
 
 unsigned long epochSeconds;
-unsigned long localEpochSeconds;
 
 byte currentSecond;
 unsigned long newSecondStartedAtMillis;
@@ -86,8 +85,12 @@ void setup() {
         epochSeconds = timeClient.getEpochTime();
         checkEpochSeconds(epochSeconds);
         rtc.setEpoch(epochSeconds);
+        sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
         Serial.print("RTC was set to UTC time epoch seconds: ");
         Serial.println(epochSeconds);
+        Serial.print("That is: ");
+        Serial.print(formattedTimeBuffer);
+        Serial.println(" in local time");
       } else {
         Serial.println("Unexpected errors in NTP client");
       }
@@ -115,8 +118,8 @@ void setup() {
   DateTime now = RTClib::now();
   programStartedSeconds = now.unixtime();
   programStartedMillis = millis() - newSecondStartedAtMillis;
-  prettyPrint(formattedTimeBuffer, programStartedSeconds, programStartedMillis);
-  Serial.print("Program Started at: ");
+  sprintfRaw(formattedTimeBuffer, programStartedSeconds, programStartedMillis);
+  Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
 
@@ -129,24 +132,35 @@ void loop() {
   }
 
   DateTime now = RTClib::now();
-  localEpochSeconds = now.unixtime();
+  epochSeconds = now.unixtime();
   currentMillis = millis() - newSecondStartedAtMillis;
   if (currentMillis > 1000) {
     // re-adjusting values
-    localEpochSeconds = localEpochSeconds + (currentMillis / 1000);
+    epochSeconds = epochSeconds + (currentMillis / 1000);
     currentMillis = currentMillis % 1000;
   }
   // TODO: calculate fake time
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
   // shows real time local seconds and current millis on LCD
-  prettyPrint(formattedTimeBuffer, localEpochSeconds, currentMillis);
+  sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
+  lcd.setCursor(0, 0);
+  lcd.print(formattedTimeBuffer);
+  sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
   checkRotaryEncoder();
 }
 
-void prettyPrint(char *buffer, unsigned long epochSeconds, int millis) {
+void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
+  unsigned long localSeconds = plDateTimeConverter.toLocalSeconds(epochSeconds);
+  int hour = (localSeconds / 3600) % 24;
+  int minutes = (localSeconds / 60) % 60;
+  int seconds = localSeconds % 60;
+  sprintf(buffer, "%6d:%02d:%02d.%03d", hour, minutes, seconds, millis);
+}
+
+void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
   sprintf(buffer, "%12d.%03d", epochSeconds, millis);
 }
 
