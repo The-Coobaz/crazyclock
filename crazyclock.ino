@@ -28,8 +28,8 @@ Debouncer debouncer(ROTARY_ENCODER_BUTTON_PIN, 30, Debouncer::Active::L,
                     Debouncer::DurationFrom::TRIGGER);
 
 unsigned long epochSeconds;
+unsigned long currentSecond;
 
-byte currentSecond;
 unsigned long newSecondStartedAtMillis;
 unsigned long currentMillis;
 
@@ -103,36 +103,34 @@ void setup() {
 
   lcd.clear();
 
-  currentSecond = rtc.getSecond();
+  int sec = rtc.getSecond();
   Serial.print("Current second value: ");
-  Serial.println(currentSecond);
-  while (currentSecond == rtc.getSecond()) {
+  Serial.println(sec);
+  while (sec == rtc.getSecond()) {
     // waits until new second starts
   }
   newSecondStartedAtMillis = millis();
-  // increases value of current second
-  currentSecond++;
   Serial.print("New second started at millis: ");
   Serial.println(newSecondStartedAtMillis);
 
   DateTime now = RTClib::now();
-  epochSecondsForStartPoint = now.unixtime();
+  epochSecondsForStartPoint = currentSecond = now.unixtime();
   millisForStartPoint = millis() - newSecondStartedAtMillis;
-  sprintfRaw(formattedTimeBuffer, epochSecondsForStartPoint, millisForStartPoint);
+  sprintfRaw(formattedTimeBuffer, epochSecondsForStartPoint,
+             millisForStartPoint);
   Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
 
 void loop() {
   debouncer.update();
-  byte rtcSec = rtc.getSecond();
-  if (currentSecond < rtcSec) {
-    newSecondStartedAtMillis = millis();
-    currentSecond = rtcSec;
-  }
-
   DateTime now = RTClib::now();
   epochSeconds = now.unixtime();
+  if (epochSeconds > currentSecond) {
+    newSecondStartedAtMillis = millis();
+    currentSecond = epochSeconds;
+  }
+
   currentMillis = millis() - newSecondStartedAtMillis;
   if (currentMillis > 1000) {
     // re-adjusting values
