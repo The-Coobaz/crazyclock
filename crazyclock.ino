@@ -17,7 +17,7 @@ const char *password = "PASS";
 
 LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
 
-char formattedTimeBuffer[19] = "<initial value>";
+char formattedTimeBuffer[20] = "<initial value>";
 
 // Example for ESP8266 NodeMCU with input signals on pin D5 and D6
 #define ROTARY_ENCODER_CLK D5
@@ -115,8 +115,8 @@ void setup() {
   DateTime now = RTClib::now();
   programStartedSeconds = now.unixtime();
   programStartedMillis = millis() - newSecondStartedAtMillis;
-  prettyPrint(formattedTimeBuffer, programStartedSeconds, programStartedMillis);
-  Serial.print("Program Started at: ");
+  sprintfRaw(formattedTimeBuffer, programStartedSeconds, programStartedMillis);
+  Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
 
@@ -140,13 +140,24 @@ void loop() {
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
   // shows real time local seconds and current millis on LCD
-  prettyPrint(formattedTimeBuffer, localEpochSeconds, currentMillis);
+  sprinfLocalTime(formattedTimeBuffer, localEpochSeconds, currentMillis);
+  lcd.setCursor(0, 0);
+  lcd.print(formattedTimeBuffer);
+  sprintfRaw(formattedTimeBuffer, localEpochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
   checkRotaryEncoder();
 }
 
-void prettyPrint(char *buffer, unsigned long epochSeconds, int millis) {
+void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
+  unsigned long localSeconds = plDateTimeConverter.toLocalSeconds(epochSeconds);
+  int hour = (localSeconds / 3600) % 24;
+  int minutes = (localSeconds / 60) % 60;
+  int seconds = localSeconds % 60;
+  sprintf(buffer, "%6d:%02d:%02d.%03d", hour, minutes, seconds, millis);
+}
+
+void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
   sprintf(buffer, "%12d.%03d", epochSeconds, millis);
 }
 
