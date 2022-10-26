@@ -33,8 +33,8 @@ byte currentSecond;
 unsigned long newSecondStartedAtMillis;
 unsigned long currentMillis;
 
-unsigned long programStartedSeconds;
-unsigned long programStartedMillis;
+unsigned long epochSecondsForStartPoint;
+unsigned long millisForStartPoint;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -62,7 +62,7 @@ void setup() {
     Serial.println("Resetting");
     // TODO: reset = current pos should now be considered as "zero"
     DateTime now = RTClib::now();
-    programStartedSeconds = now.unixtime();
+    epochSecondsForStartPoint = now.unixtime();
   });
   debouncer.subscribe(Debouncer::Edge::FALL, [](const int state) {
     // turns off built-in led
@@ -116,9 +116,9 @@ void setup() {
   Serial.println(newSecondStartedAtMillis);
 
   DateTime now = RTClib::now();
-  programStartedSeconds = now.unixtime();
-  programStartedMillis = millis() - newSecondStartedAtMillis;
-  sprintfRaw(formattedTimeBuffer, programStartedSeconds, programStartedMillis);
+  epochSecondsForStartPoint = now.unixtime();
+  millisForStartPoint = millis() - newSecondStartedAtMillis;
+  sprintfRaw(formattedTimeBuffer, epochSecondsForStartPoint, millisForStartPoint);
   Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
