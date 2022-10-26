@@ -84,6 +84,7 @@ void setup() {
       Serial.println("Updating RTC with UTC time from NTP...");
       if (timeClient.update() && timeClient.isTimeSet()) {
         epochSeconds = timeClient.getEpochTime();
+        checkEpochSeconds(epochSeconds);
         rtc.setEpoch(epochSeconds);
         Serial.print("RTC was set to UTC time epoch seconds: ");
         Serial.println(epochSeconds);
