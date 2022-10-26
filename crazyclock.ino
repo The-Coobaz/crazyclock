@@ -28,7 +28,6 @@ Debouncer debouncer(ROTARY_ENCODER_BUTTON_PIN, 30, Debouncer::Active::L,
                     Debouncer::DurationFrom::TRIGGER);
 
 unsigned long epochSeconds;
-unsigned long localEpochSeconds;
 
 byte currentSecond;
 unsigned long newSecondStartedAtMillis;
@@ -86,8 +85,12 @@ void setup() {
         epochSeconds = timeClient.getEpochTime();
         checkEpochSeconds(epochSeconds);
         rtc.setEpoch(epochSeconds);
+        sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
         Serial.print("RTC was set to UTC time epoch seconds: ");
         Serial.println(epochSeconds);
+        Serial.print("That is: ");
+        Serial.print(formattedTimeBuffer);
+        Serial.println(" in local time");
       } else {
         Serial.println("Unexpected errors in NTP client");
       }
@@ -129,21 +132,21 @@ void loop() {
   }
 
   DateTime now = RTClib::now();
-  localEpochSeconds = now.unixtime();
+  epochSeconds = now.unixtime();
   currentMillis = millis() - newSecondStartedAtMillis;
   if (currentMillis > 1000) {
     // re-adjusting values
-    localEpochSeconds = localEpochSeconds + (currentMillis / 1000);
+    epochSeconds = epochSeconds + (currentMillis / 1000);
     currentMillis = currentMillis % 1000;
   }
   // TODO: calculate fake time
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
   // shows real time local seconds and current millis on LCD
-  sprinfLocalTime(formattedTimeBuffer, localEpochSeconds, currentMillis);
+  sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 0);
   lcd.print(formattedTimeBuffer);
-  sprintfRaw(formattedTimeBuffer, localEpochSeconds, currentMillis);
+  sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
   checkRotaryEncoder();
