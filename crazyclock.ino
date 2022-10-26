@@ -57,8 +57,6 @@ void setup() {
   while (!Serial) {
     // waits for serial port to be ready
   }
-  // gives some time to connect Serial monitor
-  delay(2000);
 
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
@@ -79,18 +77,24 @@ void setup() {
   bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
   if (wifiAvailable) {
 
-    bool isNtpAvailable = retrieveEpochTimeFromNTP(lcd, &epochSeconds);
+    timeClient.begin();
+    bool isNtpAvailable = tryNTPTimeClientUpdate(timeClient);
     if (isNtpAvailable) {
 
-      Serial.println("Updating RTC with time from NTP...");
-      LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
-      int mH = localDateTime.getLocalTimeFragment(HOURS);
-      int mM = localDateTime.getLocalTimeFragment(MINUTES);
-      int mS = localDateTime.getLocalTimeFragment(SECONDS);
-      rtc.setHour(mH);
-      rtc.setMinute(mM);
-      rtc.setSecond(mS);
+      Serial.println("Updating RTC with UTC time from NTP...");
+      if (timeClient.update() && timeClient.isTimeSet()) {
+        epochSeconds = timeClient.getEpochTime();
+        checkEpochSeconds(epochSeconds);
+        rtc.setEpoch(epochSeconds);
+        Serial.print("RTC was set to UTC time epoch seconds: ");
+        Serial.println(epochSeconds);
+      } else {
+        Serial.println("Unexpected errors in NTP client");
+      }
+    } else {
+      Serial.println("NTP is not available");
     }
+    timeClient.end();
   }
   checkRTC(&lcd, &rtc);
 
@@ -143,21 +147,19 @@ void loop() {
 }
 
 void prettyPrint(char *buffer, unsigned long epochSeconds, int millis) {
-  sprintf(buffer, "%9d.%03d", epochSeconds, millis);
+  sprintf(buffer, "%12d.%03d", epochSeconds, millis);
 }
 
-bool retrieveEpochTimeFromNTP(hd44780_I2Cexp lcd, unsigned long *epochSeconds) {
-  bool isNtpTimeRetrieved = false;
+bool tryNTPTimeClientUpdate(NTPClient timeClient) {
+  bool isNtpAvailable = false;
   Serial.println("Checking NTP...");
-  timeClient.begin();
   if (timeClient.update()) {
     Serial.println("NTP time update successful");
-    *epochSeconds = timeClient.getEpochTime();
-    isNtpTimeRetrieved = true;
+    isNtpAvailable = true;
   } else {
     Serial.println("NTP time update failed");
   }
-  return isNtpTimeRetrieved;
+  return isNtpAvailable;
 }
 
 void checkRotaryEncoder() {
