@@ -155,7 +155,7 @@ void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
   int hour = (localSeconds / 3600) % 24;
   int minutes = (localSeconds / 60) % 60;
   int seconds = localSeconds % 60;
-  sprintf(buffer, "%6d:%02d:%02d.%03d", hour, minutes, seconds, millis);
+  sprintf(buffer, "    %02d:%02d:%02d.%03d", hour, minutes, seconds, millis);
 }
 
 void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
