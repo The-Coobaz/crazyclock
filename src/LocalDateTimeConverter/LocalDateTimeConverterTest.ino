@@ -31,7 +31,6 @@ test(valentines_day) {
 }
 
 test(utc_conversion_to_seconds) {
-  // given
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
 
   assertEqual(utc.fromUtc(2022, 2, 14, 12, 34, 56).getLocalSeconds(),
@@ -49,7 +48,6 @@ test(utc_conversion_to_seconds) {
 }
 
 test(pl_conversion_to_seconds) {
-  // given
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
   // epoch start
@@ -67,7 +65,6 @@ test(pl_conversion_to_seconds) {
 
 // in March we change the clock from 2 AM to 3 AM
 test(pl_conversion_near_spring_time_change_2020) {
-  // given
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
@@ -84,7 +81,6 @@ test(pl_conversion_near_spring_time_change_2020) {
 
 // in October we change the clock from 3 AM to 2 AM
 test(pl_conversion_near_autumn_time_change_2020) {
-  // given
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
@@ -98,8 +94,24 @@ test(pl_conversion_near_autumn_time_change_2020) {
   assertEqual(afterPL.getLocalSeconds(), afterUTC.getLocalSeconds() + 3600);
 }
 
+// in October we change the clock from 3 AM to 2 AM
+test(pl_time_increase_near_autumn_time_change_2022) {
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+
+  // 2022-10-30, 00:00:00 UTC
+  // 2022-10-30, 02:00:00 Warsaw time (CEST +2)
+  unsigned long zero = 1667088000;
+
+  unsigned long zeroPlusTwoHours = zero + (2 * 3600);
+  LocalDateTime tested = pl.fromUtc(zeroPlusTwoHours);
+  
+  // Two hours later we should have 03:00:00 Warsaw time (CET +1)
+  assertEqual(tested.getLocalTimeFragment(HOURS), 3);
+  assertEqual(tested.getLocalTimeFragment(MINUTES), 0);
+  assertEqual(tested.getLocalTimeFragment(SECONDS), 0);
+}
+
 test(local_date_get_time_fragments_at_epoch_start_utc) {
-  // given
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
 
   // epoch start
@@ -110,7 +122,6 @@ test(local_date_get_time_fragments_at_epoch_start_utc) {
 }
 
 test(local_date_get_time_fragments_at_epoch_start_pl) {
-  // given
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
   // epoch start
