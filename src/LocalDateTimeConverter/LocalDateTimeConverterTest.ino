@@ -104,7 +104,7 @@ test(pl_time_increase_near_autumn_time_change_2022) {
 
   unsigned long zeroPlusTwoHours = zero + (2 * 3600);
   LocalDateTime tested = pl.fromUtc(zeroPlusTwoHours);
-  
+
   // Two hours later we should have 03:00:00 Warsaw time (CET +1)
   assertEqual(tested.getLocalTimeFragment(HOURS), 3);
   assertEqual(tested.getLocalTimeFragment(MINUTES), 0);
