@@ -11,9 +11,10 @@ test(should_not_change_the_value_if_scaling_factor_is_zero) {
   double timeStoppedScalingFactor = 0.0;
   Fake actual;
 
-  actual = computeFakeTime(valentinesUTCSecond, 123, 1644843210, 789,
+  actual = computeFakeTime(valentinesUTCSecond, 123,
+                           valentinesUTCSecond + 12345789000, 789,
                            timeStoppedScalingFactor);
-  // the returned time should be same as input
+  // the returned time should be same as start point
   assertEqual(actual.epochSeconds, valentinesUTCSecond);
   assertEqual(actual.millis, 123);
 }
