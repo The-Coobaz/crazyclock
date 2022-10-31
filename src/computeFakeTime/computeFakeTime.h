@@ -12,4 +12,6 @@ Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
                          int millisForStartPoint,
                          unsigned long epochSecondsForNow, int millisForNow);
 
+Time scalePassedTime(Time passedTime, double scalingFactor);
+
 #endif
