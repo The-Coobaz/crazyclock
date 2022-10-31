@@ -31,17 +31,19 @@ LocalDateTime LocalDateTimeConverter::fromUtc(int year, int month, int day,
   return this->fromUtc(seconds);
 }
 
-unsigned long
-LocalDateTimeConverter::toLocalSeconds(unsigned long epochSeconds) {
-  if (this->timezoneId == plId) {
-    return pl.toLocal(epochSeconds);
-  } else {
-    return epochSeconds;
-  }
-}
-
 LocalDateTime LocalDateTimeConverter::fromUtc(unsigned long epochSeconds) {
   return LocalDateTime(this->toLocalSeconds(epochSeconds));
+}
+
+unsigned long
+LocalDateTimeConverter::toLocalSeconds(unsigned long epochSeconds) {
+  unsigned long localSeconds;
+  if (this->timezoneId == plId) {
+    localSeconds = pl.toLocal(epochSeconds);
+  } else {
+    localSeconds = epochSeconds;
+  }
+  return localSeconds;
 }
 
 LocalDateTimeConverter LocalDateTimeConverter::UTC =
