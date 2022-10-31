@@ -9,21 +9,26 @@ unsigned long valentinesUTCSecond = 1644842096ul;
 test(should_calculate_simple_passed_millis) {
 
   Time actual;
+  unsigned long expectedSeconds = 0ul;
+  int expectedMillis;
 
   actual =
       calculateTimePassed(valentinesUTCSecond, 111, valentinesUTCSecond, 111);
-  assertEqual(actual.seconds, 0ul);
-  assertEqual(actual.millis, 0);
+  expectedMillis = 0;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
 
   actual =
       calculateTimePassed(valentinesUTCSecond, 222, valentinesUTCSecond, 345);
-  assertEqual(actual.seconds, 0ul);
-  assertEqual(actual.millis, 123);
+  expectedMillis = 123;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
 
   actual =
       calculateTimePassed(valentinesUTCSecond, 1, valentinesUTCSecond, 999);
-  assertEqual(actual.seconds, 0ul);
-  assertEqual(actual.millis, 998);
+  expectedMillis = 998;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
 }
 
 //----------------------------------------------------------------------------
