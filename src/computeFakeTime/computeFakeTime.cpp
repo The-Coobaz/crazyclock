@@ -5,7 +5,7 @@ Time computeFakeTime(unsigned long epochSecondsForStartPoint,
                      int millisForStartPoint, unsigned long epochSecondsForNow,
                      int millisForNow, double scalingFactor) {}
 
-Time calculateTimePassed(unsigned long epochSecondsForStartPoint,
+Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
                          int millisForStartPoint,
                          unsigned long epochSecondsForNow, int millisForNow) {
   Time result;
@@ -24,4 +24,4 @@ Time calculateTimePassed(unsigned long epochSecondsForStartPoint,
   return result;
 }
 
-Time calculateScaledDistance(Time distance, double scalingFactor) {}
+Time calculateScaledPassedTime(Time distance, double scalingFactor) {}

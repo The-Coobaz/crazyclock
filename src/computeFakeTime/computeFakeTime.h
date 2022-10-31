@@ -31,19 +31,10 @@ Time computeFakeTime(unsigned long epochSecondsForStartPoint,
                      int millisForStartPoint, unsigned long epochSecondsForNow,
                      int millisForNow, double scalingFactor);
 
-/**
- * @brief Calculates seconds and millis passed between two UTC time points
- *
- * @param epochSecondsForStartPoint
- * @param millisForStartPoint
- * @param epochSecondsForNow
- * @param millisForNow
- * @return Time
- */
-Time calculateTimePassed(unsigned long epochSecondsForStartPoint,
+Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
                          int millisForStartPoint,
                          unsigned long epochSecondsForNow, int millisForNow);
 
-Time calculateScaledDistance(Time distance, double scalingFactor);
+Time calculateScaledPassedTime(Time distance, double scalingFactor);
 
 #endif

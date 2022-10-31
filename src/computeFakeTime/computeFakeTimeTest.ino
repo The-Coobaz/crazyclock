@@ -13,19 +13,19 @@ test(should_calculate_simple_passed_millis) {
   int expectedMillis;
 
   actual =
-      calculateTimePassed(valentinesUTCSecond, 111, valentinesUTCSecond, 111);
+      calculatePassedTime(valentinesUTCSecond, 111, valentinesUTCSecond, 111);
   expectedMillis = 0;
   assertEqual(actual.seconds, expectedSeconds);
   assertEqual(actual.millis, expectedMillis);
 
   actual =
-      calculateTimePassed(valentinesUTCSecond, 222, valentinesUTCSecond, 345);
+      calculatePassedTime(valentinesUTCSecond, 222, valentinesUTCSecond, 345);
   expectedMillis = 123;
   assertEqual(actual.seconds, expectedSeconds);
   assertEqual(actual.millis, expectedMillis);
 
   actual =
-      calculateTimePassed(valentinesUTCSecond, 1, valentinesUTCSecond, 999);
+      calculatePassedTime(valentinesUTCSecond, 1, valentinesUTCSecond, 999);
   expectedMillis = 998;
   assertEqual(actual.seconds, expectedSeconds);
   assertEqual(actual.millis, expectedMillis);
@@ -38,13 +38,13 @@ test(should_calculate_when_start_millis_greater_than_current_millis) {
   int expectedMillis;
 
   actual =
-      calculateTimePassed(valentinesUTCSecond, 999, valentinesUTCSecond + 1, 1);
+      calculatePassedTime(valentinesUTCSecond, 999, valentinesUTCSecond + 1, 1);
   expectedSeconds = 0ul;
   expectedMillis = 2;
   assertEqual(actual.seconds, expectedSeconds);
   assertEqual(actual.millis, expectedMillis);
 
-  actual = calculateTimePassed(valentinesUTCSecond, 500,
+  actual = calculatePassedTime(valentinesUTCSecond, 500,
                                valentinesUTCSecond + 1, 499);
   expectedSeconds = 0ul;
   expectedMillis = 999;
@@ -58,14 +58,14 @@ test(should_calculate_millis_passed_over_seconds_change) {
   unsigned long expectedSeconds;
   int expectedMillis;
 
-  actual = calculateTimePassed(valentinesUTCSecond, 101,
+  actual = calculatePassedTime(valentinesUTCSecond, 101,
                                valentinesUTCSecond + 4, 102);
   expectedSeconds = 4ul;
   expectedMillis = 1;
   assertEqual(actual.seconds, expectedSeconds);
   assertEqual(actual.millis, expectedMillis);
 
-  actual = calculateTimePassed(valentinesUTCSecond, 101,
+  actual = calculatePassedTime(valentinesUTCSecond, 101,
                                valentinesUTCSecond + 4, 100);
   expectedSeconds = 3ul;
   expectedMillis = 999;
