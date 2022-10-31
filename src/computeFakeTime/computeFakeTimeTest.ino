@@ -31,6 +31,47 @@ test(should_calculate_simple_passed_millis) {
   assertEqual(actual.millis, expectedMillis);
 }
 
+test(should_calculate_when_start_millis_greater_than_current_millis) {
+
+  Time actual;
+  unsigned long expectedSeconds;
+  int expectedMillis;
+
+  actual =
+      calculateTimePassed(valentinesUTCSecond, 999, valentinesUTCSecond + 1, 1);
+  expectedSeconds = 0ul;
+  expectedMillis = 2;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
+
+  actual = calculateTimePassed(valentinesUTCSecond, 500,
+                               valentinesUTCSecond + 1, 499);
+  expectedSeconds = 0ul;
+  expectedMillis = 999;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
+}
+
+test(should_calculate_millis_passed_over_seconds_change) {
+
+  Time actual;
+  unsigned long expectedSeconds;
+  int expectedMillis;
+
+  actual = calculateTimePassed(valentinesUTCSecond, 101,
+                               valentinesUTCSecond + 4, 102);
+  expectedSeconds = 4ul;
+  expectedMillis = 1;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
+
+  actual = calculateTimePassed(valentinesUTCSecond, 101,
+                               valentinesUTCSecond + 4, 100);
+  expectedSeconds = 3ul;
+  expectedMillis = 999;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
+}
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
