@@ -3,12 +3,7 @@
 
 Time computeFakeTime(unsigned long epochSecondsForStartPoint,
                      int millisForStartPoint, unsigned long epochSecondsForNow,
-                     int millisForNow, double scalingFactor) {
-  Time result;
-  result.seconds = epochSecondsForStartPoint;
-  result.millis = millisForStartPoint;
-  return result;
-}
+                     int millisForNow, double scalingFactor) {}
 
 Time calculateTimePassed(unsigned long epochSecondsForStartPoint,
                          int millisForStartPoint,
