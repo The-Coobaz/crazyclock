@@ -6,17 +6,24 @@
 // UTC seconds for 2022-02-14T12:34:56UTC
 unsigned long valentinesUTCSecond = 1644842096ul;
 
-test(should_not_change_the_value_if_scaling_factor_is_zero) {
+test(should_calculate_simple_passed_millis) {
 
-  double timeStoppedScalingFactor = 0.0;
-  Fake actual;
+  Time actual;
 
-  actual = computeFakeTime(valentinesUTCSecond, 123,
-                           valentinesUTCSecond + 12345789000, 789,
-                           timeStoppedScalingFactor);
-  // the returned time should be same as start point
-  assertEqual(actual.epochSeconds, valentinesUTCSecond);
+  actual =
+      calculateTimePassed(valentinesUTCSecond, 111, valentinesUTCSecond, 111);
+  assertEqual(actual.seconds, 0ul);
+  assertEqual(actual.millis, 0);
+
+  actual =
+      calculateTimePassed(valentinesUTCSecond, 222, valentinesUTCSecond, 345);
+  assertEqual(actual.seconds, 0ul);
   assertEqual(actual.millis, 123);
+
+  actual =
+      calculateTimePassed(valentinesUTCSecond, 1, valentinesUTCSecond, 999);
+  assertEqual(actual.seconds, 0ul);
+  assertEqual(actual.millis, 998);
 }
 
 //----------------------------------------------------------------------------
