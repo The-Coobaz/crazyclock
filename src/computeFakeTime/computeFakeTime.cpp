@@ -1,10 +1,6 @@
 
 #include "computeFakeTime.h"
 
-Time computeFakeTime(unsigned long epochSecondsForStartPoint,
-                     int millisForStartPoint, unsigned long epochSecondsForNow,
-                     int millisForNow, double scalingFactor) {}
-
 Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
                          int millisForStartPoint,
                          unsigned long epochSecondsForNow, int millisForNow) {
@@ -23,5 +19,3 @@ Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
   result.millis = passedMillis;
   return result;
 }
-
-Time calculateScaledPassedTime(Time distance, double scalingFactor) {}
