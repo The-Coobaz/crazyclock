@@ -19,3 +19,10 @@ Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
   result.millis = passedMillis;
   return result;
 }
+
+Time scalePassedTime(Time passedTime, double scalingFactor) {
+  Time result;
+  result.seconds = 0;
+  result.millis = 0;
+  return result;
+}
