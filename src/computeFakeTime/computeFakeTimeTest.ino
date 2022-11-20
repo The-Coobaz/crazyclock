@@ -87,6 +87,20 @@ test(should_correctly_calculate_with_scaling_factor_zero) {
   assertEqual(actual.millis, 0);
 }
 
+test(should_correctly_calculate_with_scaling_factor_one) {
+
+  Time passedTime;
+  double scalingFactor = 1.0;
+  Time actual;
+
+  passedTime.seconds = 123;
+  passedTime.millis = 456;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual.seconds, 123ul);
+  assertEqual(actual.millis, 456);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
