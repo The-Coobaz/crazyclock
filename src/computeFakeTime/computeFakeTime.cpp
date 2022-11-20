@@ -20,6 +20,13 @@ Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
   return result;
 }
 
+/**
+ * @brief multiplies passed time by scaling factor
+ *
+ * @param passedTime time passed from the start point
+ * @param scalingFactor how many times faster (or slower) crazyclock should go
+ * @return Time fake passed time
+ */
 Time scalePassedTime(Time passedTime, double scalingFactor) {
   Time result;
   // TODO: implementation should be updated for failing unit test
