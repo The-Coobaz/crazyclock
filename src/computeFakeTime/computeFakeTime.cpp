@@ -29,7 +29,7 @@ Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
  */
 Time scalePassedTime(Time passedTime, double scalingFactor) {
   Time result;
-  // TODO: implementation should be updated for failing unit test
+  // TODO: implementation should be updated
   result.seconds = 0;
   result.millis = 0;
   return result;
