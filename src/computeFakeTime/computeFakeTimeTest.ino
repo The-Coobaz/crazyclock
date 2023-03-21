@@ -101,6 +101,36 @@ test(should_correctly_calculate_with_scaling_factor_one) {
   assertEqual(actual.millis, 456);
 }
 
+
+
+test(should_correctly_calculate_with_scaling_factor_half) {
+
+  Time passedTime;
+  double scalingFactor = 0.5;
+  Time actual;
+
+  passedTime.seconds = 123;
+  passedTime.millis = 456;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual.seconds, 62ul);
+  assertEqual(actual.millis, 728);
+}
+
+test(should_correctly_calculate_with_scaling_factor_one_third) {
+
+  Time passedTime;
+  double scalingFactor = 0.333;
+  Time actual;
+
+  passedTime.seconds = 123;
+  passedTime.millis = 456;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual.seconds, 41ul);
+  assertEqual(actual.millis, 152);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
