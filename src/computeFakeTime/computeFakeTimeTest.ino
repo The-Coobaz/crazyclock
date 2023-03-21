@@ -77,14 +77,197 @@ test(should_correctly_calculate_with_scaling_factor_zero) {
 
   Time passedTime;
   double scalingFactor = 0.0;
-  Time actual;
+  long long actual;
 
   passedTime.seconds = 123;
   passedTime.millis = 456;
 
   actual = scalePassedTime(passedTime, scalingFactor);
-  assertEqual(actual.seconds, 0ul);
-  assertEqual(actual.millis, 0);
+  assertEqual(actual, (long long)0);
+}
+
+test(should_correctly_calculate_with_scaling_factor_one) {
+
+  Time passedTime;
+  double scalingFactor = 1.0;
+  long long actual;
+
+  passedTime.seconds = 123;
+  passedTime.millis = 456;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)123456);
+}
+
+test(should_correctly_calculate_with_scaling_factor_half) {
+
+  Time passedTime;
+  double scalingFactor = 0.5;
+  long long actual;
+
+  passedTime.seconds = 123;
+  passedTime.millis = 456;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)61728);
+}
+
+test(should_correctly_calculate_with_scaling_factor_one_third) {
+
+  Time passedTime;
+  double scalingFactor = 0.333333333333333333;
+  long long actual;
+
+  passedTime.seconds = 123;
+  passedTime.millis = 456;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)41152);
+
+  passedTime.seconds = 2;
+  passedTime.millis = 10;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  // incorrect because of numeric reasons (should be 670)
+  assertEqual(actual, (long long)669);
+}
+
+test(should_correctly_calculate_with_scaling_factor_one_eight) {
+
+  Time passedTime;
+  double scalingFactor = 0.125;
+  long long actual;
+
+  passedTime.seconds = 489;
+  passedTime.millis = 400;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)61175);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 128;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)16);
+}
+
+test(should_correctly_calculate_with_scaling_factor_nine) {
+
+  Time passedTime;
+  double scalingFactor = 9;
+  long long actual;
+
+  passedTime.seconds = 2;
+  passedTime.millis = 873;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)25857);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 128;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)1152);
+}
+
+test(should_correctly_calculate_with_scaling_factor_seventy_three) {
+
+  Time passedTime;
+  double scalingFactor = 73;
+  long long actual;
+
+  passedTime.seconds = 0;
+  passedTime.millis = 136;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)9928);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 128;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)9344);
+}
+
+test(should_correctly_calculate_with_scaling_factor_minus_three) {
+
+  Time passedTime;
+  double scalingFactor = -3;
+  long long actual;
+
+  passedTime.seconds = 0;
+  passedTime.millis = 136;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)-408);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 128;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)-384);
+}
+
+test(should_correctly_calculate_with_scaling_factor_minus_half) {
+
+  Time passedTime;
+  double scalingFactor = -0.5;
+  long long actual;
+
+  passedTime.seconds = 123;
+  passedTime.millis = 456;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)-61728);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 123;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  // truncated instead of rounded (exact value: -61.5)
+  assertEqual(actual, (long long)-61);
+}
+
+test(should_correctly_calculate_with_scaling_factor_minus_one_thousands) {
+
+  Time passedTime;
+  double scalingFactor = -0.001;
+  long long actual;
+
+  passedTime.seconds = 1;
+  passedTime.millis = 010;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)-1);
+
+  passedTime.seconds = 2;
+  passedTime.millis = 222;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  // truncated instead of rounded (exact value: -61.5)
+  assertEqual(actual, (long long)-2);
+}
+
+test(should_correctly_calculate_with_scaling_factor_ninenty_nine) {
+
+  Time passedTime;
+  double scalingFactor = 99;
+  long long actual;
+
+  // check if it will work for longer time (one month)
+  passedTime.seconds = 2628000;
+  passedTime.millis = 10;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)260172000990);
+
+  // one year
+  passedTime.seconds = 31536000;
+  passedTime.millis = 001;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  // truncated instead of rounded (exact value: -61.5)
+  assertEqual(actual, (long long)3122064000099);
 }
 
 //----------------------------------------------------------------------------

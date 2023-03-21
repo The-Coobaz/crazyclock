@@ -20,9 +20,23 @@ Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
   return result;
 }
 
-Time scalePassedTime(Time passedTime, double scalingFactor) {
-  Time result;
-  result.seconds = 0;
-  result.millis = 0;
+/**
+ * @brief multiplies passed time by scaling factor
+ *
+ * @param passedTime time passed from the start point
+ * @param scalingFactor how many times faster (or slower) crazyclock should go
+ * @return fake passed time in milliseconds (might be negative)
+ */
+long long scalePassedTime(Time passedTime, double scalingFactor) {
+  long long result;
+  if (scalingFactor == 0.0) {
+    result = 0;
+  } else if (scalingFactor == 1.0) {
+    result = passedTime.seconds * 1000 + passedTime.millis;
+  } else {
+    long long scaledSeconds = scalingFactor * passedTime.seconds * 1000;
+    long long scaledMillis = scalingFactor * passedTime.millis;
+    result = scaledSeconds + scaledMillis;
+  }
   return result;
 }
