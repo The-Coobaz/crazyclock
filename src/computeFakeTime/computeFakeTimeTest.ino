@@ -151,6 +151,44 @@ test(should_correctly_calculate_with_scaling_factor_one_eight) {
   assertEqual(actual, (long long)16);
 }
 
+test(should_correctly_calculate_with_scaling_factor_nine) {
+
+  Time passedTime;
+  double scalingFactor = 9;
+  long long actual;
+
+  passedTime.seconds = 2;
+  passedTime.millis = 873;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)25857);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 128;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)1152);
+}
+
+test(should_correctly_calculate_with_scaling_factor_seventy_three) {
+
+  Time passedTime;
+  double scalingFactor = 73;
+  long long actual;
+
+  passedTime.seconds = 0;
+  passedTime.millis = 136;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)9928);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 128;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)9344);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
