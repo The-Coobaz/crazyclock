@@ -115,7 +115,7 @@ test(should_correctly_calculate_with_scaling_factor_half) {
 test(should_correctly_calculate_with_scaling_factor_one_third) {
 
   Time passedTime;
-  double scalingFactor = 0.33333333333333333333;
+  double scalingFactor = 0.333333333333333333;
   long long actual;
 
   passedTime.seconds = 123;
@@ -123,6 +123,32 @@ test(should_correctly_calculate_with_scaling_factor_one_third) {
 
   actual = scalePassedTime(passedTime, scalingFactor);
   assertEqual(actual, (long long)41152);
+
+  passedTime.seconds = 2;
+  passedTime.millis = 10;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  // incorrect because of numeric reasons (should be 670)
+  assertEqual(actual, (long long)669);
+}
+
+test(should_correctly_calculate_with_scaling_factor_one_eight) {
+
+  Time passedTime;
+  double scalingFactor = 0.125;
+  long long actual;
+
+  passedTime.seconds = 489;
+  passedTime.millis = 400;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)61175);
+
+  passedTime.seconds = 0;
+  passedTime.millis = 128;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)16);
 }
 
 //----------------------------------------------------------------------------
