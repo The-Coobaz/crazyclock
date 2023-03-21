@@ -248,6 +248,28 @@ test(should_correctly_calculate_with_scaling_factor_minus_one_thousands) {
   assertEqual(actual, (long long)-2);
 }
 
+test(should_correctly_calculate_with_scaling_factor_ninenty_nine) {
+
+  Time passedTime;
+  double scalingFactor = 99;
+  long long actual;
+
+  // check if it will work for longer time (one month)
+  passedTime.seconds = 2628000;
+  passedTime.millis = 10;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  assertEqual(actual, (long long)260172000990);
+
+  // one year
+  passedTime.seconds = 31536000;
+  passedTime.millis = 001;
+
+  actual = scalePassedTime(passedTime, scalingFactor);
+  // truncated instead of rounded (exact value: -61.5)
+  assertEqual(actual, (long long)3122064000099);
+}
+
 //----------------------------------------------------------------------------
 // setup() and loop()
 //----------------------------------------------------------------------------
