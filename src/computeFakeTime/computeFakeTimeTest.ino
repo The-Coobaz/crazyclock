@@ -77,58 +77,52 @@ test(should_correctly_calculate_with_scaling_factor_zero) {
 
   Time passedTime;
   double scalingFactor = 0.0;
-  Time actual;
+  long long actual;
 
   passedTime.seconds = 123;
   passedTime.millis = 456;
 
   actual = scalePassedTime(passedTime, scalingFactor);
-  assertEqual(actual.seconds, 0ul);
-  assertEqual(actual.millis, 0);
+  assertEqual(actual, (long long)0);
 }
 
 test(should_correctly_calculate_with_scaling_factor_one) {
 
   Time passedTime;
   double scalingFactor = 1.0;
-  Time actual;
+  long long actual;
 
   passedTime.seconds = 123;
   passedTime.millis = 456;
 
   actual = scalePassedTime(passedTime, scalingFactor);
-  assertEqual(actual.seconds, 123ul);
-  assertEqual(actual.millis, 456);
+  assertEqual(actual, (long long)123456);
 }
-
-
 
 test(should_correctly_calculate_with_scaling_factor_half) {
 
   Time passedTime;
   double scalingFactor = 0.5;
-  Time actual;
+  long long actual;
 
   passedTime.seconds = 123;
   passedTime.millis = 456;
 
   actual = scalePassedTime(passedTime, scalingFactor);
-  assertEqual(actual.seconds, 62ul);
-  assertEqual(actual.millis, 728);
+  assertEqual(actual, (long long)61728);
 }
 
 test(should_correctly_calculate_with_scaling_factor_one_third) {
 
   Time passedTime;
-  double scalingFactor = 0.333;
-  Time actual;
+  double scalingFactor = 0.33333333333333333333;
+  long long actual;
 
   passedTime.seconds = 123;
   passedTime.millis = 456;
 
   actual = scalePassedTime(passedTime, scalingFactor);
-  assertEqual(actual.seconds, 41ul);
-  assertEqual(actual.millis, 152);
+  assertEqual(actual, (long long)41152);
 }
 
 //----------------------------------------------------------------------------
