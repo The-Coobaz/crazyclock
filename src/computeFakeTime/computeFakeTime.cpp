@@ -29,8 +29,16 @@ Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
  */
 Time scalePassedTime(Time passedTime, double scalingFactor) {
   Time result;
-  // TODO: implementation should be updated
-  result.seconds = 0;
-  result.millis = 0;
+  if (scalingFactor == 0.0) {
+    result.seconds = 0;
+    result.millis = 0;
+  } else if (scalingFactor == 1.0) {
+    result.seconds = passedTime.seconds;
+    result.millis = passedTime.millis;
+  } else {
+    // maybe optimize for large / small scaling factors in future...
+    result.seconds = 1;
+    result.millis = 1;
+  }
   return result;
 }
