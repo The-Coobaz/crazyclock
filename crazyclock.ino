@@ -42,6 +42,11 @@ const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(ROTARY_ENCODER_DT, ROTARY_ENCODER_CLK,
                       RotaryEncoder::LatchMode::TWO03);
+// interrupts added for better handling of rotary encoder
+IRAM_ATTR void checkPosition()
+{
+  encoder.tick(); // just call tick() to check the state.
+};
 int pos = 0;
 int buttonState = 0;
 DS3231 rtc;
@@ -55,6 +60,9 @@ void setup() {
   while (!Serial) {
     // waits for serial port to be ready
   }
+  Serial.println("Attaching encoder interrupts...");
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_DT), checkPosition, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_CLK), checkPosition, CHANGE);
 
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
@@ -182,5 +190,8 @@ void checkRotaryEncoder() {
     Serial.println(newPos);
     pos = newPos;
     // TODO: calculate scaling factor based on rotary encoder position
+    double scalingFactor = (pos * 0.2) + 1;
+    Serial.print("Scaling factor: ");
+    Serial.println(scalingFactor);
   }
 }
