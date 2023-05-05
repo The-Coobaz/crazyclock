@@ -10,8 +10,14 @@
 class LocalDateTimeConverter {
 
 private:
-  LocalDateTimeConverter(int timezoneId);
   int timezoneId;
+
+  /**
+   * @brief creates time converter for specific time zone
+   */
+  LocalDateTimeConverter(int timezoneId);
+
+  unsigned long toLocalSeconds(unsigned long epochSeconds);
 
 public:
   static LocalDateTimeConverter UTC;
@@ -19,7 +25,6 @@ public:
 
   LocalDateTime fromUtc(int year, int month, int day, int hour, int minute,
                         int second);
-  unsigned long toLocalSeconds(unsigned long epochSeconds);
   LocalDateTime fromUtc(unsigned long epochSeconds);
 };
 
