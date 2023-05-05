@@ -12,9 +12,6 @@ class LocalDateTimeConverter {
 private:
   int timezoneId;
 
-  /**
-   * @brief creates time converter for specific time zone
-   */
   LocalDateTimeConverter(int timezoneId);
 
   unsigned long toLocalSeconds(unsigned long epochSeconds);

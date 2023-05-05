@@ -15,17 +15,6 @@ Timezone pl(dstRule, stdRule);
 
 LocalDateTimeConverter::LocalDateTimeConverter(int tzId) { timezoneId = tzId; }
 
-unsigned long
-LocalDateTimeConverter::toLocalSeconds(unsigned long epochSeconds) {
-  unsigned long localSeconds;
-  if (this->timezoneId == plId) {
-    localSeconds = pl.toLocal(epochSeconds);
-  } else {
-    localSeconds = epochSeconds;
-  }
-  return localSeconds;
-}
-
 LocalDateTime LocalDateTimeConverter::fromUtc(int year, int month, int day,
                                               int hour, int minute,
                                               int second) {
@@ -46,7 +35,17 @@ LocalDateTime LocalDateTimeConverter::fromUtc(unsigned long epochSeconds) {
   return LocalDateTime(this->toLocalSeconds(epochSeconds));
 }
 
-// Creates instances of UTC and PL time converters
+unsigned long
+LocalDateTimeConverter::toLocalSeconds(unsigned long epochSeconds) {
+  unsigned long localSeconds;
+  if (this->timezoneId == plId) {
+    localSeconds = pl.toLocal(epochSeconds);
+  } else {
+    localSeconds = epochSeconds;
+  }
+  return localSeconds;
+}
+
 LocalDateTimeConverter LocalDateTimeConverter::UTC =
     LocalDateTimeConverter(utcId);
 LocalDateTimeConverter LocalDateTimeConverter::PL =
