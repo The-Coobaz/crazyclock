@@ -73,6 +73,27 @@ test(should_calculate_millis_passed_over_seconds_change) {
   assertEqual(actual.millis, expectedMillis);
 }
 
+test(should_calculate_millis_passed_over_month) {
+
+  Time actual;
+  unsigned long expectedSeconds;
+  int expectedMillis;
+
+  actual = calculatePassedTime(valentinesUTCSecond, 100,
+                               valentinesUTCSecond + 3600 * 24 * 31, 100);
+  expectedSeconds = 3600 * 24 * 31;
+  expectedMillis = 0;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
+
+  actual = calculatePassedTime(valentinesUTCSecond, 101,
+                               valentinesUTCSecond + 3600 * 24 * 31, 100);
+  expectedSeconds = 3600 * 24 * 31 - 1;
+  expectedMillis = 999;
+  assertEqual(actual.seconds, expectedSeconds);
+  assertEqual(actual.millis, expectedMillis);
+}
+
 test(should_correctly_calculate_with_scaling_factor_zero) {
 
   Time passedTime;

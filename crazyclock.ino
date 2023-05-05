@@ -150,10 +150,10 @@ void loop() {
 }
 
 void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
-  unsigned long localSeconds = plDateTimeConverter.toLocalSeconds(epochSeconds);
-  int hour = (localSeconds / 3600) % 24;
-  int minutes = (localSeconds / 60) % 60;
-  int seconds = localSeconds % 60;
+  LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
+  int hour = localDateTime.getLocalTimeFragment(HOURS);
+  int minutes = localDateTime.getLocalTimeFragment(MINUTES);
+  int seconds = localDateTime.getLocalTimeFragment(SECONDS);
   sprintf(buffer, "    %02d:%02d:%02d.%03d", hour, minutes, seconds, millis);
 }
 
