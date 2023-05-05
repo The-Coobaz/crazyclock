@@ -20,14 +20,16 @@ You are going to need:
 
 ## Development
 
-### Formatting
-#### VS Code
+### VS Code
 
-For VS Code install [Clang-Format](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format) extension.
+You might want to install [C++ Tools](https://code.visualstudio.com/docs/languages/cpp) plugin.
+
+Install [Clang-Format](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format) extension
+and choose it for formatting (`xaver.clang-format`).
 
 To format currently edited file use `[ctlr] + [shift] + [i]` [keyboard shortcut](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference).
 
-#### Console
+### Console
 
 To format all files at once (with [clang-format](https://clang.llvm.org/docs/ClangFormat.html) installed on your system):
 
