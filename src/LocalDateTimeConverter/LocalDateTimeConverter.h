@@ -10,10 +10,8 @@
 class LocalDateTimeConverter {
 
 private:
-  int timezoneId;
-
   LocalDateTimeConverter(int timezoneId);
-
+  int timezoneId;
   unsigned long toLocalSeconds(unsigned long epochSeconds);
 
 public:

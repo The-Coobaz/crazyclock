@@ -32,7 +32,11 @@ bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
   lcd->setCursor(0, 0);
   lcd->print("Waiting for WiFi");
   lcd->setCursor(0, 1);
-
+  // provided in examples of WiFi library with a comment:
+  // > Explicitly set the ESP8266 to be a WiFi-client,
+  // > otherwise, it by default, would try to act as both
+  // > a client and an access-point
+  WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   for (int n = 0; (n < 30) && (WiFi.status() != WL_CONNECTED); n++) {
     delay(500);
