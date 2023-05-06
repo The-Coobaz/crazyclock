@@ -8,9 +8,9 @@
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
+#include "src/FakeTimeStartingPoint/FakeTimeStartingPoint.h"
 #include "src/HardwareCheck/HardwareCheck.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
-#include "src/computeFakeTime/computeFakeTime.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -71,9 +71,8 @@ void setup() {
     encoder.setPosition(0);
     DateTime now = RTClib::now();
 
-    fakeTimeStartingPoint.epochSeconds = now.unixtime();
-    fakeTimeStartingPoint.millis = millis() - newSecondStartedAtMillis;
-    fakeTimeStartingPoint.scalingFactor = 1.0;
+    int millisOfSecond = millis() - newSecondStartedAtMillis;
+    fakeTimeStartingPoint.resetAt(now.unixtime(), millisOfSecond);
   });
   debouncer.subscribe(Debouncer::Edge::FALL, [](const int state) {
     // turns off built-in led
