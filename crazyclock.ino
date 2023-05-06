@@ -43,7 +43,7 @@ const int LCD_ROWS = 2;
 RotaryEncoder encoder(ROTARY_ENCODER_DT, ROTARY_ENCODER_CLK,
                       RotaryEncoder::LatchMode::TWO03);
 // interrupts added for better handling of rotary encoder
-IRAM_ATTR void checkPosition() {
+IRAM_ATTR void tick() {
   encoder.tick(); // just call tick() to check the state.
 };
 int pos = 0;
@@ -60,10 +60,8 @@ void setup() {
     // waits for serial port to be ready
   }
   Serial.println("Attaching encoder interrupts...");
-  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_DT), checkPosition,
-                  CHANGE);
-  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_CLK), checkPosition,
-                  CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_DT), tick, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_CLK), tick, CHANGE);
 
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
@@ -191,17 +189,16 @@ bool tryNTPTimeClientUpdate(NTPClient timeClient) {
 
 void checkRotaryEncoder(FakeTimeStartingPoint *startingPoint,
                         unsigned long currentSecond, int currentMillis) {
-  encoder.tick();
   int newPos = encoder.getPosition();
 
   if (pos != newPos) {
+    pos = newPos;
     // for now we calculate scaling factor as simple linear function
     double scaling = (pos * 0.1) + 1;
     startingPoint->update(scaling, currentSecond, currentMillis);
 
-    pos = newPos;
     Serial.print("New rotary position: ");
-    Serial.println(newPos);
+    Serial.println(pos);
     Serial.print("New scaling factor: ");
     Serial.println(scaling);
   }
