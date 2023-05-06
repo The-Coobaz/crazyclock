@@ -11,6 +11,7 @@
 #include "src/HardwareCheck/HardwareCheck.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 #include "src/ScalingFactorChange/ScalingFactorChange.h"
+#include "src/ntpClient/ntpClient.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -88,29 +89,16 @@ void setup() {
   beginRTC(&lcd, &rtc);
   bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
   if (wifiAvailable) {
+    epochSeconds = retrieveEpochSeconds(&timeClient);
+    checkEpochSeconds(epochSeconds);
+    rtc.setEpoch(epochSeconds);
 
-    timeClient.begin();
-    bool isNtpAvailable = tryNTPTimeClientUpdate(timeClient);
-    if (isNtpAvailable) {
-
-      Serial.println("Updating RTC with UTC time from NTP...");
-      if (timeClient.update() && timeClient.isTimeSet()) {
-        epochSeconds = timeClient.getEpochTime();
-        checkEpochSeconds(epochSeconds);
-        rtc.setEpoch(epochSeconds);
-        sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
-        Serial.print("RTC was set to UTC time epoch seconds: ");
-        Serial.println(epochSeconds);
-        Serial.print("That is: ");
-        Serial.print(formattedTimeBuffer);
-        Serial.println(" in local time");
-      } else {
-        Serial.println("Unexpected errors in NTP client");
-      }
-    } else {
-      Serial.println("NTP is not available");
-    }
-    timeClient.end();
+    sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
+    Serial.print("RTC was set to UTC time epoch seconds: ");
+    Serial.println(epochSeconds);
+    Serial.print("That is: ");
+    Serial.print(formattedTimeBuffer);
+    Serial.println(" in local time");
   }
   checkRTC(&lcd, &rtc);
 
@@ -173,18 +161,6 @@ void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
 
 void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
   sprintf(buffer, "%12lu.%03d", epochSeconds, millis);
-}
-
-bool tryNTPTimeClientUpdate(NTPClient timeClient) {
-  bool isNtpAvailable = false;
-  Serial.println("Checking NTP...");
-  if (timeClient.update()) {
-    Serial.println("NTP time update successful");
-    isNtpAvailable = true;
-  } else {
-    Serial.println("NTP time update failed");
-  }
-  return isNtpAvailable;
 }
 
 void checkRotaryEncoder(ScalingFactorChange *scalingFactorChange) {
