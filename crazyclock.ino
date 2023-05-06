@@ -187,7 +187,7 @@ bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   return isNtpAvailable;
 }
 
-void checkRotaryEncoder(FakeTimeStartingPoint *startingPoint,
+void checkRotaryEncoder(FakeTimeStartingPoint *fakeTimeStartingPoint,
                         unsigned long currentSecond, int currentMillis) {
   int newPos = encoder.getPosition();
 
@@ -195,7 +195,7 @@ void checkRotaryEncoder(FakeTimeStartingPoint *startingPoint,
     pos = newPos;
     // for now we calculate scaling factor as simple linear function
     double scaling = (pos * 0.1) + 1;
-    startingPoint->update(scaling, currentSecond, currentMillis);
+    fakeTimeStartingPoint->update(scaling, currentSecond, currentMillis);
 
     Serial.print("New rotary position: ");
     Serial.println(pos);
