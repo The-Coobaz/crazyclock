@@ -1,6 +1,6 @@
 #include "FakeTimeStartingPoint.h"
 
-#include<stdio.h>
+#include <stdio.h>
 
 void FakeTimeStartingPoint::reset(unsigned long epochSeconds, int millis) {
   this->update(1.0, epochSeconds, millis);

@@ -68,9 +68,10 @@ void setup() {
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
     Serial.println("Resetting");
+    pos = 0;
     encoder.setPosition(0);
-    DateTime now = RTClib::now();
 
+    DateTime now = RTClib::now();
     int millisOfSecond = millis() - newSecondStartedAtMillis;
     if (millisOfSecond >= 1000) {
       Serial.print("WARNING: Unexpected millis value: ");
