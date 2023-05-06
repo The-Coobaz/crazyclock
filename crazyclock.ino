@@ -68,7 +68,7 @@ void setup() {
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
     Serial.println("Resetting");
-    // TODO: reset = current pos should now be considered as "zero"
+    encoder.setPosition(0);
     DateTime now = RTClib::now();
 
     fakeTimeStartingPoint.epochSeconds = now.unixtime();
