@@ -10,6 +10,7 @@
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/HardwareCheck/HardwareCheck.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
+#include "src/computeFakeTime/computeFakeTime.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -32,8 +33,7 @@ unsigned long currentSecond;
 unsigned long newSecondStartedAtMillis;
 unsigned long currentMillis;
 
-unsigned long epochSecondsForStartPoint;
-unsigned long millisForStartPoint;
+FakeTimeStartingPoint fakeTimeStartingPoint;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -43,8 +43,7 @@ const int LCD_ROWS = 2;
 RotaryEncoder encoder(ROTARY_ENCODER_DT, ROTARY_ENCODER_CLK,
                       RotaryEncoder::LatchMode::TWO03);
 // interrupts added for better handling of rotary encoder
-IRAM_ATTR void checkPosition()
-{
+IRAM_ATTR void checkPosition() {
   encoder.tick(); // just call tick() to check the state.
 };
 int pos = 0;
@@ -61,15 +60,20 @@ void setup() {
     // waits for serial port to be ready
   }
   Serial.println("Attaching encoder interrupts...");
-  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_DT), checkPosition, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_CLK), checkPosition, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_DT), checkPosition,
+                  CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_CLK), checkPosition,
+                  CHANGE);
 
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
     Serial.println("Resetting");
     // TODO: reset = current pos should now be considered as "zero"
     DateTime now = RTClib::now();
-    epochSecondsForStartPoint = now.unixtime();
+
+    fakeTimeStartingPoint.epochSeconds = now.unixtime();
+    fakeTimeStartingPoint.millis = millis() - newSecondStartedAtMillis;
+    fakeTimeStartingPoint.scalingFactor = 1.0;
   });
   debouncer.subscribe(Debouncer::Edge::FALL, [](const int state) {
     // turns off built-in led
@@ -121,10 +125,9 @@ void setup() {
   Serial.println(newSecondStartedAtMillis);
 
   DateTime now = RTClib::now();
-  epochSecondsForStartPoint = currentSecond = now.unixtime();
-  millisForStartPoint = millis() - newSecondStartedAtMillis;
-  sprintfRaw(formattedTimeBuffer, epochSecondsForStartPoint,
-             millisForStartPoint);
+  fakeTimeStartingPoint.epochSeconds = currentSecond = now.unixtime();
+  fakeTimeStartingPoint.millis = millis() - newSecondStartedAtMillis;
+  sprintfRaw(formattedTimeBuffer, &fakeTimeStartingPoint);
   Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
@@ -145,6 +148,7 @@ void loop() {
     currentMillis = currentMillis % 1000;
   }
   // TODO: calculate fake time
+  checkRotaryEncoder(&fakeTimeStartingPoint, currentSecond, currentMillis);
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
   // shows real time local seconds and current millis on LCD
@@ -154,7 +158,6 @@ void loop() {
   sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
-  checkRotaryEncoder();
 }
 
 void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
@@ -169,6 +172,11 @@ void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
   sprintf(buffer, "%12d.%03d", epochSeconds, millis);
 }
 
+void sprintfRaw(char *buffer, FakeTimeStartingPoint *fakeTimeStartingPoint) {
+  sprintf(buffer, "%12d.%03d", fakeTimeStartingPoint->epochSeconds,
+          fakeTimeStartingPoint->millis);
+}
+
 bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   bool isNtpAvailable = false;
   Serial.println("Checking NTP...");
@@ -181,17 +189,22 @@ bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   return isNtpAvailable;
 }
 
-void checkRotaryEncoder() {
+void checkRotaryEncoder(FakeTimeStartingPoint *result,
+                        unsigned long currentSecond, int currentMillis) {
   encoder.tick();
   int newPos = encoder.getPosition();
 
   if (pos != newPos) {
+    result->epochSeconds = currentSecond;
+    result->millis = currentMillis;
+
     Serial.print("New rotary position: ");
     Serial.println(newPos);
     pos = newPos;
-    // TODO: calculate scaling factor based on rotary encoder position
-    double scalingFactor = (pos * 0.2) + 1;
-    Serial.print("Scaling factor: ");
-    Serial.println(scalingFactor);
+    // for now we calculate scaling factor as simple linear function
+    double scaling = (pos * 0.1) + 1;
+    result->scalingFactor = scaling;
+    Serial.print("New scaling factor: ");
+    Serial.println(scaling);
   }
 }

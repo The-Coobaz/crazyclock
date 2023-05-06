@@ -8,6 +8,14 @@ public:
   int millis;
 };
 
+class FakeTimeStartingPoint {
+
+public:
+  unsigned long epochSeconds;
+  int millis;
+  double scalingFactor;
+};
+
 Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
                          int millisForStartPoint,
                          unsigned long epochSecondsForNow, int millisForNow);
