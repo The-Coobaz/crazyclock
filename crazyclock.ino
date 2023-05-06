@@ -124,8 +124,9 @@ void setup() {
   Serial.println(newSecondStartedAtMillis);
 
   DateTime now = RTClib::now();
-  fakeTimeStartingPoint.epochSeconds = currentSecond = now.unixtime();
-  fakeTimeStartingPoint.millis = millis() - newSecondStartedAtMillis;
+  int millisOfSecond = millis() - newSecondStartedAtMillis;
+  fakeTimeStartingPoint.resetAt(now.unixtime(), millisOfSecond);
+
   sprintfRaw(formattedTimeBuffer, &fakeTimeStartingPoint);
   Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
@@ -147,7 +148,6 @@ void loop() {
     currentMillis = currentMillis % 1000;
   }
   // TODO: calculate fake time
-  checkRotaryEncoder(&fakeTimeStartingPoint, currentSecond, currentMillis);
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
   // shows real time local seconds and current millis on LCD
@@ -157,6 +157,7 @@ void loop() {
   sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
+  checkRotaryEncoder(&fakeTimeStartingPoint, currentSecond, currentMillis);
 }
 
 void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
