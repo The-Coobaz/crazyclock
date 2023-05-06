@@ -2,13 +2,16 @@
 #define CRAZYCLOCK_FAKE_TIME_STARTING_POINT_H
 
 class FakeTimeStartingPoint {
-
-public:
+private:
   unsigned long epochSeconds;
   int millis;
   double scalingFactor;
 
-  void resetAt(unsigned long epochSeconds, int millis);
+public:
+  void reset(unsigned long epochSeconds, int millis);
+  void update(double scalingFactor, unsigned long epochSeconds, int millis);
+
+  void formatEpoch(char *buffer);
 };
 
 #endif

@@ -72,7 +72,11 @@ void setup() {
     DateTime now = RTClib::now();
 
     int millisOfSecond = millis() - newSecondStartedAtMillis;
-    fakeTimeStartingPoint.resetAt(now.unixtime(), millisOfSecond);
+    if (millisOfSecond >= 1000) {
+      Serial.print("WARNING: Unexpected millis value: ");
+      Serial.println(millisOfSecond);
+    }
+    fakeTimeStartingPoint.reset(now.unixtime(), millisOfSecond);
   });
   debouncer.subscribe(Debouncer::Edge::FALL, [](const int state) {
     // turns off built-in led
@@ -125,9 +129,9 @@ void setup() {
 
   DateTime now = RTClib::now();
   int millisOfSecond = millis() - newSecondStartedAtMillis;
-  fakeTimeStartingPoint.resetAt(now.unixtime(), millisOfSecond);
+  fakeTimeStartingPoint.reset(now.unixtime(), millisOfSecond);
 
-  sprintfRaw(formattedTimeBuffer, &fakeTimeStartingPoint);
+  fakeTimeStartingPoint.formatEpoch(formattedTimeBuffer);
   Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
@@ -172,11 +176,6 @@ void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
   sprintf(buffer, "%12d.%03d", epochSeconds, millis);
 }
 
-void sprintfRaw(char *buffer, FakeTimeStartingPoint *fakeTimeStartingPoint) {
-  sprintf(buffer, "%12d.%03d", fakeTimeStartingPoint->epochSeconds,
-          fakeTimeStartingPoint->millis);
-}
-
 bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   bool isNtpAvailable = false;
   Serial.println("Checking NTP...");
@@ -189,21 +188,19 @@ bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   return isNtpAvailable;
 }
 
-void checkRotaryEncoder(FakeTimeStartingPoint *result,
+void checkRotaryEncoder(FakeTimeStartingPoint *startingPoint,
                         unsigned long currentSecond, int currentMillis) {
   encoder.tick();
   int newPos = encoder.getPosition();
 
   if (pos != newPos) {
-    result->epochSeconds = currentSecond;
-    result->millis = currentMillis;
-
-    Serial.print("New rotary position: ");
-    Serial.println(newPos);
-    pos = newPos;
     // for now we calculate scaling factor as simple linear function
     double scaling = (pos * 0.1) + 1;
-    result->scalingFactor = scaling;
+    startingPoint->update(scaling, currentSecond, currentMillis);
+
+    pos = newPos;
+    Serial.print("New rotary position: ");
+    Serial.println(newPos);
     Serial.print("New scaling factor: ");
     Serial.println(scaling);
   }
