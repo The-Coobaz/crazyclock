@@ -172,7 +172,7 @@ void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
 }
 
 void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
-  sprintf(buffer, "%12d.%03d", epochSeconds, millis);
+  sprintf(buffer, "%12lu.%03d", epochSeconds, millis);
 }
 
 bool tryNTPTimeClientUpdate(NTPClient timeClient) {

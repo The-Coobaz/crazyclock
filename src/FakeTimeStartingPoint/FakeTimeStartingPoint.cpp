@@ -14,5 +14,5 @@ void FakeTimeStartingPoint::update(double scalingFactor,
 };
 
 void FakeTimeStartingPoint::formatEpoch(char *buffer) {
-  sprintf(buffer, "%12d.%03d", this->epochSeconds, this->millis);
+  sprintf(buffer, "%12lu.%03d", this->epochSeconds, this->millis);
 };
