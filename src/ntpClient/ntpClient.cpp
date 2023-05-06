@@ -4,16 +4,16 @@
 #include <WiFiUdp.h>
 #include <Wire.h>
 
-bool isNtpUpdateAvailable(NTPClient *ntpClient) {
+bool updateTimeFromNtpServer(NTPClient *ntpClient) {
   bool isNtpAvailable = false;
   Serial.println("Checking NTP...");
   // Interesting observation: update() function returns false
   // if there was no need to update the time from server (default is 60 seconds)
   if (ntpClient->update()) {
-    Serial.println("NTP time update is available");
+    Serial.println("NTP time was updated from server");
     isNtpAvailable = true;
   } else {
-    Serial.println("Can not update from NTP");
+    Serial.println("NTP server not checked");
   }
   return isNtpAvailable;
 }
@@ -24,10 +24,10 @@ unsigned long retrieveEpochSeconds(NTPClient *ntpClient) {
   unsigned long result = 0;
   ntpClient->begin();
 
-  if (isNtpUpdateAvailable(ntpClient)) {
-    Serial.println("Updating RTC with UTC time from NTP...");
+  if (updateTimeFromNtpServer(ntpClient)) {
+    Serial.println("Updated UTC time from NTP");
     if (ntpClient->isTimeSet()) {
-      Serial.println("Getting time from NTP...");
+      Serial.println("Getting epoch seconds...");
       result = ntpClient->getEpochTime();
       Serial.print("Response from NTP client: ");
       Serial.println(result);
