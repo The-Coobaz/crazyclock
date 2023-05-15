@@ -1,7 +1,7 @@
-#ifndef CRAZYCLOCK_FAKE_TIME_STARTING_POINT_H
-#define CRAZYCLOCK_FAKE_TIME_STARTING_POINT_H
+#ifndef CRAZYCLOCK_SCALING_FACTOR_CHANGE_H
+#define CRAZYCLOCK_SCALING_FACTOR_CHANGE_H
 
-class FakeTimeStartingPoint {
+class ScalingFactorChange {
 private:
   double scalingFactor;
   // we need real time to correctly calculate time passed

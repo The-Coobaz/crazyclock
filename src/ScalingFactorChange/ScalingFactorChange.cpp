@@ -1,12 +1,12 @@
-#include "FakeTimeStartingPoint.h"
+#include "ScalingFactorChange.h"
 
 #include <stdio.h>
 
-void FakeTimeStartingPoint::reset(unsigned long epochSeconds, int millis) {
+void ScalingFactorChange::reset(unsigned long epochSeconds, int millis) {
   this->update(1.0, epochSeconds, millis, epochSeconds, millis);
 };
 
-void FakeTimeStartingPoint::update(double scalingFactor,
+void ScalingFactorChange::update(double scalingFactor,
                                    unsigned long epochSeconds, int millis,
                                    unsigned long fakeEpochSeconds,
                                    int fakeMillis) {
@@ -15,6 +15,6 @@ void FakeTimeStartingPoint::update(double scalingFactor,
   this->scalingFactor = scalingFactor;
 };
 
-void FakeTimeStartingPoint::formatEpoch(char *buffer) {
+void ScalingFactorChange::formatEpoch(char *buffer) {
   sprintf(buffer, "%12lu.%03d", this->epochSeconds, this->millis);
 };

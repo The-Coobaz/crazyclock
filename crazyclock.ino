@@ -8,9 +8,10 @@
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
-#include "src/FakeTimeStartingPoint/FakeTimeStartingPoint.h"
 #include "src/HardwareCheck/HardwareCheck.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
+#include "src/ScalingFactorChange/ScalingFactorChange.h"
+#include "src/computeFakeTime/computeFakeTime.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -33,7 +34,8 @@ unsigned long currentSecond;
 unsigned long newSecondStartedAtMillis;
 unsigned long currentMillis;
 
-FakeTimeStartingPoint fakeTimeStartingPoint;
+ScalingFactorChange scalingFactorChange;
+Time fakeTime;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -75,7 +77,7 @@ void setup() {
       Serial.print("WARNING: Unexpected millis value: ");
       Serial.println(millisOfSecond);
     }
-    fakeTimeStartingPoint.reset(now.unixtime(), millisOfSecond);
+    scalingFactorChange.reset(now.unixtime(), millisOfSecond);
   });
   debouncer.subscribe(Debouncer::Edge::FALL, [](const int state) {
     // turns off built-in led
@@ -128,9 +130,9 @@ void setup() {
 
   DateTime now = RTClib::now();
   int millisOfSecond = millis() - newSecondStartedAtMillis;
-  fakeTimeStartingPoint.reset(now.unixtime(), millisOfSecond);
+  scalingFactorChange.reset(now.unixtime(), millisOfSecond);
 
-  fakeTimeStartingPoint.formatEpoch(formattedTimeBuffer);
+  scalingFactorChange.formatEpoch(formattedTimeBuffer);
   Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
@@ -152,6 +154,7 @@ void loop() {
   }
   // TODO: calculate fake time
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
+  fakeTime.set(epochSeconds, currentMillis);
 
   // shows real time local seconds and current millis on LCD
   sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
@@ -160,7 +163,8 @@ void loop() {
   sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
-  checkRotaryEncoder(&fakeTimeStartingPoint, currentSecond, currentMillis);
+  checkRotaryEncoder(&scalingFactorChange, currentSecond, currentMillis,
+                     fakeTime.seconds, fakeTime.millis);
 }
 
 void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
@@ -187,15 +191,17 @@ bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   return isNtpAvailable;
 }
 
-void checkRotaryEncoder(FakeTimeStartingPoint *fakeTimeStartingPoint,
-                        unsigned long currentSecond, int currentMillis) {
+void checkRotaryEncoder(ScalingFactorChange *fakeTimeStartingPoint,
+                        unsigned long currentSecond, int currentMillis,
+                        unsigned long fakeSeconds, int fakeMillis) {
   int newPos = encoder.getPosition();
 
   if (pos != newPos) {
     pos = newPos;
     // for now we calculate scaling factor as simple linear function
     double scaling = (pos * 0.1) + 1;
-    fakeTimeStartingPoint->update(scaling, currentSecond, currentMillis);
+    fakeTimeStartingPoint->update(scaling, currentSecond, currentMillis,
+                                  fakeSeconds, fakeMillis);
 
     Serial.print("New rotary position: ");
     Serial.println(pos);

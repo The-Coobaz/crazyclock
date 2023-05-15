@@ -1,6 +1,16 @@
 
 #include "computeFakeTime.h"
 
+Time::Time() {
+  seconds = 0;
+  millis = 0;
+};
+
+void Time::set(unsigned long seconds, int millis) {
+  this->seconds = seconds;
+  this->millis = millis;
+};
+
 Time calculatePassedTime(unsigned long epochSecondsForStartPoint,
                          int millisForStartPoint,
                          unsigned long epochSecondsForNow, int millisForNow) {
