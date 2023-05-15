@@ -3,5 +3,5 @@
 
 APP_NAME := LocalDateTimeConverterTest
 ARDUINO_LIBS := AUnit Timezone Time
-ARDUINO_LIB_DIRS := ${HOME}/Arduino/libraries
+ARDUINO_LIB_DIRS := ${ARDUINO_CLI_DIR}/libraries
 include ../../libraries/EpoxyDuino/EpoxyDuino.mk

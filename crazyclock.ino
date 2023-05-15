@@ -11,7 +11,6 @@
 #include "src/HardwareCheck/HardwareCheck.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 #include "src/ScalingFactorChange/ScalingFactorChange.h"
-#include "src/computeFakeTime/computeFakeTime.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -35,7 +34,6 @@ unsigned long newSecondStartedAtMillis;
 unsigned long currentMillis;
 
 ScalingFactorChange scalingFactorChange;
-Time fakeTime;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -154,7 +152,6 @@ void loop() {
   }
   // TODO: calculate fake time
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
-  fakeTime.set(epochSeconds, currentMillis);
 
   // shows real time local seconds and current millis on LCD
   sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
@@ -163,8 +160,7 @@ void loop() {
   sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
-  checkRotaryEncoder(&scalingFactorChange, currentSecond, currentMillis,
-                     fakeTime.seconds, fakeTime.millis);
+  checkRotaryEncoder(&scalingFactorChange);
 }
 
 void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
@@ -191,17 +187,14 @@ bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   return isNtpAvailable;
 }
 
-void checkRotaryEncoder(ScalingFactorChange *fakeTimeStartingPoint,
-                        unsigned long currentSecond, int currentMillis,
-                        unsigned long fakeSeconds, int fakeMillis) {
+void checkRotaryEncoder(ScalingFactorChange *scalingFactorChange) {
   int newPos = encoder.getPosition();
 
   if (pos != newPos) {
     pos = newPos;
     // for now we calculate scaling factor as simple linear function
     double scaling = (pos * 0.1) + 1;
-    fakeTimeStartingPoint->update(scaling, currentSecond, currentMillis,
-                                  fakeSeconds, fakeMillis);
+    // TODO: we will need to update attributes of scaling factor change
 
     Serial.print("New rotary position: ");
     Serial.println(pos);

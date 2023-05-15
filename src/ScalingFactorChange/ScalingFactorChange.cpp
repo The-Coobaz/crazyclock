@@ -3,16 +3,11 @@
 #include <stdio.h>
 
 void ScalingFactorChange::reset(unsigned long epochSeconds, int millis) {
-  this->update(1.0, epochSeconds, millis, epochSeconds, millis);
-};
-
-void ScalingFactorChange::update(double scalingFactor,
-                                   unsigned long epochSeconds, int millis,
-                                   unsigned long fakeEpochSeconds,
-                                   int fakeMillis) {
+  this->scalingFactor = scalingFactor;
   this->epochSeconds = epochSeconds;
   this->millis = millis;
-  this->scalingFactor = scalingFactor;
+  this->fakeEpochSeconds = epochSeconds;
+  this->fakeMillis = millis;
 };
 
 void ScalingFactorChange::formatEpoch(char *buffer) {

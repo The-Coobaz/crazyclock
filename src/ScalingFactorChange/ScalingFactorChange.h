@@ -4,10 +4,10 @@
 class ScalingFactorChange {
 private:
   double scalingFactor;
-  // we need real time to correctly calculate time passed
+  // we need the real time when the scaling factor was changed
   unsigned long epochSeconds;
   int millis;
-  // we need fake time to know how to calculate fake time
+  // and also fake time of that change
   unsigned long fakeEpochSeconds;
   int fakeMillis;
 
@@ -18,13 +18,8 @@ public:
   void reset(unsigned long epochSeconds, int millis);
 
   /**
-   * @brief Creates new starting point after the scaling factor is changed.
-   */
-  void update(double scalingFactor, unsigned long epochSeconds, int millis,
-              unsigned long fakeEpochSeconds, int fakeMillis);
-
-  /**
-   * @brief Prints epoch seconds and millis into buffer (with leading spaces).
+   * @brief Prints real epoch seconds and millis of the change into buffer
+   * (with leading spaces).
    */
   void formatEpoch(char *buffer);
 };
