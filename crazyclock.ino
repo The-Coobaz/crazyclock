@@ -92,13 +92,12 @@ void setup() {
     epochSeconds = retrieveEpochSeconds(&timeClient);
     checkEpochSeconds(epochSeconds);
     rtc.setEpoch(epochSeconds);
-
-    sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
     Serial.print("RTC was set to UTC time epoch seconds: ");
     Serial.println(epochSeconds);
-    Serial.print("That is: ");
+
+    sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
+    Serial.print("In Europe/Warsaw timezone it is: ");
     Serial.print(formattedTimeBuffer);
-    Serial.println(" in local time");
   }
   checkRTC(&lcd, &rtc);
 
