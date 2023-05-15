@@ -98,8 +98,4 @@ In root directory:
 
 1. AUnit library: `arduino-cli lib install AUnit`
 2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.5.0 in crazyclock `libraries` folder
-3. Set environment variable `ARDUINO_CLI_DIR` for `arduino-cli` libraries:
-   ```bash
-   export ARDUINO_CLI_DIR=${HOME}/Arduino
-   ```
-4. Inside `src` folder run command `make`
+3. Inside `src` folder run command `make`
