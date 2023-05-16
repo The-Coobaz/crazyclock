@@ -6,8 +6,6 @@ on:
 env:
   # https://arduino.github.io/arduino-cli/latest/installation/#download
   ARDUINO_CLI_FILE: arduino-cli_latest_Linux_64bit.tar.gz
-  # for https://github.com/bxparks/EpoxyDuino#additional-arduino-library-locations
-  ARDUINO_CLI_DIR: ${HOME}/Arduino
 
 jobs:
   # https://github.com/marketplace/actions/clang-format-check#single-path
