@@ -76,7 +76,7 @@ void checkRTC(hd44780_I2Cexp *lcd, DS3231 *rtc) {
   }
 }
 
-void checkEpochSeconds(unsigned long realTimeEpochSeconds) {
+void checkIfEpochSecondsMakeSense(unsigned long realTimeEpochSeconds) {
   if (realTimeEpochSeconds < 946684801) {
     Serial.println("Real time should NOT be before 2000-01-01");
     hd44780::fatalError(INVALID_REAL_TIME);
