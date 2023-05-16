@@ -10,6 +10,7 @@
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/HardwareCheck/HardwareCheck.h"
 #include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
+#include "src/ScalingFactorChange/ScalingFactorChange.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
@@ -32,8 +33,7 @@ unsigned long currentSecond;
 unsigned long newSecondStartedAtMillis;
 unsigned long currentMillis;
 
-unsigned long epochSecondsForStartPoint;
-unsigned long millisForStartPoint;
+ScalingFactorChange scalingFactorChange;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
@@ -42,6 +42,10 @@ const int LCD_COLS = 16;
 const int LCD_ROWS = 2;
 RotaryEncoder encoder(ROTARY_ENCODER_DT, ROTARY_ENCODER_CLK,
                       RotaryEncoder::LatchMode::TWO03);
+// interrupts added for better handling of rotary encoder
+IRAM_ATTR void tick() {
+  encoder.tick(); // just call tick() to check the state.
+};
 int pos = 0;
 int buttonState = 0;
 DS3231 rtc;
@@ -55,13 +59,23 @@ void setup() {
   while (!Serial) {
     // waits for serial port to be ready
   }
+  Serial.println("Attaching encoder interrupts...");
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_DT), tick, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ROTARY_ENCODER_CLK), tick, CHANGE);
 
   debouncer.subscribe(Debouncer::Edge::RISE, [](const int state) {
     digitalWrite(LED_BUILTIN, HIGH);
     Serial.println("Resetting");
-    // TODO: reset = current pos should now be considered as "zero"
+    pos = 0;
+    encoder.setPosition(0);
+
     DateTime now = RTClib::now();
-    epochSecondsForStartPoint = now.unixtime();
+    int millisOfSecond = millis() - newSecondStartedAtMillis;
+    if (millisOfSecond >= 1000) {
+      Serial.print("WARNING: Unexpected millis value: ");
+      Serial.println(millisOfSecond);
+    }
+    scalingFactorChange.reset(now.unixtime(), millisOfSecond);
   });
   debouncer.subscribe(Debouncer::Edge::FALL, [](const int state) {
     // turns off built-in led
@@ -113,10 +127,10 @@ void setup() {
   Serial.println(newSecondStartedAtMillis);
 
   DateTime now = RTClib::now();
-  epochSecondsForStartPoint = currentSecond = now.unixtime();
-  millisForStartPoint = millis() - newSecondStartedAtMillis;
-  sprintfRaw(formattedTimeBuffer, epochSecondsForStartPoint,
-             millisForStartPoint);
+  int millisOfSecond = millis() - newSecondStartedAtMillis;
+  scalingFactorChange.reset(now.unixtime(), millisOfSecond);
+
+  scalingFactorChange.formatEpoch(formattedTimeBuffer);
   Serial.print("Program Started at epoch seconds (UTC): ");
   Serial.println(formattedTimeBuffer);
 }
@@ -146,7 +160,7 @@ void loop() {
   sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
-  checkRotaryEncoder();
+  checkRotaryEncoder(&scalingFactorChange);
 }
 
 void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
@@ -158,7 +172,7 @@ void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
 }
 
 void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
-  sprintf(buffer, "%12d.%03d", epochSeconds, millis);
+  sprintf(buffer, "%12lu.%03d", epochSeconds, millis);
 }
 
 bool tryNTPTimeClientUpdate(NTPClient timeClient) {
@@ -173,14 +187,18 @@ bool tryNTPTimeClientUpdate(NTPClient timeClient) {
   return isNtpAvailable;
 }
 
-void checkRotaryEncoder() {
-  encoder.tick();
+void checkRotaryEncoder(ScalingFactorChange *scalingFactorChange) {
   int newPos = encoder.getPosition();
 
   if (pos != newPos) {
-    Serial.print("New rotary position: ");
-    Serial.println(newPos);
     pos = newPos;
-    // TODO: calculate scaling factor based on rotary encoder position
+    // for now we calculate scaling factor as simple linear function
+    double scaling = (pos * 0.1) + 1;
+    // TODO: we will need to update attributes of scaling factor change
+
+    Serial.print("New rotary position: ");
+    Serial.println(pos);
+    Serial.print("New scaling factor: ");
+    Serial.println(scaling);
   }
 }
