@@ -32,13 +32,18 @@ LocalDateTime LocalDateTimeConverter::fromUtc(int year, int month, int day,
 }
 
 LocalDateTime LocalDateTimeConverter::fromUtc(unsigned long epochSeconds) {
+  return LocalDateTime(this->toLocalSeconds(epochSeconds));
+}
+
+unsigned long
+LocalDateTimeConverter::toLocalSeconds(unsigned long epochSeconds) {
   unsigned long localSeconds;
   if (this->timezoneId == plId) {
     localSeconds = pl.toLocal(epochSeconds);
   } else {
     localSeconds = epochSeconds;
   }
-  return LocalDateTime(localSeconds);
+  return localSeconds;
 }
 
 LocalDateTimeConverter LocalDateTimeConverter::UTC =
