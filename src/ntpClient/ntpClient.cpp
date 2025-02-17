@@ -5,17 +5,17 @@
 #include <Wire.h>
 
 bool updateTimeFromNtpServer(NTPClient *ntpClient) {
-  bool isNtpAvailable = false;
+  bool retrievedFromNtpServer = false;
   Serial.println("Checking NTP...");
-  // Interesting observation: update() function returns false
-  // if there was no need to update the time from server (default is 60 seconds)
   if (ntpClient->update()) {
-    Serial.println("NTP time was updated from server");
-    isNtpAvailable = true;
+    retrievedFromNtpServer = true;
   } else {
-    Serial.println("NTP server not checked");
+    // Interesting observation:
+    // update() function only check the server if the time is not fresh
+    // (if the last update is older than 60 seconds ago)
+    Serial.println("Did not connect to NTP server");
   }
-  return isNtpAvailable;
+  return retrievedFromNtpServer;
 }
 
 unsigned long retrieveEpochSeconds(NTPClient *ntpClient) {
@@ -26,16 +26,14 @@ unsigned long retrieveEpochSeconds(NTPClient *ntpClient) {
 
   if (updateTimeFromNtpServer(ntpClient)) {
     Serial.println("Updated UTC time from NTP");
-    if (ntpClient->isTimeSet()) {
-      Serial.println("Getting epoch seconds...");
-      result = ntpClient->getEpochTime();
-      Serial.print("Response from NTP client: ");
-      Serial.println(result);
-    } else {
-      Serial.println("Unexpected errors in NTP client");
-    }
+  }
+  if (ntpClient->isTimeSet()) {
+    Serial.println("Getting epoch seconds...");
+    result = ntpClient->getEpochTime();
+    Serial.print("Response from NTP client: ");
+    Serial.println(result);
   } else {
-    Serial.println("NTP is not available");
+    Serial.println("Could not get time from NTP");
   }
 
   ntpClient->end();
