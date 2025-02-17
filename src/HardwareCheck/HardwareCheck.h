@@ -15,6 +15,6 @@ bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
                      const char *password);
 
 void checkRTC(hd44780_I2Cexp *lcd, DS3231 *rtc);
-void checkEpochSeconds(unsigned long realTimeEpochSeconds);
+bool epochSecondsAreCorrect(unsigned long realTimeEpochSeconds);
 
 #endif
