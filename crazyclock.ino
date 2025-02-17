@@ -90,14 +90,15 @@ void setup() {
   bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
   if (wifiAvailable) {
     epochSeconds = retrieveEpochSeconds(&timeClient);
-    checkIfEpochSecondsMakeSense(epochSeconds);
-    rtc.setEpoch(epochSeconds);
-    Serial.print("RTC was set to UTC time epoch seconds: ");
-    Serial.println(epochSeconds);
+    if (epochSecondsAreCorrect(epochSeconds)) {
+      rtc.setEpoch(epochSeconds);
+      Serial.print("RTC was set to UTC time epoch seconds: ");
+      Serial.println(epochSeconds);
 
-    sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
-    Serial.print("In Europe/Warsaw timezone it is: ");
-    Serial.print(formattedTimeBuffer);
+      sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
+      Serial.print("In Europe/Warsaw timezone it is: ");
+      Serial.print(formattedTimeBuffer);
+    }
   }
   checkRTC(&lcd, &rtc);
 
