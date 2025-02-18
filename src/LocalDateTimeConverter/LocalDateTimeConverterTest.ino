@@ -4,7 +4,7 @@
 #include "LocalDateTimeConverter.h"
 
 // UTC seconds for 2022-02-14T12:34:56UTC
-unsigned long valentinesUTCSecond = 1644842096ul;
+unsigned long valentinesUTCSecond = 1644842096;
 
 test(should_be_one_hour_later_in_PL_at_epoch_start) {
   // given
@@ -65,10 +65,10 @@ test(should_convert_PL_time_near_spring_time_change) {
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
   // 2020-01-29, 00:59:00 UTC
-  unsigned long utcBefore = 1580259540ul;
+  unsigned long utcBefore = 1580259540;
   LocalDateTime beforePL = pl.fromUtc(utcBefore);
   // 2020-01-29, 01:01:00 UTC
-  unsigned long utcAfter = 1580259660ul;
+  unsigned long utcAfter = 1580259660;
   LocalDateTime afterPL = pl.fromUtc(utcAfter);
 
   assertEqual(beforePL.getLocalSeconds(), utcBefore + 3600);
@@ -81,10 +81,10 @@ test(should_convert_PL_time_near_autumn_time_change) {
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
   // 2020-10-25, 00:59:00 UTC
-  unsigned long utcBefore = 1603587540ul;
+  unsigned long utcBefore = 1603587540;
   LocalDateTime beforePL = pl.fromUtc(utcBefore);
   // 2020-10-25, 02:01:00 UTC
-  unsigned long utcAfter = 1603587660ul;
+  unsigned long utcAfter = 1603587660;
   LocalDateTime afterPL = pl.fromUtc(utcAfter);
 
   assertEqual(beforePL.getLocalSeconds(), utcBefore + 7200);
