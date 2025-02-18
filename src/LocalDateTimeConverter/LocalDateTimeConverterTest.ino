@@ -64,6 +64,21 @@ test(pl_conversion_to_seconds) {
 }
 
 // in March we change the clock from 2 AM to 3 AM
+test(pl_conversion_near_spring_time_change) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  unsigned long expectedSecondsUTC = 1580263140;
+
+  // UTC time difference is 2 minutes
+  LocalDateTime beforePL = pl.fromUtc(2020, 1, 29, 0, 59, 0);
+  LocalDateTime afterPL = pl.fromUtc(2020, 1, 29, 1, 1, 0);
+
+  // but local time difference should be 1 hour and 2 minutes
+  assertEqual(beforePL.getLocalSeconds(), expectedSecondsUTC);
+  assertEqual(afterPL.getLocalSeconds(), expectedSecondsUTC + 2 * 60);
+}
+
+// in March we change the clock from 2 AM to 3 AM
 test(pl_conversion_near_spring_time_change_2020) {
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
@@ -77,6 +92,21 @@ test(pl_conversion_near_spring_time_change_2020) {
   LocalDateTime afterUTC = utc.fromUtc(2020, 3, 29, 1, 1, 0);
   LocalDateTime afterPL = pl.fromUtc(2020, 3, 29, 1, 1, 0);
   assertEqual(afterPL.getLocalSeconds(), afterUTC.getLocalSeconds() + 7200);
+}
+
+// in October we change the clock from 3 AM to 2 AM
+test(pl_conversion_near_autumn_time_change) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+  unsigned long expectedSecondsUTC = 1603594740;
+
+  // UTC time difference is 1 hour and 3 minutes
+  LocalDateTime beforePL = pl.fromUtc(2020, 10, 25, 0, 59, 0);
+  LocalDateTime afterPL = pl.fromUtc(2020, 10, 25, 2, 2, 0);
+
+  // but local time difference is only 3 minutes
+  assertEqual(beforePL.getLocalSeconds(), expectedSecondsUTC);
+  assertEqual(afterPL.getLocalSeconds(), expectedSecondsUTC + 3 * 60);
 }
 
 // in October we change the clock from 3 AM to 2 AM

@@ -6,8 +6,6 @@ on:
 env:
   # https://arduino.github.io/arduino-cli/latest/installation/#download
   ARDUINO_CLI_FILE: arduino-cli_latest_Linux_64bit.tar.gz
-  # for https://github.com/bxparks/EpoxyDuino#additional-arduino-library-locations
-  ARDUINO_CLI_DIR: ${HOME}/Arduino
 
 jobs:
   # https://github.com/marketplace/actions/clang-format-check#single-path
@@ -61,7 +59,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: bxparks/EpoxyDuino
-          ref: v1.3.0
+          ref: v1.5.0
           path: crazyclock/libraries/EpoxyDuino
 
       - name: Compile tests
@@ -90,7 +88,7 @@ jobs:
           ./arduino-cli core install esp8266:esp8266
 
       - name: Install Libraries Required by Sketch
-        run: ./arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone" "DS3231"
+        run: ./arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone" "DS3231" "Debouncer"
 
       - name: List top directory
         run: ls -lah

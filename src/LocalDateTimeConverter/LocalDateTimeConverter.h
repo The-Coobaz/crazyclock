@@ -12,6 +12,7 @@ class LocalDateTimeConverter {
 private:
   LocalDateTimeConverter(int timezoneId);
   int timezoneId;
+  unsigned long toLocalSeconds(unsigned long epochSeconds);
 
 public:
   static LocalDateTimeConverter UTC;
