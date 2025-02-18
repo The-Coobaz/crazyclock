@@ -92,8 +92,25 @@ test(should_convert_PL_time_near_autumn_time_change) {
 }
 
 // in October we change the clock from 3 AM to 2 AM
-test(
-    should_convert_to_PL_time_and_return_time_fragments_near_autumn_time_change_2022) {
+test(should_convert_to_same_PL_time_twice_during_a_night) {
+  // given
+  LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
+
+  // 2020-10-25, 00:00:30 UTC
+  unsigned long utcFirst = 1603585800;
+  LocalDateTime firstPL = pl.fromUtc(utcFirst);
+  // 2020-10-25, 00:01:30 UTC
+  unsigned long utcSecond = 1603589400;
+  LocalDateTime secondPL = pl.fromUtc(utcSecond);
+
+  // 2020-10-25, 00:02:30
+  unsigned long expected = 1603593000;
+  assertEqual(firstPL.getLocalSeconds(), expected);
+  assertEqual(secondPL.getLocalSeconds(), expected);
+}
+
+// in October we change the clock from 3 AM to 2 AM
+test(should_convert_with_time_fragments_near_autumn_time_change_2022) {
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
   // 2022-10-30, 00:00:00 UTC
