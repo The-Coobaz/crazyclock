@@ -18,7 +18,7 @@ test(should_be_one_hour_later_in_PL_at_epoch_start) {
   assertEqual(localDateTime.getLocalSeconds(), epochStart + 3600);
 }
 
-test(should_recognize_same_time_on_valentines_day) {
+test(should_recognize_valentines_day_in_UTC_and_PL) {
   // given
   LocalDateTimeConverter utc = LocalDateTimeConverter::UTC;
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
@@ -64,11 +64,11 @@ test(should_convert_PL_time_near_spring_time_change) {
   // given
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
-  // 2020-01-29, 00:59:00 UTC
-  unsigned long utcBefore = 1580259540;
+  // 2020-03-29, 00:59:59 UTC
+  unsigned long utcBefore = 1585443599;
   LocalDateTime beforePL = pl.fromUtc(utcBefore);
-  // 2020-01-29, 01:01:00 UTC
-  unsigned long utcAfter = 1580259660;
+  // 2020-03-29, 01:00:00 UTC
+  unsigned long utcAfter = 1585443600;
   LocalDateTime afterPL = pl.fromUtc(utcAfter);
 
   assertEqual(beforePL.getLocalSeconds(), utcBefore + 3600);
@@ -80,11 +80,11 @@ test(should_convert_PL_time_near_autumn_time_change) {
   // given
   LocalDateTimeConverter pl = LocalDateTimeConverter::PL;
 
-  // 2020-10-25, 00:59:00 UTC
-  unsigned long utcBefore = 1603587540;
+  // 2020-10-25, 00:59:59 UTC
+  unsigned long utcBefore = 1603587599;
   LocalDateTime beforePL = pl.fromUtc(utcBefore);
-  // 2020-10-25, 02:01:00 UTC
-  unsigned long utcAfter = 1603587660;
+  // 2020-10-25, 01:00:00 UTC
+  unsigned long utcAfter = 1603587600;
   LocalDateTime afterPL = pl.fromUtc(utcAfter);
 
   assertEqual(beforePL.getLocalSeconds(), utcBefore + 7200);
