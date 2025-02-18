@@ -32,11 +32,7 @@ bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
   lcd->setCursor(0, 0);
   lcd->print("Waiting for WiFi");
   lcd->setCursor(0, 1);
-  // provided in examples of WiFi library with a comment:
-  // > Explicitly set the ESP8266 to be a WiFi-client,
-  // > otherwise, it by default, would try to act as both
-  // > a client and an access-point
-  WiFi.mode(WIFI_STA);
+
   WiFi.begin(ssid, password);
   for (int n = 0; (n < 30) && (WiFi.status() != WL_CONNECTED); n++) {
     delay(500);
@@ -74,27 +70,4 @@ void checkRTC(hd44780_I2Cexp *lcd, DS3231 *rtc) {
   } else {
     Serial.println("RTC started");
   }
-}
-
-bool epochSecondsAreCorrect(unsigned long realTimeEpochSeconds) {
-  if (realTimeEpochSeconds < 946684801) {
-    Serial.println("Real time should NOT be before 2000-01-01");
-    hd44780::fatalError(INVALID_REAL_TIME);
-    return false;
-  }
-  if (realTimeEpochSeconds > 4102444799) {
-    Serial.println("Real time should NOT be after 2099-12-31");
-    hd44780::fatalError(INVALID_REAL_TIME);
-    return false;
-  }
-  // prints error to console but doesn't stop execution
-  if (realTimeEpochSeconds < 1640999044) {
-    Serial.println("Real time should NOT be before 2022-01-01");
-    return false;
-  }
-  if (realTimeEpochSeconds > 1924920244) {
-    Serial.println("Real time should NOT be after 2030-12-31");
-    return false;
-  }
-  return true;
 }

@@ -2,7 +2,6 @@
 #define CRAZYCLOCK_HARDWARE_CHECK_H
 
 #define RTC_ERROR_STATUS 3
-#define INVALID_REAL_TIME 2
 
 #include <DS3231.h>
 #include <hd44780.h>
@@ -15,6 +14,5 @@ bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
                      const char *password);
 
 void checkRTC(hd44780_I2Cexp *lcd, DS3231 *rtc);
-bool epochSecondsAreCorrect(unsigned long realTimeEpochSeconds);
 
 #endif

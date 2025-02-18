@@ -20,16 +20,14 @@ You are going to need:
 
 ## Development
 
-### VS Code
+### Formatting
+#### VS Code
 
-You might want to install [C++ Tools](https://code.visualstudio.com/docs/languages/cpp) plugin.
-
-Install [Clang-Format](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format) extension
-and choose it for formatting (`xaver.clang-format`).
+For VS Code install [Clang-Format](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format) extension.
 
 To format currently edited file use `[ctlr] + [shift] + [i]` [keyboard shortcut](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference).
 
-### Console
+#### Console
 
 To format all files at once (with [clang-format](https://clang.llvm.org/docs/ClangFormat.html) installed on your system):
 
@@ -81,7 +79,7 @@ In root directory:
 1. Install required libraries (i.e. [hd44780](https://github.com/duinoWitchery/hd44780)):
 
    ```bash
-   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone" "DS3231" "Debouncer"
+   arduino-cli lib install "hd44780" "NTPClient" "RotaryEncoder" "Time" "Timezone" "DS3231"
    ```
 
 2. Compile: `arduino-cli --verbose compile --fqbn esp8266:esp8266:d1`
@@ -97,5 +95,8 @@ In root directory:
 #### Requirements
 
 1. AUnit library: `arduino-cli lib install AUnit`
-2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.5.0 in crazyclock `libraries` folder
-3. Inside `src` folder run command `make`
+2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.3.0 in crazyclock `libraries` folder
+3. Set environment variable `ARDUINO_CLI_DIR` for `arduino-cli` libraries:
+   ```bash
+   export ARDUINO_CLI_DIR=${HOME}/Arduino
+   ```
