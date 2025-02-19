@@ -2,8 +2,29 @@
 
 [![Continuous Integration](https://github.com/The-Coobaz/crazyclock/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/The-Coobaz/crazyclock/actions/workflows/continuous-integration.yml)
 
-The main idea of this project is arduino clock with flexible second time.
-This would allow to speed up or slow down the time.
+Crazyclock is a clock that can go faster or slower than normal clock.
+
+In other words: _crazy_ minute can last more than, or less than 60 _real_ seconds.
+_Crazy_ time can be scaled to run for example twice as fast:
+
+1. By default Crazyclock starts in normal mode
+    - it shows _real_ time
+2. Let's assume that at 12:00 someone configures the scaling factor to be 2
+    - time should run twice as fast as normal time
+3. As a result after one minute the clock will show _crazy_ time being 12:02
+
+## Table of Content
+
+* [Hardware](#hardware)
+    - [Schema](#schema)
+* [Development](#development)
+    - [VS Code](#vs-code)
+    - [Console](#console)
+    - [Working with Arduino IDE](#working-with-arduino-ide)
+    - [working with Arduino CLI](#working-with-arduino-cli)
+* [Fritzing Parts](#fritzing-parts)
+* [Automated Tests](#automated-tests)
+    - [Requirements](#requirements)
 
 ## Hardware
 
@@ -92,9 +113,9 @@ In root directory:
 1. [KY-040 Rotary Encoder](https://forum.fritzing.org/t/ky-040-rotary-encoder-breakout-board-part/11073)
 2. [Wemos D1 Mini](https://github.com/mcauser/Fritzing-Part-WeMos-D1-Mini/tree/master/dist)
 
-### Automated tests
+## Automated tests
 
-#### Requirements
+### Requirements
 
 1. AUnit library: `arduino-cli lib install AUnit`
 2. [EpoxyDuino](https://github.com/bxparks/EpoxyDuino#installation) v1.5.0 in crazyclock `libraries` folder
