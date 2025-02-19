@@ -9,21 +9,25 @@ _Crazy_ time can be scaled to run for example twice as fast:
 
 1. By default Crazyclock starts in normal mode
     - it shows _real_ time
-2. Let's assume that at 12:00 someone configures the scaling factor to be 2
+2. Let's assume that at 12:00 someone configures the scaling factor to be `2`
     - time should run twice as fast as normal time
 3. As a result after one minute the clock will show _crazy_ time being 12:02
 
+For more details see [How it Works](#how-it-works) section.
+
 ## Table of Content
 
-* [Hardware](#hardware)
+- [Hardware](#hardware)
     - [Schema](#schema)
-* [Development](#development)
+- [How it Works](#how-it-works)
+    - [When the Scaling Factor Changes](#when-the-scaling-factor-changes)
+- [Development](#development)
     - [VS Code](#vs-code)
     - [Console](#console)
     - [Working with Arduino IDE](#working-with-arduino-ide)
     - [working with Arduino CLI](#working-with-arduino-cli)
-* [Fritzing Parts](#fritzing-parts)
-* [Automated Tests](#automated-tests)
+- [Fritzing Parts](#fritzing-parts)
+- [Automated Tests](#automated-tests)
     - [Requirements](#requirements)
 
 ## Hardware
@@ -38,6 +42,28 @@ You are going to need:
 ### Schema
 
 [![Fritzing Wemos D1 Mini schema](./misc/img/wemos-d1-mini-s.png)](./misc/img/wemos-d1-mini.png)
+
+## How it Works
+
+In short Crazyclock uses _real_ time to calculate _crazy_ time:
+
+- it checks how much time passed
+    - for that it needs to know _real_ time
+- and calculates the _crazy_ time
+    - using the scaling factor
+
+It calculates the _crazy_ clock within the main program loop without using delays.
+
+### When the Scaling Factor Changes
+
+1. Get **t<sub>0</sub>** as the _real_ time when scaling factor was configured
+2. And **c<sub>0</sub>** as the _crazy_ time for that moment
+3. Let **T** be how much time passed since **t<sub>0</sub>**:
+    - **T** = **t<sub>now</sub>** - **t<sub>0</sub>**
+4. And then it knows how much _crazy_ time passed from **t<sub>0</sub>**:
+    - **C** = **T** * **scaling factor**
+5. For current crazy time we get starting point (_crazy_ time **c<sub>0</sub>**) and increase it by passed _crazy_ time (**C**):
+    - **c<sub>now</sub>** = **c<sub>0</sub>** + **C**
 
 ## Development
 
