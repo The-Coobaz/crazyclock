@@ -51,7 +51,7 @@ In short Crazyclock uses _real_ time and a _scaling factor_ to calculate _crazy_
 - it checks how much of _real_ time passed
 - and calculates the _crazy_ time using the scaling factor
 
-It calculates the _crazy_ clock within the main program loop as fast as it can: without using `delay(ms)` function.
+It calculates the _crazy_ time in the main program loop without using `delay(ms)` function.
 
 ### Simple Example
 
