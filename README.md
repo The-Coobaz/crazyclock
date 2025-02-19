@@ -9,9 +9,9 @@ _Crazy_ time can be scaled to run for example twice as fast:
 
 1. By default Crazyclock starts in normal mode
     - it shows _real_ time
-2. Let's assume that at 12:00 someone configures the scaling factor to be `2`
+2. Let's assume that at 12:00 someone goes _crazy_
     - time should run twice as fast as normal time
-3. As a result after one minute the clock will show _crazy_ time being 12:02
+3. As a result after **one minute** the Crazyclock will show **12:02**
 
 For more details see [How it Works](#how-it-works) section.
 
@@ -20,6 +20,7 @@ For more details see [How it Works](#how-it-works) section.
 - [Hardware](#hardware)
     - [Schema](#schema)
 - [How it Works](#how-it-works)
+    - [Simple Example](#simple-example)
     - [When the Scaling Factor Changes](#when-the-scaling-factor-changes)
 - [Development](#development)
     - [VS Code](#vs-code)
@@ -45,14 +46,22 @@ You are going to need:
 
 ## How it Works
 
-In short Crazyclock uses _real_ time to calculate _crazy_ time:
+In short Crazyclock uses _real_ time and a _scaling factor_ to calculate _crazy_ time:
 
-- it checks how much time passed
-    - for that it needs to know _real_ time
-- and calculates the _crazy_ time
-    - using the scaling factor
+- it checks how much of _real_ time passed
+- and calculates the _crazy_ time using the scaling factor
 
-It calculates the _crazy_ clock within the main program loop without using delays.
+It calculates the _crazy_ clock within the main program loop as fast as it can: without using `delay(ms)` function.
+
+### Simple Example
+
+1. When the program starts it shows _normal_ time
+    - **scaling factor** being `1`
+2. At some time **t<sub>0</sub>** someone changes the **scaling factor** to `2`
+3. Now we should show time flying twice as fast. We do it by:
+    - calculating how much of _real_ time passed
+    - multiplying tha by `2`
+    - adding that to **t<sub>0</sub>**
 
 ### When the Scaling Factor Changes
 
@@ -62,7 +71,7 @@ It calculates the _crazy_ clock within the main program loop without using delay
     - **T** = **t<sub>now</sub>** - **t<sub>0</sub>**
 4. And then it knows how much _crazy_ time passed from **t<sub>0</sub>**:
     - **C** = **T** * **scaling factor**
-5. For current crazy time we get starting point (_crazy_ time **c<sub>0</sub>**) and increase it by passed _crazy_ time (**C**):
+5. For current crazy time we get _crazy_ starting point **c<sub>0</sub>** and increase it by passed _crazy_ time **C**:
     - **c<sub>now</sub>** = **c<sub>0</sub>** + **C**
 
 ## Development
