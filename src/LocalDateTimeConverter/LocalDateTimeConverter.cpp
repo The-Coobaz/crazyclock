@@ -15,22 +15,6 @@ Timezone pl(dstRule, stdRule);
 
 LocalDateTimeConverter::LocalDateTimeConverter(int tzId) { timezoneId = tzId; }
 
-LocalDateTime LocalDateTimeConverter::fromUtc(int year, int month, int day,
-                                              int hour, int minute,
-                                              int second) {
-  TimeElements timeElements;
-  timeElements.Year = year - 1970;
-  timeElements.Month = month;
-  timeElements.Day = day;
-  timeElements.Hour = hour;
-  timeElements.Minute = minute;
-  timeElements.Second = second;
-
-  unsigned long seconds = makeTime(timeElements);
-
-  return this->fromUtc(seconds);
-}
-
 LocalDateTime LocalDateTimeConverter::fromUtc(unsigned long epochSeconds) {
   return LocalDateTime(this->toLocalSeconds(epochSeconds));
 }
