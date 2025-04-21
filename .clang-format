@@ -1,9 +1,0 @@
-SortIncludes: true
-IncludeBlocks: Regroup
-IncludeCategories:
-  - Regex: '^<Arduino\.h>'
-    Priority: 1
-  - Regex: '^<.*\.h>'
-    Priority: 2
-  - Regex: '^".*"$'
-    Priority: 3

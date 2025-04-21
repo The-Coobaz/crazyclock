@@ -1,7 +1,3 @@
-#include "src/HardwareCheck/HardwareCheck.h"
-#include "src/ScalingFactorChange/ScalingFactorChange.h"
-#include "src/WarsawTimeConverter/WarsawTimeConverter.h"
-#include "src/ntpClient/ntpClient.h"
 #include <DS3231.h>
 #include <Debouncer.h>
 #include <ESP8266WiFi.h>
@@ -11,6 +7,11 @@
 #include <Wire.h>
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
+
+#include "src/HardwareCheck/HardwareCheck.h"
+#include "src/ScalingFactorChange/ScalingFactorChange.h"
+#include "src/WarsawTimeConverter/WarsawTimeConverter.h"
+#include "src/ntpClient/ntpClient.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
