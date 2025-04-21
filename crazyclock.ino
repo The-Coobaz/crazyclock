@@ -7,10 +7,9 @@
 #include <Wire.h>
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
-// https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/HardwareCheck/HardwareCheck.h"
-#include "src/WarsawTimeConverter/WarsawTimeConverter.h"
 #include "src/ScalingFactorChange/ScalingFactorChange.h"
+#include "src/WarsawTimeConverter/WarsawTimeConverter.h"
 #include "src/ntpClient/ntpClient.h"
 
 const char *ssid = "SSID";

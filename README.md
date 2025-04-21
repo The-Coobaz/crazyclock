@@ -76,6 +76,10 @@ It calculates the _crazy_ time in the main program loop without using `delay(ms)
 
 ## Development
 
+Additional infpo about `src` folder for submodules:
+
+* https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
+
 ### VS Code
 
 You might want to install [C++ Tools](https://code.visualstudio.com/docs/languages/cpp) plugin.
