@@ -11,7 +11,7 @@ jobs:
   # https://github.com/marketplace/actions/clang-format-check#single-path
   formatting-check:
     name: Formatting Check
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
@@ -24,7 +24,7 @@ jobs:
 
   tests:
     name: Unit Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Download Arduino cli
         run: |
@@ -70,7 +70,7 @@ jobs:
 
   compile:
     name: Compile for Wemos D1
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Download Arduino cli
         run: |
