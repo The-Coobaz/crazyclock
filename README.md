@@ -102,7 +102,7 @@ We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-fro
 
 #### Arduino CLI setup
 
-1. [Install arduino-cli](https://arduino.github.io/arduino-cli/0.22/installation/)
+1. [Install arduino-cli](https://arduino.github.io/arduino-cli/1.2/installation/)
 2. Create configuration file: `arduino-cli config init`
 3. Add esp8266 URL for board manager:
 
@@ -110,7 +110,7 @@ We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-fro
    arduino-cli config add board_manager.additional_urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
    ```
 
-4. Configure the [autocompletion for command-line](https://arduino.github.io/arduino-cli/0.22/command-line-completion/#generate-the-completion-file) (optional step)
+4. Configure the [autocompletion for command-line](https://arduino.github.io/arduino-cli/1.2/command-line-completion/#generate-the-completion-file) (optional step)
 5. Install Wemos D1 Mini board:
 
    ```bash
