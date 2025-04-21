@@ -138,7 +138,7 @@ void loop() {
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
   // shows real time local seconds and current millis on LCD
-  warsawTimeConverter.update(epochSeconds, currentMillis);
+  warsawTimeConverter.fromUtc(epochSeconds, currentMillis);
   lcd.setCursor(0, 0);
   lcd.print(warsawTimeConverter.formatted());
 

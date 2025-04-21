@@ -3,9 +3,6 @@
 
 #include "WarsawTimeConverter.h"
 
-// UTC seconds for 2022-02-14T12:34:56UTC
-unsigned long valentinesUTCSecond = 1644842096;
-
 test(should_be_two_hours_later_in_PL_at_epoch_start) {
   // given
   WarsawTimeConverter converter = WarsawTimeConverter();
@@ -16,7 +13,7 @@ test(should_be_two_hours_later_in_PL_at_epoch_start) {
   String expected = "02:00:00.000";
 
   // when
-  converter.update(utcEpochStart, 0);
+  converter.fromUtc(utcEpochStart, 0);
 
   // then
   assertEqual(formatted, expected);
@@ -26,10 +23,12 @@ test(should_convert_valentines_day) {
   // given
   WarsawTimeConverter converter = WarsawTimeConverter();
   char *formatted = converter.formatted();
+  // UTC seconds for 2022-02-14T12:34:56UTC
+  unsigned long valentinesUTCSecond = 1644842096;
   String expected = "13:34:56.000";
 
   // when
-  converter.update(valentinesUTCSecond, 0);
+  converter.fromUtc(valentinesUTCSecond, 0);
 
   // then
   assertEqual(formatted, expected);
@@ -41,18 +40,18 @@ test(should_correctly_convert_to_PL_time) {
   String expected;
 
   // 2020-02-29, 00:00:00 UTC
-  converter.update(1582934400ul, 0);
+  converter.fromUtc(1582934400ul, 0);
   expected = "01:00:00.000";
   assertEqual(formatted, expected);
 
   // 2050-08-15, 17:15:02 UTC
-  converter.update(2544196502ul, 0);
+  converter.fromUtc(2544196502ul, 0);
   expected = "19:15:02.000";
   assertEqual(formatted, expected);
 
   // 2100-08-15, 17:15:00 UTC
-  converter.update(4122033300ul, 0);
-  expected = "19:15:00.000";
+  converter.fromUtc(4122033300ul, 543);
+  expected = "19:15:00.543";
   assertEqual(formatted, expected);
 }
 
@@ -64,13 +63,13 @@ test(should_convert_PL_time_near_spring_time_change) {
 
   // 2020-03-29, 00:59:59 UTC
   unsigned long utcBefore = 1585443599;
-  converter.update(utcBefore, 999);
+  converter.fromUtc(utcBefore, 999);
   String expectedBefore = "01:59:59.999";
   assertEqual(formatted, expectedBefore);
 
   // 2020-03-29, 01:00:00 UTC
   unsigned long utcAfter = 1585443600;
-  converter.update(utcAfter, 0);
+  converter.fromUtc(utcAfter, 0);
   String expectedAfter = "03:00:00.000";
   assertEqual(formatted, expectedAfter);
 }
@@ -83,13 +82,13 @@ test(should_convert_PL_time_near_autumn_time_change) {
 
   // 2020-10-25, 00:59:59 UTC
   unsigned long utcBefore = 1603587599;
-  converter.update(utcBefore, 999);
+  converter.fromUtc(utcBefore, 999);
   String expectedBefore = "02:59:59.999";
   assertEqual(formatted, expectedBefore);
 
   // 2020-10-25, 01:00:00 UTC
   unsigned long utcAfter = 1603587600;
-  converter.update(utcAfter, 0);
+  converter.fromUtc(utcAfter, 0);
   String expectedAfter = "02:00:00.000";
   assertEqual(formatted, expectedAfter);
 }

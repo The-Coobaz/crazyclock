@@ -17,7 +17,7 @@ int minutes(unsigned long epochSeconds) { return (epochSeconds / 60) % 60; }
 
 int hours(unsigned long epochSeconds) { return (epochSeconds / 3600) % 24; }
 
-void WarsawTimeConverter::update(unsigned long utcEpochSeconds, int millis) {
+void WarsawTimeConverter::fromUtc(unsigned long utcEpochSeconds, int millis) {
 
   unsigned long localEpochSeconds = this->plTimezone->toLocal(utcEpochSeconds);
 
