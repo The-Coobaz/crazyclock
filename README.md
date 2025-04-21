@@ -98,6 +98,8 @@ clang-format -style=llvm -i crazyclock.ino
 find src -iname "*.h" -o -iname "*.cpp" -o -iname "*.ino" | xargs clang-format -style=llvm -i
 ```
 
+In GitHub actions we are using version 19 of clang-format.
+
 ### Working with Arduino IDE
 
 We keep [components in src folder](https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9).
