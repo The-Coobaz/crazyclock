@@ -3,18 +3,92 @@
 
 #include "WarsawTimeConverter.h"
 
-test(should_be_one_hour_later_in_PL_at_epoch_start) {
+// UTC seconds for 2022-02-14T12:34:56UTC
+unsigned long valentinesUTCSecond = 1644842096;
+
+test(should_be_two_hours_later_in_PL_at_epoch_start) {
   // given
   WarsawTimeConverter converter = WarsawTimeConverter();
-  unsigned long epochStart = 0;
-  int millisZero = 0;
-  String expected = "01:00:00.000";
+  unsigned long utcEpochStart = 0ul;
+  // DST has been in use in Poland since 1977;
+  String expected = "02:00:00.000";
 
   // when
-  char *actual = converter.toWarsawTime(epochStart, millisZero);
+  char *actual = converter.toWarsawTime(utcEpochStart, 0);
 
   // then
   assertEqual(actual, expected);
+}
+
+test(should_convert_valentines_day) {
+  // given
+  WarsawTimeConverter converter = WarsawTimeConverter();
+  String expected = "13:34:56.000";
+
+  // when
+  char *actual = converter.toWarsawTime(valentinesUTCSecond, 0);
+
+  // then
+  assertEqual(actual, expected);
+}
+
+test(should_correctly_convert_to_PL_time) {
+  WarsawTimeConverter converter = WarsawTimeConverter();
+  char *actual;
+  String expected;
+
+  // 2020-02-29, 00:00:00 UTC
+  actual = converter.toWarsawTime(1582934400ul, 0);
+  expected = "01:00:00.000";
+  assertEqual(actual, expected);
+
+  // 2050-08-15, 17:15:02 UTC
+  actual = converter.toWarsawTime(2544196502ul, 0);
+  expected = "19:15:02.000";
+  assertEqual(actual, expected);
+
+  // 2100-08-15, 17:15:00 UTC
+  actual = converter.toWarsawTime(4122033300ul, 0);
+  expected = "19:15:00.000";
+  assertEqual(actual, expected);
+}
+
+// in March we change the clock from 2 AM to 3 AM
+test(should_convert_PL_time_near_spring_time_change) {
+  // given
+  WarsawTimeConverter converter = WarsawTimeConverter();
+  char *actual;
+
+  // 2020-03-29, 00:59:59 UTC
+  unsigned long utcBefore = 1585443599;
+  actual = converter.toWarsawTime(utcBefore, 999);
+  String expectedBefore = "01:59:59.999";
+  assertEqual(actual, expectedBefore);
+
+  // 2020-03-29, 01:00:00 UTC
+  unsigned long utcAfter = 1585443600;
+  actual = converter.toWarsawTime(utcAfter, 0);
+  String expectedAfter = "03:00:00.000";
+  assertEqual(actual, expectedAfter);
+}
+
+// in October we change the clock from 3 AM to 2 AM
+test(should_convert_PL_time_near_autumn_time_change) {
+  // given
+  WarsawTimeConverter converter = WarsawTimeConverter();
+  char *actual;
+
+  // 2020-10-25, 00:59:59 UTC
+  unsigned long utcBefore = 1603587599;
+  actual = converter.toWarsawTime(utcBefore, 999);
+  String expectedBefore = "02:59:59.999";
+  assertEqual(actual, expectedBefore);
+
+  // 2020-10-25, 01:00:00 UTC
+  unsigned long utcAfter = 1603587600;
+  actual = converter.toWarsawTime(utcAfter, 0);
+  String expectedAfter = "02:00:00.000";
+  assertEqual(actual, expectedAfter);
 }
 
 //----------------------------------------------------------------------------
