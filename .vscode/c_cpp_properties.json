@@ -4,8 +4,14 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${env:HOME}/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/libraries/**",
+                "${env:HOME}/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/cores/esp8266",
                 "${env:HOME}/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/tools/sdk/include",
+                // ESP8266 libraries
+                "${env:HOME}/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/libraries/**",
+                // Toolchain includes
+                "${env:HOME}/.arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/3.1.0-gcc10.3-e5f9fec/xtensa-lx106-elf/include",
+                // Variant files for Wemos D1
+                "${env:HOME}/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/variants/d1",
                 "${env:HOME}/Arduino/libraries/**"
             ],
             "browse": {
@@ -17,7 +23,10 @@
                     "${env:HOME}/Arduino/libraries/**"
                 ]
             },
-            "defines": [],
+            "defines": [
+                // Define newer ARDUINO version for conditional compilation
+                "ARDUINO=103"
+            ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++14",

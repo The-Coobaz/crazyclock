@@ -16,6 +16,9 @@ test(should_be_one_hour_later_in_PL_at_epoch_start) {
 
   // then
   assertEqual(localDateTime.getLocalSeconds(), epochStart + 3600);
+  String a = "1234";
+  String b = "12345";
+  assertEqual(a, b);
 }
 
 test(should_recognize_valentines_day_in_UTC_and_PL) {
