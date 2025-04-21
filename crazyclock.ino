@@ -1,5 +1,6 @@
-#include <DS3231.h>
+
 #include <Debouncer.h>
+#include <DS3231.h>
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <RotaryEncoder.h>
