@@ -17,11 +17,12 @@ int minutes(unsigned long epochSeconds) { return (epochSeconds / 60) % 60; }
 
 int hours(unsigned long epochSeconds) { return (epochSeconds / 3600) % 24; }
 
-char *WarsawTimeConverter::toWarsawTime(unsigned long utcEpochSeconds,
-                                        int millis) {
+void WarsawTimeConverter::update(unsigned long utcEpochSeconds, int millis) {
 
   unsigned long localEpochSeconds = this->plTimezone->toLocal(utcEpochSeconds);
+
   sprintf(this->_warsawTime, "%02d:%02d:%02d.%03d", hours(localEpochSeconds),
           minutes(localEpochSeconds), seconds(localEpochSeconds), millis);
-  return this->_warsawTime;
 };
+
+char *WarsawTimeConverter::formatted() { return this->_warsawTime; };

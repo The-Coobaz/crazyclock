@@ -7,7 +7,14 @@ class WarsawTimeConverter {
 
 public:
   WarsawTimeConverter();
-  char *toWarsawTime(unsigned long epochSeconds, int millis);
+  /**
+   * This updates the buffer to contain Warsaw time for given UTC epoch seconds.
+   */
+  void update(unsigned long utcEpochSeconds, int millis);
+  /**
+   * Warsaw time will be updated in-place at this memory address.
+   */
+  char *formatted();
 
 private:
   char *_warsawTime;
