@@ -7,16 +7,17 @@
 #include <Wire.h>
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
+
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/HardwareCheck/HardwareCheck.h"
-#include "src/LocalDateTimeConverter/LocalDateTimeConverter.h"
 #include "src/ScalingFactorChange/ScalingFactorChange.h"
+#include "src/WarsawTimeConverter/WarsawTimeConverter.h"
 #include "src/ntpClient/ntpClient.h"
 
 const char *ssid = "SSID";
 const char *password = "PASS";
 
-LocalDateTimeConverter plDateTimeConverter = LocalDateTimeConverter::PL;
+WarsawTimeConverter warsawTimeConverter = WarsawTimeConverter();
 
 char formattedTimeBuffer[20] = "<initial value>";
 
@@ -138,21 +139,14 @@ void loop() {
   // fakeTime = programStartedAt + (scalingFactor * timePassed)
 
   // shows real time local seconds and current millis on LCD
-  sprinfLocalTime(formattedTimeBuffer, epochSeconds, currentMillis);
+  warsawTimeConverter.fromUtc(epochSeconds, currentMillis);
   lcd.setCursor(0, 0);
-  lcd.print(formattedTimeBuffer);
+  lcd.print(warsawTimeConverter.formatted());
+
   sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
   lcd.setCursor(0, 1);
   lcd.print(formattedTimeBuffer);
   checkRotaryEncoder(&scalingFactorChange);
-}
-
-void sprinfLocalTime(char *buffer, unsigned long epochSeconds, int millis) {
-  LocalDateTime localDateTime = plDateTimeConverter.fromUtc(epochSeconds);
-  int hour = localDateTime.getLocalTimeFragment(HOURS);
-  int minutes = localDateTime.getLocalTimeFragment(MINUTES);
-  int seconds = localDateTime.getLocalTimeFragment(SECONDS);
-  sprintf(buffer, "    %02d:%02d:%02d.%03d", hour, minutes, seconds, millis);
 }
 
 void sprintfRaw(char *buffer, unsigned long epochSeconds, int millis) {
