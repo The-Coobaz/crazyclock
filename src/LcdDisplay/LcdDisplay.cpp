@@ -23,17 +23,17 @@ LcdDisplay::LcdDisplay() {
   }
 
   lcd.clear();
-};
+}
 
 void LcdDisplay::setLine1(char *line) {
   this->clearLine(0);
   this->lcd.print(line);
-};
+}
 
 void LcdDisplay::setLine2(char *line) {
   this->clearLine(1);
   this->lcd.print(line);
-};
+}
 
 void LcdDisplay::print(char *text) { this->lcd.print(text); }
 

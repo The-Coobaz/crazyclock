@@ -18,6 +18,7 @@ public:
   void clear();
 
   hd44780_I2Cexp lcd;
+
 private:
   static const uint8_t cols = 16;
   static const uint8_t rows = 2;
