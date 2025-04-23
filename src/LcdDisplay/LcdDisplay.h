@@ -12,10 +12,16 @@ public:
   LcdDisplay();
 
   void setLine1(char *line);
+  void setLine2(char *line);
+
+  void print(char *text);
 
 private:
+  hd44780_I2Cexp lcd;
   static const uint8_t columns = 16;
   static const uint8_t rows = 2;
-  static char blankLine[columns + 1];
-  hd44780_I2Cexp lcd;
+
+  char blankLine[columns + 1];
+
+  void clearLine(uint8_t row);
 };

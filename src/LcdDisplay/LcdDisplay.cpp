@@ -1,12 +1,16 @@
 #include "LcdDisplay.h"
 
+void initializeBlankLine(char *line, int length) {
+  for (int i = 0; i < length; i++) {
+    line[i] = ' ';
+  }
+  line[length] = '\0';
+}
+
 LcdDisplay::LcdDisplay() {
+  initializeBlankLine(this->blankLine, LcdDisplay::columns);
   Serial.println("Starting LCD...");
   this->lcd = hd44780_I2Cexp();
-  for (int i = 0; i < LcdDisplay::columns; i++) {
-    LcdDisplay::blankLine[i] = ' ';
-  }
-  LcdDisplay::blankLine[LcdDisplay::columns] = '\0';
 
   int status = this->lcd.begin(LcdDisplay::columns, LcdDisplay::rows);
   if (status) {
@@ -22,7 +26,19 @@ LcdDisplay::LcdDisplay() {
 };
 
 void LcdDisplay::setLine1(char *line) {
-  this->lcd.setCursor(0, 0);
-  this->lcd.print(LcdDisplay::blankLine);
+  this->clearLine(0);
   this->lcd.print(line);
 };
+
+void LcdDisplay::setLine2(char *line) {
+  this->clearLine(1);
+  this->lcd.print(line);
+};
+
+void LcdDisplay::print(char *text) { this->lcd.print(text); }
+
+void LcdDisplay::clearLine(uint8_t row) {
+  this->lcd.setCursor(0, row);
+  this->lcd.print(this->blankLine);
+  this->lcd.setCursor(0, row);
+}
