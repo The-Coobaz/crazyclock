@@ -8,11 +8,11 @@ void initializeBlankLine(char *line, int length) {
 }
 
 LcdDisplay::LcdDisplay() {
-  initializeBlankLine(this->blankLine, LcdDisplay::columns);
+  initializeBlankLine(this->blankLine, LcdDisplay::cols);
   Serial.println("Starting LCD...");
   this->lcd = hd44780_I2Cexp();
 
-  int status = this->lcd.begin(LcdDisplay::columns, LcdDisplay::rows);
+  int status = this->lcd.begin(LcdDisplay::cols, LcdDisplay::rows);
   if (status) {
     Serial.print("LCD error status: ");
     Serial.println(status);
@@ -36,6 +36,8 @@ void LcdDisplay::setLine2(char *line) {
 };
 
 void LcdDisplay::print(char *text) { this->lcd.print(text); }
+
+void LcdDisplay::clear() { this->lcd.clear(); }
 
 void LcdDisplay::clearLine(uint8_t row) {
   this->lcd.setCursor(0, row);

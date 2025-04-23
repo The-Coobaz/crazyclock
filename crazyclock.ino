@@ -10,6 +10,7 @@
 
 // https://forum.arduino.cc/t/how-to-include-from-subfolder-of-sketch-folder/428039/9
 #include "src/HardwareCheck/HardwareCheck.h"
+#include "src/LcdDisplay/LcdDisplay.h"
 #include "src/ScalingFactorChange/ScalingFactorChange.h"
 #include "src/WarsawTimeConverter/WarsawTimeConverter.h"
 #include "src/ntpClient/ntpClient.h"
@@ -39,9 +40,7 @@ ScalingFactorChange scalingFactorChange;
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "europe.pool.ntp.org");
-hd44780_I2Cexp lcd;
-const int LCD_COLS = 16;
-const int LCD_ROWS = 2;
+LcdDisplay lcdDisplay = LcdDisplay();
 RotaryEncoder encoder(ROTARY_ENCODER_DT, ROTARY_ENCODER_CLK,
                       RotaryEncoder::LatchMode::TWO03);
 // interrupts added for better handling of rotary encoder
@@ -86,9 +85,9 @@ void setup() {
 
   Serial.println("\n================\ncrazyclock\n================");
 
-  beginLCD(&lcd, LCD_COLS, LCD_ROWS);
-  beginRTC(&lcd, &rtc);
-  bool wifiAvailable = isWiFiAvailable(&lcd, ssid, password);
+  beginRTC(&(lcdDisplay.lcd), &rtc);
+  bool wifiAvailable = isWiFiAvailable(lcdDisplay, ssid, password);
+  lcdDisplay.clear();
   if (wifiAvailable) {
     epochSeconds = retrieveEpochSeconds(&timeClient);
     if (epochSecondsAreCorrect(epochSeconds)) {
@@ -97,9 +96,7 @@ void setup() {
       Serial.println(epochSeconds);
     }
   }
-  checkRTC(&lcd, &rtc);
-
-  lcd.clear();
+  checkRTC(&(lcdDisplay.lcd), &rtc);
 
   int sec = rtc.getSecond();
   Serial.print("Current second value: ");
@@ -140,12 +137,10 @@ void loop() {
 
   // shows real time local seconds and current millis on LCD
   warsawTimeConverter.fromUtc(epochSeconds, currentMillis);
-  lcd.setCursor(0, 0);
-  lcd.print(warsawTimeConverter.formatted());
+  lcdDisplay.setLine1(warsawTimeConverter.formatted());
 
   sprintfRaw(formattedTimeBuffer, epochSeconds, currentMillis);
-  lcd.setCursor(0, 1);
-  lcd.print(formattedTimeBuffer);
+  lcdDisplay.setLine2(formattedTimeBuffer);
   checkRotaryEncoder(&scalingFactorChange);
 }
 
