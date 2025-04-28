@@ -5,8 +5,8 @@
 #define INVALID_REAL_TIME 2
 
 #include <Arduino.h>
-#include <ESP8266WiFi.h>
 #include <DS3231.h>
+#include <ESP8266WiFi.h>
 #include <Wire.h>
 #include <hd44780.h>
 #include <hd44780ioClass/hd44780_I2Cexp.h>
