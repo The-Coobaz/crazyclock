@@ -1,9 +1,5 @@
 #include "HardwareCheck.h"
 
-#include <Arduino.h>
-#include <ESP8266WiFi.h>
-#include <Wire.h>
-
 void beginLCD(hd44780_I2Cexp *lcd, int cols, int rows) {
   Serial.println("Starting LCD...");
   int status = lcd->begin(cols, rows);
@@ -25,13 +21,10 @@ void beginRTC(hd44780_I2Cexp *lcd, DS3231 *rtc) {
   Serial.println("RTC set to 24-hour mode");
 }
 
-bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
+bool isWiFiAvailable(LcdDisplay lcdDisplay, const char *ssid,
                      const char *password) {
   Serial.println("Waiting for WiFi");
-  lcd->clear();
-  lcd->setCursor(0, 0);
-  lcd->print("Waiting for WiFi");
-  lcd->setCursor(0, 1);
+  lcdDisplay.setLine1("Waiting for WiFi");
   // provided in examples of WiFi library with a comment:
   // > Explicitly set the ESP8266 to be a WiFi-client,
   // > otherwise, it by default, would try to act as both
@@ -41,7 +34,7 @@ bool isWiFiAvailable(hd44780_I2Cexp *lcd, const char *ssid,
   for (int n = 0; (n < 30) && (WiFi.status() != WL_CONNECTED); n++) {
     delay(500);
     Serial.print(".");
-    lcd->print(".");
+    lcdDisplay.print(".");
   }
   Serial.println();
   if (WiFi.status() == WL_CONNECTED) {
